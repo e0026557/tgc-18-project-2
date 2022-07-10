@@ -1,0 +1,13 @@
+.navbar {
+  background-color: grey !important;
+}
+
+.section-hero {
+  height: calc(100vh - 40px);
+  margin-top: 40px;
+  
+  background-image: url('https://images.unsplash.com/photo-1580933073521-dc49ac0d4e6a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGNvZmZlZXxlbnwwfDB8MHx8&auto=format&fit=crop&w=500&q=60');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
