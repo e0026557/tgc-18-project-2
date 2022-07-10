@@ -27,10 +27,10 @@ As a coffee hobbyist who likes to experiment new coffee recipes and enhance my c
 ### Structure and Skeleton
 
 #### Database
-![ERD Diagram](ERD-diagram.png)
+![ERD Diagram](readme/ERD-diagram.png)
 
 #### Sitemap
-![Sitemap](sitemap.png)
+![Sitemap](readme/sitemap.png)
 
 #### Wireframes
 [Wireframes]()
