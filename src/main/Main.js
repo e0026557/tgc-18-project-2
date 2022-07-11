@@ -12,10 +12,10 @@ export default function Main() {
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='me-auto'>
-							<Nav.Link href='#home'>Home</Nav.Link>
-							<Nav.Link href='#recipes'>Recipes</Nav.Link>
-							<Nav.Link href='#create'>Create</Nav.Link>
-							<Nav.Link href='#favorites'>Favorites</Nav.Link>
+							<Nav.Link className='navbar-link' href='#home'>Home</Nav.Link>
+							<Nav.Link className='navbar-link' href='#recipes'>Recipes</Nav.Link>
+							<Nav.Link className='navbar-link' href='#create'>Create</Nav.Link>
+							<Nav.Link className='navbar-link' href='#favorites'>Favorites</Nav.Link>
 						</Nav>
 					</Navbar.Collapse>
 				</Container>

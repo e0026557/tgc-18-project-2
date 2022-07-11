@@ -1,11 +1,24 @@
+/* --- General --- */
+body {
+  font-family: 'Inter', sans-serif;
+  color: #432D2D;
+}
+
+/* *** MOBILE SETTINGS (BELOW 768PX) *** */
+/* --- Navbar --- */
 .navbar {
   background-color: #E1C9A9 !important;
+}
+
+.navbar-link {
+  color: #432D2D !important;
 }
 
 .logo-img {
   height: 40px;
 }
 
+/* --- Hero Section --- */
 .section-hero {
   /* Account for height of navbar */
   height: calc(100vh - 50px);
@@ -15,4 +28,19 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+/* *** MEDIUM SCREEN SETTINGS (768PX AND ABOVE) *** */
+@media screen and (min-width: 768px) {
+  .logo-img {
+    height: 45px;
+  }
+}
+
+
+/* *** LARGE SCREEN SETTINGS (992PX AND ABOVE) *** */
+@media screen and (min-width: 992px) {
+  .logo-img {
+    height: 50px;
+  }
 }
