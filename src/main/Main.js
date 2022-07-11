@@ -6,7 +6,9 @@ export default function Main() {
 		<React.Fragment>
 			<Navbar className='navbar' fixed="top" bg='light' expand='lg'>
 				<Container>
-					<Navbar.Brand href='#home'>CoffeeTalk</Navbar.Brand>
+					<Navbar.Brand href='#home'>
+						<img className='logo-img' src={require('./../assets/images/coffeetalk.png')} alt="CoffeeTalk Logo" />
+					</Navbar.Brand>
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='me-auto'>
