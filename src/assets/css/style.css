@@ -10,7 +10,19 @@ body {
   background-color: #E1C9A9 !important;
 }
 
-.navbar-link {
+.nav-link {
+  font-weight: 500;
+  color: #695757!important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  transition: all 0.3s;
+}
+
+.nav-link:hover {
+  color: #432D2D !important;
+  border-color: #653A1A;
+}
+
+.nav-link.active {
   color: #432D2D !important;
 }
 
@@ -23,7 +35,7 @@ body {
   /* Account for height of navbar */
   height: calc(100vh - 50px);
   margin-top: 50px;
-  
+
   background-image: url('./../images/coffee-beans.jpg');
   background-repeat: no-repeat;
   background-size: cover;
