@@ -1,10 +1,15 @@
 .navbar {
-  background-color: grey !important;
+  background-color: #E1C9A9 !important;
+}
+
+.logo-img {
+  height: 40px;
 }
 
 .section-hero {
-  height: calc(100vh - 40px);
-  margin-top: 40px;
+  /* Account for height of navbar */
+  height: calc(100vh - 50px);
+  margin-top: 50px;
   
   background-image: url('./../images/coffee-beans.jpg');
   background-repeat: no-repeat;
