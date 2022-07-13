@@ -1,3 +1,10 @@
+/* 
+--- Color Scheme ---
+#E1C9A9
+#d4b095
+#432D2D - 695757(tint)
+*/
+
 /* --- General --- */
 * {
   box-sizing: border-box;
@@ -6,6 +13,7 @@
 body {
   font-family: 'Inter', sans-serif;
   color: #432D2D;
+  background-color: #d4b095;
 }
 
 /* Adjust margin-top to account for height of navbar */
@@ -60,7 +68,7 @@ body {
   background-color: rgba(188, 196, 199, 0.65);
   padding: 1rem 1.5rem;
   border-radius: 16px;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,6 +96,7 @@ body {
 }
 
 @keyframes bounce {
+
   0%,
   20%,
   50%,
@@ -95,9 +104,11 @@ body {
   100% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(-16px);
   }
+
   60% {
     transform: translateY(-8px);
   }
@@ -138,6 +149,7 @@ body {
   .logo-img {
     height: 50px;
   }
+
   /* --- Hero Section --- */
   .section-hero {
     /* Account for height of navbar */
