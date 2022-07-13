@@ -39,8 +39,11 @@ export default class Home extends React.Component {
 	renderRecipes = (recipes) => {
 		return recipes.map((recipe) => {
 			return (
-				<div className='col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-center'>
-					<RecipeCard key={recipe._id} />
+				<div
+					className='col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-center'
+					key={recipe._id}
+				>
+					<RecipeCard />
 				</div>
 			);
 		});
