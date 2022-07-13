@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/style.css';
+import './assets/css/spinner.css';
 import Main from './Main';
 
 export default function App() {
