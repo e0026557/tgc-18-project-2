@@ -4,15 +4,15 @@ import { Nav, Navbar, Container } from 'react-bootstrap';
 export default function Navigation(props) {
   return (
     <Navbar className='navbar' fixed='top' bg='light' expand='lg'>
-      <Container>
-        <Navbar.Brand href='#home'>
+      <Container fluid>
+        <Navbar.Brand className='ms-3' href='#home'>
           <img
             className='logo-img'
             src={require('./../assets/images/logo/coffeetalk.png')}
             alt='CoffeeTalk Logo'
           />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Toggle aria-controls='basic-navbar-nav' className='me-3' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-auto'>
             <Nav.Link className={props.activePage === 'home' ? 'active' : ''} href='#home' onClick={() => {
