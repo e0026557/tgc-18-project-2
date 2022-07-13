@@ -161,7 +161,8 @@ body {
   align-items: center;
 }
 
-.fa-heart-circle-plus {
+.fa-heart-circle-plus,
+.fa-heart-circle-minus {
   color: #ffffff;
   font-size: 1.1rem;
 }
