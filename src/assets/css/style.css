@@ -115,6 +115,11 @@ body {
   }
 }
 
+/* --- Recipe Card --- */
+.recipe-card {
+  width: 16rem;
+}
+
 /* *** MEDIUM SCREEN SETTINGS (768PX AND ABOVE) *** */
 @media screen and (min-width: 768px) {
 
@@ -133,6 +138,23 @@ body {
   .section-hero {
     /* Account for height of navbar */
     height: calc(100vh - 71px);
+  }
+
+  .hero-box {
+    padding: 1rem 1.5rem;
+    border-radius: 22px;
+  }
+
+  .hero-header {
+    font-size: 3.5rem;
+  }
+
+  .hero-span {
+    font-size: 1.8rem;
+  }
+
+  .fa-chevron-down {
+    font-size: 3rem;
   }
 }
 
@@ -155,5 +177,22 @@ body {
   .section-hero {
     /* Account for height of navbar */
     height: calc(100vh - 76px);
+  }
+
+  .hero-box {
+    padding: 1.5rem 2rem;
+    border-radius: 22px;
+  }
+
+  .hero-header {
+    font-size: 4rem;
+  }
+
+  .hero-span {
+    font-size: 2rem;
+  }
+
+  .fa-chevron-down {
+    font-size: 3.5rem;
   }
 }
