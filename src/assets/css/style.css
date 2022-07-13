@@ -4,6 +4,11 @@ body {
   color: #432D2D;
 }
 
+/* Adjust margin-top to account for height of navbar */
+.adjust-margin-top {
+  margin-top: 66px;
+}
+
 /* *** MOBILE SETTINGS (BELOW 768PX) *** */
 /* --- Navbar --- */
 .navbar {
@@ -12,7 +17,7 @@ body {
 
 .nav-link {
   font-weight: 500;
-  color: #695757!important;
+  color: #695757 !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0);
   transition: all 0.3s;
 }
@@ -34,7 +39,6 @@ body {
 .section-hero {
   /* Account for height of navbar */
   height: calc(100vh - 50px);
-  margin-top: 50px;
 
   background-image: url('./../images/coffee-beans.jpg');
   background-repeat: no-repeat;
@@ -44,6 +48,13 @@ body {
 
 /* *** MEDIUM SCREEN SETTINGS (768PX AND ABOVE) *** */
 @media screen and (min-width: 768px) {
+
+  /* --- General --- */
+  /* Adjust margin-top to account for height of navbar */
+  .adjust-margin-top {
+    margin-top: 71px;
+  }
+
   .logo-img {
     height: 45px;
   }
@@ -52,6 +63,13 @@ body {
 
 /* *** LARGE SCREEN SETTINGS (992PX AND ABOVE) *** */
 @media screen and (min-width: 992px) {
+
+  /* --- General --- */
+  /* Adjust margin-top to account for height of navbar */
+  .adjust-margin-top {
+    margin-top: 76px;
+  }
+
   .logo-img {
     height: 50px;
   }
