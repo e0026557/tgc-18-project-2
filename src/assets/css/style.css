@@ -1,4 +1,8 @@
 /* --- General --- */
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   color: #432D2D;
@@ -39,11 +43,62 @@ body {
 .section-hero {
   /* Account for height of navbar */
   height: calc(100vh - 66px);
+  position: relative;
 
   background-image: url('./../images/coffee-beans.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-box {
+  background-color: rgba(188, 196, 199, 0.6);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-header {
+  font-size: 3rem;
+}
+
+.hero-span {
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+.fa-chevron-down {
+  color: #BCC4C7;
+  font-size: 2rem;
+  animation: bounce 2s ease infinite;
+
+  position: absolute;
+  bottom: 1rem;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-16px);
+  }
+  60% {
+    transform: translateY(-8px);
+  }
 }
 
 /* *** MEDIUM SCREEN SETTINGS (768PX AND ABOVE) *** */
