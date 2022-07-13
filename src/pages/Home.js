@@ -59,7 +59,6 @@ export default class Home extends React.Component {
 				</div>
 
 				{/* Latest 3 Recipes */}
-        <LoadingSpinner />
 				<div className='section-latest container'>
           <h2>What's New</h2>
 					{this.state.contentLoaded ? (
