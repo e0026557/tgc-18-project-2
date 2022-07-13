@@ -117,7 +117,12 @@ body {
 
 /* --- Recipe Card --- */
 .recipe-card {
-  width: 16rem;
+  width: 18rem;
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 18rem;
 }
 
 /* *** MEDIUM SCREEN SETTINGS (768PX AND ABOVE) *** */
