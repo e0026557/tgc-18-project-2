@@ -148,6 +148,27 @@ body {
   box-shadow: none;
 }
 
+.card-btn-bookmark {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 100%;
+  background-color: #BCC4C7;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-heart-circle-plus {
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+.card-btn-bookmark:hover {
+  background-color: #a9b0b3;
+  border-color: #a9b0b3;
+}
+
 /* *** MEDIUM SCREEN SETTINGS (768PX AND ABOVE) *** */
 @media screen and (min-width: 768px) {
 
