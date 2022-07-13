@@ -40,10 +40,10 @@ export default class Home extends React.Component {
 		return recipes.map((recipe) => {
 			return (
 				<div
-					className='col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-center'
+					className='col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-stretch'
 					key={recipe._id}
 				>
-					<RecipeCard />
+					<RecipeCard recipe={recipe}/>
 				</div>
 			);
 		});
@@ -66,7 +66,7 @@ export default class Home extends React.Component {
 				{/* Latest 3 Recipes */}
 				<div className='section-latest container mt-5'>
 					<h2>What's New</h2>
-					<div className='row d-flex justify-content-center align-items-center'>
+					<div className='row d-flex justify-content-center align-items-stretch'>
 						{this.state.contentLoaded ? (
 							this.renderRecipes(this.state.latestRecipes)
 						) : (
@@ -78,7 +78,7 @@ export default class Home extends React.Component {
 				{/* Top 3 Recipes */}
 				<div className='section-popular container mt-5'>
 					<h2>What's Popular</h2>
-					<div className='row d-flex justify-content-center align-items-center'>
+					<div className='row d-flex justify-content-center align-items-stretch'>
 						{this.state.contentLoaded ? (
 							this.renderRecipes(this.state.popularRecipes)
 						) : (
