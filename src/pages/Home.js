@@ -76,7 +76,7 @@ export default class Home extends React.Component {
 				</div>
 
 				{/* Top 3 Recipes */}
-				<div className='section-popular container mt-5'>
+				<div className='section-popular container my-5'>
 					<h2>What's Popular</h2>
 					<div className='row d-flex justify-content-center align-items-stretch'>
 						{this.state.contentLoaded ? (
