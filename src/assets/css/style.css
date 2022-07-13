@@ -126,8 +126,26 @@ body {
 }
 
 .card-body {
-  height: 8rem;
+  height: 10rem;
   overflow: hidden;
+}
+
+.card-btn-info {
+  font-weight: 500;
+  background-color: #BCC4C7;
+  border-color: #BCC4C7;
+}
+
+.card-btn-info:focus,
+.card-btn-info:active,
+.card-btn-info:hover {
+  background-color: #a9b0b3;
+  border-color: #a9b0b3;
+}
+
+.card-btn-info:active:focus,
+.card-btn-info:focus {
+  box-shadow: none;
 }
 
 /* *** MEDIUM SCREEN SETTINGS (768PX AND ABOVE) *** */

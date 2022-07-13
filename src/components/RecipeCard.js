@@ -9,7 +9,7 @@ export default function RecipeCard(props) {
 				<Card.Title>{props.recipe.recipe_name}</Card.Title>
 				<Card.Text>{props.recipe.description}</Card.Text>
 			</Card.Body>
-			<Button className='mt-2' variant='primary'>More info</Button>
+			<Button className='card-btn-info mt-2' variant='primary'>More info</Button>
 		</Card>
 	);
 }
