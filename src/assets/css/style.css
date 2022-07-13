@@ -38,7 +38,7 @@ body {
 /* --- Hero Section --- */
 .section-hero {
   /* Account for height of navbar */
-  height: calc(100vh - 50px);
+  height: calc(100vh - 66px);
 
   background-image: url('./../images/coffee-beans.jpg');
   background-repeat: no-repeat;
@@ -55,8 +55,15 @@ body {
     margin-top: 71px;
   }
 
+  /* --- Navbar --- */
   .logo-img {
     height: 45px;
+  }
+
+  /* --- Hero Section --- */
+  .section-hero {
+    /* Account for height of navbar */
+    height: calc(100vh - 71px);
   }
 }
 
@@ -70,7 +77,13 @@ body {
     margin-top: 76px;
   }
 
+  /* --- Navbar --- */
   .logo-img {
     height: 50px;
+  }
+  /* --- Hero Section --- */
+  .section-hero {
+    /* Account for height of navbar */
+    height: calc(100vh - 76px);
   }
 }
