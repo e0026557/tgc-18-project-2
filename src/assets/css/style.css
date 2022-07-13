@@ -118,6 +118,8 @@ body {
 /* --- Recipe Card --- */
 .recipe-card {
   width: 18rem;
+  border-radius: 1rem;
+  overflow: hidden;
 }
 
 .card-img-top {
