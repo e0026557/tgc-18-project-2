@@ -37,11 +37,13 @@ export default class Home extends React.Component {
 	}
 
 	renderRecipes = (recipes) => {
-		return (
-      recipes.map((recipe) => {
-        return <RecipeCard key={recipe._id}/>;
-      })
-    )
+		return recipes.map((recipe) => {
+			return (
+				<div className='col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-center'>
+					<RecipeCard key={recipe._id} />
+				</div>
+			);
+		});
 	};
 
 	render() {
@@ -59,24 +61,28 @@ export default class Home extends React.Component {
 				</div>
 
 				{/* Latest 3 Recipes */}
-				<div className='section-latest container'>
-          <h2>What's New</h2>
-					{this.state.contentLoaded ? (
-						this.renderRecipes(this.state.latestRecipes)
-					) : (
-						<LoadingSpinner />
-					)}
+				<div className='section-latest container mt-5'>
+					<h2>What's New</h2>
+					<div className='row d-flex justify-content-center align-items-center'>
+						{this.state.contentLoaded ? (
+							this.renderRecipes(this.state.latestRecipes)
+						) : (
+							<LoadingSpinner />
+						)}
+					</div>
 				</div>
 
 				{/* Top 3 Recipes */}
-				<div className='section-popular container'>
-        <h2>What's Popular</h2>
-        {this.state.contentLoaded ? (
-						this.renderRecipes(this.state.popularRecipes)
-					) : (
-						<LoadingSpinner />
-					)}
-        </div>
+				<div className='section-popular container mt-5'>
+					<h2>What's Popular</h2>
+					<div className='row d-flex justify-content-center align-items-center'>
+						{this.state.contentLoaded ? (
+							this.renderRecipes(this.state.popularRecipes)
+						) : (
+							<LoadingSpinner />
+						)}
+					</div>
+				</div>
 			</React.Fragment>
 		);
 	}
