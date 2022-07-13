@@ -125,6 +125,11 @@ body {
   height: 18rem;
 }
 
+.card-body {
+  height: 8rem;
+  overflow: hidden;
+}
+
 /* *** MEDIUM SCREEN SETTINGS (768PX AND ABOVE) *** */
 @media screen and (min-width: 768px) {
 
