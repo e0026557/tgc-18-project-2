@@ -6,7 +6,8 @@ import Form from 'react-bootstrap/Form';
 export default class AddToFavoritesModal extends React.Component {
 	// --- State ----
 	state = {
-		email: ''
+		email: '',
+    recipeid: this.props.recipeid
 	};
 
 	// --- Functions ---

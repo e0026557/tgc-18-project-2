@@ -27,6 +27,7 @@ export default function RecipeCard(props) {
 
 			{/* Email Modal for adding to Favorites collection */}
 			<AddToFavoritesModal
+				recipeid={props.recipe._id}
 				show={modalShow}
 				onHide={() => setModalShow(false)}
 			/>
