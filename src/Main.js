@@ -4,12 +4,13 @@ import Home from './pages/Home';
 import Recipes from './pages/Recipes';
 import Create from './pages/Create';
 import Favorites from './pages/Favorites';
+import Recipe from './pages/Recipe';
 
 // import { Nav, Navbar, Container } from 'react-bootstrap';
 
 export default class Main extends React.Component {
 	state = {
-		activePage: 'home' // 'home', 'recipes', 'create', and 'favorites'
+		activePage: 'home' // 'home', 'recipes', 'create', 'favorites', and 'recipe' (To display individual recipe)
 	};
 
 	// --- Functions ---
@@ -23,22 +24,27 @@ export default class Main extends React.Component {
 		const activePage = this.state.activePage;
 		if (activePage === 'home') {
 			return (
-				<Home />
+				<Home setActivePage={this.setActivePage} />
 			)
 		}
 		else if (activePage === 'recipes') {
 			return (
-				<Recipes />
+				<Recipes setActivePage={this.setActivePage} />
 			)
 		}
 		else if (activePage === 'create') {
 			return (
-				<Create />
+				<Create setActivePage={this.setActivePage} />
 			)
 		}
 		else if (activePage === 'favorites') {
 			return (
-				<Favorites />
+				<Favorites setActivePage={this.setActivePage} />
+			)
+		}
+		else if (activePage === 'recipe') {
+			return (
+				<Recipe setActivePage={this.setActivePage} />
 			)
 		}
 	}

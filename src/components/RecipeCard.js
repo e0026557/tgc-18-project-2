@@ -16,13 +16,24 @@ export default function RecipeCard(props) {
 				<Card.Body>
 					<div className='d-flex justify-content-between align-items-start'>
 						<Card.Title>{props.recipe.recipe_name}</Card.Title>
-						<a className='btn btn-sm card-btn-bookmark' onClick={() => setModalShow(true)}>
+						<a
+							className='btn btn-sm card-btn-bookmark'
+							onClick={() => setModalShow(true)}
+						>
 							<FontAwesomeIcon icon={faHeartCirclePlus} />
 						</a>
 					</div>
 					<Card.Text>{props.recipe.description}</Card.Text>
 				</Card.Body>
-				<Button className='card-btn-info mt-2' variant='primary'>More info</Button>
+				<Button
+					className='card-btn-info mt-2'
+					variant='primary'
+					onClick={() => {
+						props.setActivePage('recipe');
+					}}
+				>
+					More info
+				</Button>
 			</Card>
 
 			{/* Email Modal for adding to Favorites collection */}
@@ -34,4 +45,3 @@ export default function RecipeCard(props) {
 		</React.Fragment>
 	);
 }
-
