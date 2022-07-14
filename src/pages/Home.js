@@ -53,7 +53,7 @@ export default class Home extends React.Component {
 		return (
 			<React.Fragment>
 				{/* Hero Section */}
-				<div className='section-hero adjust-margin-top'>
+				<section className='section-hero adjust-margin-top'>
 					<div className='hero-box'>
 						<h1 className='hero-header'>CoffeeTalk</h1>
 						<span className='hero-span'>
@@ -61,10 +61,10 @@ export default class Home extends React.Component {
 						</span>
 					</div>
 					<FontAwesomeIcon icon={faChevronDown} />
-				</div>
+				</section>
 
 				{/* Latest 3 Recipes */}
-				<div className='section-latest container mt-5'>
+				<section className='section-latest container mt-5'>
 					<h2>What's New</h2>
 					<div className='row d-flex justify-content-center align-items-stretch'>
 						{this.state.contentLoaded ? (
@@ -73,10 +73,10 @@ export default class Home extends React.Component {
 							<LoadingSpinner />
 						)}
 					</div>
-				</div>
+				</section>
 
 				{/* Top 3 Recipes */}
-				<div className='section-popular container my-5'>
+				<section className='section-popular container my-5'>
 					<h2>What's Popular</h2>
 					<div className='row d-flex justify-content-center align-items-stretch'>
 						{this.state.contentLoaded ? (
@@ -85,7 +85,7 @@ export default class Home extends React.Component {
 							<LoadingSpinner />
 						)}
 					</div>
-				</div>
+				</section>
 			</React.Fragment>
 		);
 	}
