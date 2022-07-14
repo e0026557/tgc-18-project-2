@@ -1,13 +1,22 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import AddToFavoritesModal from './EmailModal';
+import AddToFavoritesModal from './AddToFavoritesModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function RecipeCard(props) {
 	const [modalShow, setModalShow] = React.useState(false);
 	
+	// --- Components ---
+
+	// --- Functions ---
+	const renderFavoriteButton = () => {
+		if (props.AddToFavorites === true) {
+			return 
+		}
+	}
+
 	return (
 		<React.Fragment>
 			{/* Recipe card */}
