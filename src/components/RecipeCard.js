@@ -7,15 +7,6 @@ import { faHeartCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function RecipeCard(props) {
 	const [modalShow, setModalShow] = React.useState(false);
-	
-	// --- Components ---
-
-	// --- Functions ---
-	const renderFavoriteButton = () => {
-		if (props.AddToFavorites === true) {
-			return 
-		}
-	}
 
 	return (
 		<React.Fragment>
