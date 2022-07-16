@@ -44,6 +44,7 @@ export default class Home extends React.Component {
 					key={recipe._id}
 				>
 					<RecipeCard
+						bookmarkCta='add'
 						recipe={recipe}
 						setActivePage={this.props.setActivePage}
 					/>

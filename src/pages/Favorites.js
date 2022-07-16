@@ -118,6 +118,7 @@ export default class Favorites extends React.Component {
 						key={recipe._id}
 					>
 						<RecipeCard
+              bookmarkCta='remove'
 							recipe={recipe}
 							setActivePage={this.props.setActivePage}
 						/>
