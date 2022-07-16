@@ -128,7 +128,6 @@ export default class AddToFavoritesModal extends React.Component {
 				<Modal.Body>
 					{this.renderAlert()}
 					<Form.Control
-						className=''
 						name='email'
 						type='email'
 						placeholder='Enter email'
