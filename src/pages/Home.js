@@ -43,7 +43,10 @@ export default class Home extends React.Component {
 					className='col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-stretch'
 					key={recipe._id}
 				>
-					<RecipeCard recipe={recipe} setActivePage={this.props.setActivePage} />
+					<RecipeCard
+						recipe={recipe}
+						setActivePage={this.props.setActivePage}
+					/>
 				</div>
 			);
 		});

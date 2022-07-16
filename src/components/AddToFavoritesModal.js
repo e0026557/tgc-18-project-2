@@ -36,31 +36,34 @@ export default class AddToFavoritesModal extends React.Component {
 		// Check that email is valid
 		if (validateEmail(this.state.email)) {
 			// Update error flag for email
-			emailError =  false;
+			emailError = false;
 
 			// Attempt to add recipe to favorites collection of user
 			try {
-				await axios.post(`${BASE_API_URL}favorites/${this.state.email}`, {
-					recipeId: this.props.recipeid
-				});
-
-			}
-			catch(err) {
+				await axios.post(
+					`${BASE_API_URL}favorites/${this.state.email}`,
+					{
+						recipeId: this.props.recipeid
+					}
+				);
+			} catch (err) {
 				// Get response status
 				const responseStatus = err.response.data.status;
-	
+
 				// Get error message if response status is 'fail'
 				if (responseStatus === 'fail') {
 					const errorMessage = err.response.data.data.recipeId;
-	
+
 					if (errorMessage === 'Recipe does not exist') {
 						recipeDoesNotExistError = true;
-					}
-					else if (errorMessage === 'Recipe ID is already in favorites collection') {
+					} else if (
+						errorMessage ===
+						'Recipe ID is already in favorites collection'
+					) {
 						recipeAlreadyAddedError = true;
 					}
 				}
-				// Return database error if none of the above 
+				// Return database error if none of the above
 				else {
 					databaseError = true;
 				}
@@ -75,7 +78,7 @@ export default class AddToFavoritesModal extends React.Component {
 			recipeDoesNotExistError: recipeDoesNotExistError,
 			databaseError: databaseError
 		});
-	}
+	};
 
 	renderAlert = () => {
 		// Check that form is submitted
@@ -86,38 +89,28 @@ export default class AddToFavoritesModal extends React.Component {
 					<Alert variant='danger'>
 						Please enter valid email address
 					</Alert>
-				)
-			}
-			else if (this.state.recipeAlreadyAddedError) {
+				);
+			} else if (this.state.recipeAlreadyAddedError) {
 				return (
-					<Alert variant='danger'>
-						Recipe is already favorited
-					</Alert>
-				)
-			}
-			else if (this.state.recipeDoesNotExistError) {
-				return (
-					<Alert variant='danger'>
-						Recipe does not exist
-					</Alert>
-				)
-			}
-			else if (this.state.databaseError) {
+					<Alert variant='danger'>Recipe is already favorited</Alert>
+				);
+			} else if (this.state.recipeDoesNotExistError) {
+				return <Alert variant='danger'>Recipe does not exist</Alert>;
+			} else if (this.state.databaseError) {
 				return (
 					<Alert variant='danger'>
 						An error has occurred. Please try again.
 					</Alert>
-				)
-			}
-			else {
+				);
+			} else {
 				return (
 					<Alert variant='success'>
 						Recipe successfully added to Favorites
 					</Alert>
-				)
+				);
 			}
 		}
-	}
+	};
 
 	render() {
 		return (
