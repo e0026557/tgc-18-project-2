@@ -1,10 +1,9 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Pagination from 'react-bootstrap/Pagination';
-import RecipeCard from './../components/RecipeCard';
-import LoadingSpinner from './../components/LoadingSpinner';
 import axios from 'axios';
+import Login from './../components/Login';
+import RecipeCard from './../components/RecipeCard';
+import Pagination from 'react-bootstrap/Pagination';
+import LoadingSpinner from './../components/LoadingSpinner';
 import validateEmail from './../utilities/validateEmail';
 
 const BASE_API_URL = 'https://coffeetalk-api.herokuapp.com/';
@@ -14,9 +13,9 @@ export default class Favorites extends React.Component {
 	state = {
 		activeSubPage: 'email',
 		login: false,
-		favoriteRecipes: [],
 		email: '',
 		emailError: false,
+		favoriteRecipes: [],
 		contentLoaded: false,
 		pages: 1,
 		activePageNumber: 1
@@ -29,21 +28,17 @@ export default class Favorites extends React.Component {
 		});
 	};
 
+	setActivePageNumber = (activePageNumber) => {
+		this.setState({
+			activePageNumber: activePageNumber,
+			contentLoaded: false
+		});
+	};
+
 	updateFormField = (event) => {
 		this.setState({
 			[event.target.name]: event.target.value
 		});
-	};
-
-	renderActiveSubPage = () => {
-		const activeSubPage = this.state.activeSubPage;
-		if (activeSubPage === 'email') {
-			// Return email form component
-			return 'email';
-		} else if (activeSubPage === 'favorites') {
-			// Return favorited recipes
-			return 'favorites';
-		}
 	};
 
 	login = () => {
@@ -60,56 +55,60 @@ export default class Favorites extends React.Component {
 		}
 	};
 
-	renderErrorMessage = () => {
-		if (this.state.emailError) {
-			return (
-				<span className='errorMessage mt-1 ms-1'>
-					Invalid email address
-				</span>
-			);
-		}
-	};
+	// renderErrorMessage = () => {
+	// 	if (this.state.emailError) {
+	// 		return (
+	// 			<span className='errorMessage mt-1 ms-1'>
+	// 				Invalid email address
+	// 			</span>
+	// 		);
+	// 	}
+	// };
 
 	getFavoriteRecipes = async () => {
 		// Load favorite recipes upon successful login
 		if (this.state.login) {
+			let activePageNumber = this.state.activePageNumber;
 			let response = await axios.get(
-				BASE_API_URL + 'favorites/' + this.state.email
+				BASE_API_URL +
+					'favorites/' +
+					this.state.email +
+					`?page=${activePageNumber}}`
 			);
 			let favoriteRecipes = response.data.data.result || []; // Set default to empty array if no results retrieved
+			let totalPages = response.data.data.pages;
 
 			// Update state
 			this.setState({
 				favoriteRecipes: favoriteRecipes,
+				pages: totalPages,
 				contentLoaded: true
 			});
 		}
 	};
 
 	renderFavoriteRecipes = (recipes) => {
-    if (recipes.length > 0) {
-      return recipes.map((recipe) => {
-        return (
-          <div
-            className='col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-stretch'
-            key={recipe._id}
-          >
-            <RecipeCard
-              recipe={recipe}
-              setActivePage={this.props.setActivePage}
-            />
-          </div>
-        );
-      });
-    }
-    else {
-      return (
-        <div className="container ms-3">
-          <h3>No results to show</h3>
-        </div>
-      )
-    }
-
+		if (recipes.length > 0) {
+			return recipes.map((recipe) => {
+				return (
+					<div
+						className='col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-stretch'
+						key={recipe._id}
+					>
+						<RecipeCard
+							recipe={recipe}
+							setActivePage={this.props.setActivePage}
+						/>
+					</div>
+				);
+			});
+		} else {
+			return (
+				<div className='container ms-3'>
+					<h3>No results to show</h3>
+				</div>
+			);
+		}
 	};
 
 	renderPagination = () => {
@@ -120,21 +119,59 @@ export default class Favorites extends React.Component {
 				<Pagination.Item
 					key={pageNumber}
 					active={pageNumber === activePageNumber}
+					onClick={async () => {
+						await this.setActivePageNumber(pageNumber);
+						this.getFavoriteRecipes();
+					}}
 				>
 					{pageNumber}
 				</Pagination.Item>
 			);
 		}
 
-    // Return pagination when there are results
-    if (this.state.favoriteRecipes.length > 0) {
-      return (
-        <div className="container-fluid d-flex justify-content-center align-items-center mt-5 mb-3">
-          <Pagination size='sm'>{items}</Pagination>
-        </div>
-      );
-    }
-    return '';
+		// Return pagination when there are results
+		if (this.state.favoriteRecipes.length > 0) {
+			return (
+				<div className='container-fluid d-flex justify-content-center align-items-center mt-5 mb-3'>
+					<Pagination size='sm'>{items}</Pagination>
+				</div>
+			);
+		}
+		return '';
+	};
+
+	renderActiveSubPage = () => {
+		const activeSubPage = this.state.activeSubPage;
+		if (activeSubPage === 'email') {
+			// Return email form component
+			return (
+				<Login
+					email={this.state.email}
+					emailError={this.state.emailError}
+					updateFormField={this.updateFormField}
+					login={this.login}
+				/>
+			);
+		} else if (activeSubPage === 'favorites') {
+			// Return favorited recipes
+			return (
+				<div className='container row d-flex justify-content-center align-items-stretch mt-4 mt-md-5'>
+					{this.state.contentLoaded ? (
+						<React.Fragment>
+							<h2 className='ms-2 me-auto'>Favorites</h2>
+							{/* Favorite recipes */}
+							{this.renderFavoriteRecipes(
+								this.state.favoriteRecipes
+							)}
+							{/* Pagination Component */}
+							{this.renderPagination()}
+						</React.Fragment>
+					) : (
+						<LoadingSpinner />
+					)}
+				</div>
+			);
+		}
 	};
 
 	render() {
@@ -143,7 +180,7 @@ export default class Favorites extends React.Component {
 			<React.Fragment>
 				{/* Email Form Input */}
 				<section className='container-fluid d-flex flex-column justify-content-center align-items-center adjust-margin-top'>
-					<div className='email-box mt-5 d-flex flex-column justify-content-center align-items-center'>
+					{/* <div className='email-box mt-5 d-flex flex-column justify-content-center align-items-center'>
 						<h3>Enter email to proceed</h3>
 						<div className='mt-3'>
 							<Form.Control
@@ -163,25 +200,24 @@ export default class Favorites extends React.Component {
 						>
 							Retrieve
 						</Button>
-					</div>
+					</div> */}
+
+					{this.renderActiveSubPage()}
 				</section>
 
-				{this.renderActiveSubPage()}
 				{/* Favorited Recipes */}
-				<div className='row d-flex justify-content-center align-items-stretch mt-5'>
+				{/* <div className='row d-flex justify-content-center align-items-stretch mt-5'>
 					{this.state.contentLoaded ? (
 						<React.Fragment>
-							{/* Recipes */}
 							{this.renderFavoriteRecipes(
 								this.state.favoriteRecipes
 							)}
-							{/* Pagination Component */}
 							{this.renderPagination()}
 						</React.Fragment>
 					) : (
 						<LoadingSpinner />
 					)}
-				</div>
+				</div> */}
 			</React.Fragment>
 		);
 	}
