@@ -16,12 +16,12 @@ export default function RecipeCard(props) {
 				<Card.Body>
 					<div className='d-flex justify-content-between align-items-start'>
 						<Card.Title>{props.recipe.recipe_name}</Card.Title>
-						<a
+						<Button
 							className='btn btn-sm card-btn-bookmark'
 							onClick={() => setModalShow(true)}
 						>
 							<FontAwesomeIcon icon={faHeartCirclePlus} />
-						</a>
+						</Button>
 					</div>
 					<Card.Text>{props.recipe.description}</Card.Text>
 				</Card.Body>
