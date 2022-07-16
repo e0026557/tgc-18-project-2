@@ -22,6 +22,28 @@ export default class Favorites extends React.Component {
 	};
 
 	// --- Functions ---
+	async componentDidUpdate() {
+		// Load favorite recipes upon successful login
+		if (this.state.login) {
+			let activePageNumber = this.state.activePageNumber;
+			let response = await axios.get(
+				BASE_API_URL +
+					'favorites/' +
+					this.state.email +
+					`?page=${activePageNumber}}`
+			);
+			let favoriteRecipes = response.data.data.result || []; // Set default to empty array if no results retrieved
+			let totalPages = response.data.data.pages;
+
+			// Update state
+			this.setState({
+				favoriteRecipes: favoriteRecipes,
+				pages: totalPages,
+				contentLoaded: true
+			});
+		}
+	}
+
 	setActiveSubPage = (subPage) => {
 		this.setState({
 			activeSubPage: subPage
@@ -65,27 +87,27 @@ export default class Favorites extends React.Component {
 	// 	}
 	// };
 
-	getFavoriteRecipes = async () => {
-		// Load favorite recipes upon successful login
-		if (this.state.login) {
-			let activePageNumber = this.state.activePageNumber;
-			let response = await axios.get(
-				BASE_API_URL +
-					'favorites/' +
-					this.state.email +
-					`?page=${activePageNumber}}`
-			);
-			let favoriteRecipes = response.data.data.result || []; // Set default to empty array if no results retrieved
-			let totalPages = response.data.data.pages;
+	// getFavoriteRecipes = async () => {
+	// 	// Load favorite recipes upon successful login
+	// 	if (this.state.login) {
+	// 		let activePageNumber = this.state.activePageNumber;
+	// 		let response = await axios.get(
+	// 			BASE_API_URL +
+	// 				'favorites/' +
+	// 				this.state.email +
+	// 				`?page=${activePageNumber}}`
+	// 		);
+	// 		let favoriteRecipes = response.data.data.result || []; // Set default to empty array if no results retrieved
+	// 		let totalPages = response.data.data.pages;
 
-			// Update state
-			this.setState({
-				favoriteRecipes: favoriteRecipes,
-				pages: totalPages,
-				contentLoaded: true
-			});
-		}
-	};
+	// 		// Update state
+	// 		this.setState({
+	// 			favoriteRecipes: favoriteRecipes,
+	// 			pages: totalPages,
+	// 			contentLoaded: true
+	// 		});
+	// 	}
+	// };
 
 	renderFavoriteRecipes = (recipes) => {
 		if (recipes.length > 0) {
@@ -175,7 +197,6 @@ export default class Favorites extends React.Component {
 	};
 
 	render() {
-		this.getFavoriteRecipes();
 		return (
 			<React.Fragment>
 				{/* Email Form Input */}
