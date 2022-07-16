@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Login from './../components/Login';
+import FavoritesLogin from './../components/FavoritesLogin';
 import RecipeCard from './../components/RecipeCard';
 import Pagination from 'react-bootstrap/Pagination';
 import LoadingSpinner from './../components/LoadingSpinner';
@@ -145,7 +145,7 @@ export default class Favorites extends React.Component {
 		if (activeSubPage === 'email') {
 			// Return email form component
 			return (
-				<Login
+				<FavoritesLogin
 					email={this.state.email}
 					emailError={this.state.emailError}
 					updateFormField={this.updateFormField}
