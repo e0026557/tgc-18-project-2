@@ -1,9 +1,18 @@
 /* 
 --- Color Scheme ---
-#E1C9A9
-#d4b095
-#BCC4C7 - a9b0b3 (shade)
-#432D2D - 695757 (tint)
+#E1C9A9 -- Beige
+
+#d4b095 -- Peach
+
+#BCC4C7 -- Light grey 
+-- Shades:
+- a9b0b3
+
+#432D2D -- Dark brown
+-- Tints: 
+- 7b6c6c
+- 695757 
+
 */
 
 /* --- General --- */
@@ -20,6 +29,47 @@ body {
 /* Adjust margin-top to account for height of navbar */
 .adjust-margin-top {
   margin-top: 66px;
+}
+
+/* Buttons */
+.btn-custom-primary {
+  font-weight: 500;
+  background-color: #7b6c6c;
+  border-color: #7b6c6c;
+}
+
+.btn-custom-primary:focus,
+.btn-custom-primary:active,
+.btn-custom-primary:hover {
+  background-color: #695757;
+  border-color: #695757;
+}
+
+.btn-custom-secondary {
+  font-weight: 500;
+  background-color: #BCC4C7;
+  border-color: #BCC4C7;
+}
+
+.btn-custom-secondary:focus,
+.btn-custom-secondary:active,
+.btn-custom-secondary:hover {
+  background-color: #a9b0b3;
+  border-color: #a9b0b3;
+}
+
+.btn-custom-primary:active:focus,
+.btn-custom-primary:focus,
+.btn-custom-secondary:active:focus,
+.btn-custom-secondary:focus {
+  box-shadow: none;
+}
+
+/* Error Messages */
+.errorMessage {
+  color: red;
+  font-weight: 500;
+  display: inline-block;
 }
 
 /* *** MOBILE SETTINGS (BELOW 768PX) *** */
@@ -174,6 +224,18 @@ body {
   box-shadow: none;
 }
 
+/* --- Favorites Section --- */
+/* Email Box */
+.email-box {
+  background-color: rgba(237, 223, 203, 0.65);
+  padding: 1.5rem 3rem;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 
 /* *** MEDIUM SCREEN SETTINGS (768PX AND ABOVE) *** */
