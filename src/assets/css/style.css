@@ -132,12 +132,34 @@ body {
   overflow: hidden;
 }
 
+.card-btn-bookmark {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 100%;
+  background-color: #BCC4C7;
+  border-color: #BCC4C7;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Icon for bookmark button */
+.fa-heart-circle-plus,
+.fa-heart-circle-minus {
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
 .card-btn-info {
   font-weight: 500;
   background-color: #BCC4C7;
   border-color: #BCC4C7;
 }
 
+.card-btn-bookmark:focus,
+.card-btn-bookmark:active,
+.card-btn-bookmark:hover,
 .card-btn-info:focus,
 .card-btn-info:active,
 .card-btn-info:hover {
@@ -145,32 +167,14 @@ body {
   border-color: #a9b0b3;
 }
 
+.card-btn-bookmark:active:focus,
+.card-btn-bookmark:focus,
 .card-btn-info:active:focus,
 .card-btn-info:focus {
   box-shadow: none;
 }
 
-.card-btn-bookmark {
-  height: 2rem;
-  width: 2rem;
-  border-radius: 100%;
-  background-color: #BCC4C7;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.fa-heart-circle-plus,
-.fa-heart-circle-minus {
-  color: #ffffff;
-  font-size: 1.1rem;
-}
-
-.card-btn-bookmark:hover {
-  background-color: #a9b0b3;
-  border-color: #a9b0b3;
-}
 
 /* *** MEDIUM SCREEN SETTINGS (768PX AND ABOVE) *** */
 @media screen and (min-width: 768px) {
