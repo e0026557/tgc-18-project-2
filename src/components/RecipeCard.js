@@ -9,6 +9,20 @@ import {
 	faHeartCircleMinus
 } from '@fortawesome/free-solid-svg-icons';
 
+/*
+ --- Notes: ---
+Required props for RecipeCard (add to favorites):
+- bookmarkCta (from page component)
+- recipe object (from page component)
+- setActivePage function (from Main)
+
+Required props for RecipeCard (remove from favorites):
+- bookmarkCta (from page component)
+- recipe object (from page component)
+- setActivePage function (from Main)
+- removeFromFavorites function (from Favorites)
+*/
+
 export default class RecipeCard extends React.Component {
 	// --- State ---
 	state = {
@@ -16,6 +30,12 @@ export default class RecipeCard extends React.Component {
 	};
 
 	// --- Functions ---
+	hideModal = () => {
+		this.setState({
+			modalShow: false
+		});
+	};
+
 	renderBookmarkIcon = () => {
 		if (this.props.bookmarkCta === 'add') {
 			return <FontAwesomeIcon icon={faHeartCirclePlus} />;
@@ -42,11 +62,13 @@ export default class RecipeCard extends React.Component {
 				<RemoveFromFavoritesModal
 					recipeid={this.props.recipe._id}
 					show={this.state.modalShow}
-					onHide={() =>
-						this.setState({
-							modalShow: false
-						})
-					}
+					// onHide={() =>
+					// 	this.setState({
+					// 		modalShow: false
+					// 	})
+					// }
+					onHide={this.hideModal}
+					removeFromFavorites={this.props.removeFromFavorites}
 				/>
 			);
 		}

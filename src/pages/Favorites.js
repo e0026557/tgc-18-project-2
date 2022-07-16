@@ -18,7 +18,7 @@ export default class Favorites extends React.Component {
 		favoriteRecipes: [],
 		contentLoaded: false,
 		pages: 1,
-		activePageNumber: 1
+		activePageNumber: 1,
 	};
 
 	// --- Functions ---
@@ -109,6 +109,21 @@ export default class Favorites extends React.Component {
 	// 	}
 	// };
 
+  removeFromFavorites = async (recipeId) => {
+    // Attempt to remove recipe from Favorites
+    try {
+      await axios.delete(BASE_API_URL + 'favorites/' + this.state.email, {
+        data: {
+          "recipeId": recipeId
+        }
+      });
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+
 	renderFavoriteRecipes = (recipes) => {
 		if (recipes.length > 0) {
 			return recipes.map((recipe) => {
@@ -121,6 +136,7 @@ export default class Favorites extends React.Component {
               bookmarkCta='remove'
 							recipe={recipe}
 							setActivePage={this.props.setActivePage}
+              removeFromFavorites={this.removeFromFavorites}
 						/>
 					</div>
 				);
@@ -144,7 +160,7 @@ export default class Favorites extends React.Component {
 					active={pageNumber === activePageNumber}
 					onClick={async () => {
 						await this.setActivePageNumber(pageNumber);
-						this.getFavoriteRecipes();
+						// this.getFavoriteRecipes();
 					}}
 				>
 					{pageNumber}
