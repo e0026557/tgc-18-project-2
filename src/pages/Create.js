@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 import validateEmail from './../utilities/validateEmail';
 import validateUrl from './../utilities/validateUrl';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const BASE_API_URL = 'https://coffeetalk-api.herokuapp.com/';
 
@@ -27,10 +29,10 @@ export default class Create extends React.Component {
 		grindSetting: '',
 		waterAmount: '',
 		waterTemperature: '',
-		additionalIngredients: [],
+		additionalIngredients: [''],
 		brewer: '',
-		additionalEquipment: [],
-		steps: [],
+		additionalEquipment: [''],
+		steps: [''],
 		// Resources
 		beans: [],
 		grinders: [],
@@ -138,6 +140,30 @@ export default class Create extends React.Component {
 				});
 			}
 		}
+	};
+
+	updateDynamicFormField = (index, event) => {
+		let data = [...this.state[event.target.name]];
+		data[index] = event.target.value;
+		this.setState({
+			[event.target.name]: data
+		});
+	};
+
+	addDynamicFormField = (inputField) => {
+		this.setState({
+			[inputField]: [...this.state[inputField], '']
+		});
+	};
+
+	removeDynamicFormField = (inputField) => {
+    // Get the last index to be removed
+    let index = this.state[inputField].length - 1;
+		let data = [...this.state[inputField]];
+		data.splice(index, 1);
+		this.setState({
+			[inputField]: data
+		});
 	};
 
 	render() {
@@ -489,44 +515,141 @@ export default class Create extends React.Component {
 						{/* Additional ingredients */}
 						<Form.Group className='mb-3'>
 							<Form.Label>Additional ingredients</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter ingredients'
-								name='additionalIngredients'
-								value={this.state.additionalIngredients}
-								onChange={this.updateFormField}
-							/>
+							{this.state.additionalIngredients.map(
+								(ingredient, index) => {
+									return (
+										<Form.Control
+											key={index}
+											type='text'
+											placeholder='Enter ingredient'
+											name='additionalIngredients'
+											value={ingredient}
+											onChange={(event) =>
+												this.updateDynamicFormField(
+													index,
+													event
+												)
+											}
+										/>
+									);
+								}
+							)}
+
+							<div className='mt-3'>
+								<Button
+									className='btn-custom-primary'
+									onClick={() => {
+										this.addDynamicFormField('additionalIngredients');
+									}}
+								>
+									<FontAwesomeIcon icon={faPlus} />
+								</Button>
+								<Button
+									className='btn-custom-primary'
+									onClick={() => {
+										this.removeDynamicFormField('additionalIngredients');
+									}}
+								>
+									<FontAwesomeIcon icon={faMinus} />
+								</Button>
+							</div>
 						</Form.Group>
 
 						{/* Additional equipment */}
 						<Form.Group className='mb-3'>
 							<Form.Label>Additional equipment</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter equipment'
-								name='additionalEquipment'
-								value={this.state.additionalEquipment}
-								onChange={this.updateFormField}
-							/>
+
+							{this.state.additionalEquipment.map(
+								(equipment, index) => {
+									return (
+										<Form.Control
+											key={index}
+											type='text'
+											placeholder='Enter equipment'
+											name='additionalEquipment'
+											value={equipment}
+											onChange={(event) =>
+												this.updateDynamicFormField(
+													index,
+													event
+												)
+											}
+										/>
+									);
+								}
+							)}
+
+							<div className='mt-3'>
+								<Button
+									className='btn-custom-primary'
+									onClick={() => {
+										this.addDynamicFormField('additionalEquipment');
+									}}
+								>
+									<FontAwesomeIcon icon={faPlus} />
+								</Button>
+								<Button
+									className='btn-custom-primary'
+									onClick={() => {
+										this.removeDynamicFormField('additionalEquipment');
+									}}
+								>
+									<FontAwesomeIcon icon={faMinus} />
+								</Button>
+							</div>
 						</Form.Group>
 
 						{/* Steps */}
 						<Form.Group className='mb-3'>
 							<Form.Label>Steps</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter steps'
-								name='steps'
-								value={this.state.steps}
-                onChange={this.updateFormField}
-							/>
+
+							{this.state.steps.map((step, index) => {
+								return (
+									<Form.Control
+										key={index}
+										type='text'
+										placeholder='Enter step'
+										name='steps'
+										value={step}
+										onChange={(event) =>
+											this.updateDynamicFormField(
+												index,
+												event
+											)
+										}
+									/>
+								);
+							})}
+
 							<Form.Text className='errorMessage'>
 								Please specify steps
 							</Form.Text>
+
+							<div className='mt-3'>
+								<Button
+									className='btn-custom-primary'
+									onClick={() => {
+										this.addDynamicFormField('steps');
+									}}
+								>
+									<FontAwesomeIcon icon={faPlus} />
+								</Button>
+								<Button
+									className='btn-custom-primary'
+									onClick={() => {
+										this.removeDynamicFormField('steps');
+									}}
+								>
+									<FontAwesomeIcon icon={faMinus} />
+								</Button>
+							</div>
 						</Form.Group>
 
-						<Button className='btn-custom-primary' type='submit'>
-							Create
+						<Button
+							className='btn-custom-primary mt-4'
+							type='submit'
+						>
+							Create recipe
 						</Button>
 					</div>
 				</section>
