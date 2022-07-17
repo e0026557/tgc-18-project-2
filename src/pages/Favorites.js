@@ -143,8 +143,8 @@ export default class Favorites extends React.Component {
 			});
 		} else {
 			return (
-				<div className='container ms-3'>
-					<h3>No results to show</h3>
+				<div className='container ms-3 mt-3'>
+					<span>No results to show</span>
 				</div>
 			);
 		}
