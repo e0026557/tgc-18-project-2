@@ -31,6 +31,11 @@ body {
   margin-top: 66px;
 }
 
+/* Fonts */
+.font-weight-500 {
+  font-weight: 500;
+}
+
 /* Buttons */
 .btn-custom-primary {
   font-weight: 500;
@@ -222,6 +227,11 @@ body {
 .card-btn-info:active:focus,
 .card-btn-info:focus {
   box-shadow: none;
+}
+
+/* --- Recipes Section --- */
+.search-box {
+  max-width: 350px;
 }
 
 /* --- Favorites Section --- */
