@@ -45,7 +45,9 @@ export default class Recipes extends React.Component {
 	// --- Functions ---
 	async componentDidMount() {
 		// Load all resources in parallel
-		let recipeRequest = axios.get(BASE_API_URL + 'recipes' + `?page=${this.state.activePageNumber}`);
+		let recipeRequest = axios.get(
+			BASE_API_URL + 'recipes' + `?page=${this.state.activePageNumber}`
+		);
 		let beanRequest = axios.get(BASE_API_URL + 'beans');
 		let grinderRequest = axios.get(BASE_API_URL + 'grinders');
 		let brewerRequest = axios.get(BASE_API_URL + 'brewers');
@@ -153,6 +155,181 @@ export default class Recipes extends React.Component {
 		}
 	};
 
+	renderSearchForm = () => {
+		return (
+			<div>
+				{/* Recipe name */}
+				<Form.Group className='mt-3 mb-3'>
+					<Form.Control
+						type='text'
+						placeholder='Search recipe name'
+						name='searchRecipeName'
+						value={this.state.searchRecipeName}
+						onChange={this.updateFormField}
+					/>
+				</Form.Group>
+
+				{/* Beans */}
+				<Form.Group className='mb-3'>
+					<Dropdown autoClose='outside'>
+						<Dropdown.Toggle className='dropdown-light'>
+							Select coffee bean(s)
+						</Dropdown.Toggle>
+
+						<Dropdown.Menu>
+							{this.state.beans.map((bean) => {
+								return (
+									<Dropdown.Item as='button' key={bean._id}>
+										<label
+											className={
+												this.state.searchBeans.includes(
+													bean._id
+												)
+													? 'w-100 py-1 dropdown-selected'
+													: 'w-100 py-1'
+											}
+										>
+											<input
+												type='checkbox'
+												className='mx-2'
+												name='searchBeans'
+												value={bean._id}
+												onChange={this.updateFormField}
+												checked={this.state.searchBeans.includes(
+													bean._id
+												)}
+											/>
+											{bean.name}
+										</label>
+									</Dropdown.Item>
+								);
+							})}
+						</Dropdown.Menu>
+					</Dropdown>
+				</Form.Group>
+
+				{/* Grinder */}
+				<Form.Group className='mb-3'>
+					<Form.Select
+						name='searchGrinder'
+						value={this.state.searchGrinder}
+						onChange={this.updateFormField}
+					>
+						<option value='' disabled selected>
+							--- Select grinder ---{' '}
+						</option>
+						{this.state.grinders.map((grinder) => {
+							return (
+								<option key={grinder._id} value={grinder._id}>
+									{grinder.brand} {grinder.model}
+								</option>
+							);
+						})}
+					</Form.Select>
+				</Form.Group>
+
+				{/* Method */}
+				<Form.Group className='mb-3'>
+					<Form.Select
+						name='searchMethod'
+						value={this.state.searchMethod}
+						onChange={this.updateFormField}
+					>
+						<option value='' disabled selected>
+							--- Select brew method ---
+						</option>
+						{this.state.methods.map((method) => {
+							return (
+								<option key={method._id} value={method._id}>
+									{method.name}
+								</option>
+							);
+						})}
+					</Form.Select>
+				</Form.Group>
+
+				{/* Brewer */}
+				<Form.Group className='mb-3'>
+					<Form.Select
+						name='searchBrewer'
+						value={this.state.searchBrewer}
+						onChange={this.updateFormField}
+					>
+						<option value='' disabled selected>
+							--- Select brewer ---{' '}
+						</option>
+						{this.state.brewers.map((brewer) => {
+							return (
+								<option key={brewer._id} value={brewer._id}>
+									{brewer.brand} {brewer.model}
+								</option>
+							);
+						})}
+					</Form.Select>
+				</Form.Group>
+
+				{/* Min rating */}
+				<Form.Group className='mb-3'>
+					<Form.Select
+						name='searchMinRating'
+						value={this.state.searchMinRating}
+						onChange={this.updateFormField}
+					>
+						<option value='' disabled selected>
+							--- Select min rating ---
+						</option>
+						{[0, 1, 2, 3, 4, 5].map((rating) => {
+							return (
+								<option key={rating} value={rating}>
+									{rating}
+								</option>
+							);
+						})}
+					</Form.Select>
+				</Form.Group>
+				{/* Sort */}
+				<Form.Group className='mb-3'>
+					<Form.Label className='me-3'>Sort by:</Form.Label>
+					<Form.Check
+						inline
+						label='Date'
+						name='searchSort'
+						type='radio'
+						value='date'
+						onChange={this.updateFormField}
+						checked={this.state.searchSort === 'date'}
+					/>
+					<Form.Check
+						inline
+						label='Rating'
+						name='searchSort'
+						type='radio'
+						value='rating'
+						onChange={this.updateFormField}
+						checked={this.state.searchSort === 'rating'}
+					/>
+				</Form.Group>
+
+				<div className='mt-4'>
+					<Button
+						className='btn-custom-primary me-3'
+						variant='primary'
+						onClick={this.searchRecipes}
+					>
+						Search
+					</Button>
+					<Button
+						className='font-weight-500'
+						variant='danger'
+						onClick={this.clearSearch}
+					>
+						Clear
+					</Button>
+				</div>
+			</div>
+		);
+	};
+
 	renderRecipes = (recipes) => {
 		if (recipes.length > 0) {
 			return recipes.map((recipe) => {
@@ -256,9 +433,9 @@ export default class Recipes extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<section className='container-fluid adjust-margin-top'>
+				<section className='container-fluid d-flex flex-column flex-lg-row justify-content-center align-items-center align-items-lg-start adjust-margin-top'>
 					{/* Quick search bar (Mobile) */}
-					<Container className='search-box d-flex justify-content-center align-items-center pt-4'>
+					<Container className='search-box d-flex d-lg-none justify-content-center align-items-center pt-4 mx-auto'>
 						<Form.Control
 							name='searchRecipeName'
 							type='search'
@@ -292,209 +469,17 @@ export default class Recipes extends React.Component {
 							<Modal.Title>Advanced Search</Modal.Title>
 						</Modal.Header>
 						<Modal.Body>
-							<div>
-								{/* Recipe name */}
-								<Form.Group className='mt-3 mb-3'>
-									<Form.Control
-										type='text'
-										placeholder='Search recipe name'
-										name='searchRecipeName'
-										value={this.state.searchRecipeName}
-										onChange={this.updateFormField}
-									/>
-								</Form.Group>
-
-								{/* Beans */}
-								<Form.Group className='mb-3'>
-									<Dropdown autoClose='outside'>
-										<Dropdown.Toggle className='dropdown-light'>
-											Select coffee bean(s)
-										</Dropdown.Toggle>
-
-										<Dropdown.Menu>
-											{this.state.beans.map((bean) => {
-												return (
-													<Dropdown.Item
-														as='button'
-														key={bean._id}
-													>
-														<label
-															className={
-																this.state.searchBeans.includes(
-																	bean._id
-																)
-																	? 'w-100 py-1 dropdown-selected'
-																	: 'w-100 py-1'
-															}
-														>
-															<input
-																type='checkbox'
-																className='mx-2'
-																name='searchBeans'
-																value={bean._id}
-																onChange={
-																	this
-																		.updateFormField
-																}
-																checked={this.state.searchBeans.includes(
-																	bean._id
-																)}
-															/>
-															{bean.name}
-														</label>
-													</Dropdown.Item>
-												);
-											})}
-										</Dropdown.Menu>
-									</Dropdown>
-								</Form.Group>
-
-								{/* Grinder */}
-								<Form.Group className='mb-3'>
-									<Form.Select
-										name='searchGrinder'
-										value={this.state.searchGrinder}
-										onChange={this.updateFormField}
-									>
-										<option value='' disabled selected>
-											--- Select grinder ---{' '}
-										</option>
-										{this.state.grinders.map((grinder) => {
-											return (
-												<option
-													key={grinder._id}
-													value={grinder._id}
-												>
-													{grinder.brand}{' '}
-													{grinder.model}
-												</option>
-											);
-										})}
-									</Form.Select>
-								</Form.Group>
-
-								{/* Method */}
-								<Form.Group className='mb-3'>
-									<Form.Select
-										name='searchMethod'
-										value={this.state.searchMethod}
-										onChange={this.updateFormField}
-									>
-										<option value='' disabled selected>
-											--- Select brew method ---
-										</option>
-										{this.state.methods.map((method) => {
-											return (
-												<option
-													key={method._id}
-													value={method._id}
-												>
-													{method.name}
-												</option>
-											);
-										})}
-									</Form.Select>
-								</Form.Group>
-
-								{/* Brewer */}
-								<Form.Group className='mb-3'>
-									<Form.Select
-										name='searchBrewer'
-										value={this.state.searchBrewer}
-										onChange={this.updateFormField}
-									>
-										<option value='' disabled selected>
-											--- Select brewer ---{' '}
-										</option>
-										{this.state.brewers.map((brewer) => {
-											return (
-												<option
-													key={brewer._id}
-													value={brewer._id}
-												>
-													{brewer.brand}{' '}
-													{brewer.model}
-												</option>
-											);
-										})}
-									</Form.Select>
-								</Form.Group>
-
-								{/* Min rating */}
-								<Form.Group className='mb-3'>
-									<Form.Select
-										name='searchMinRating'
-										value={this.state.searchMinRating}
-										onChange={this.updateFormField}
-									>
-										<option value='' disabled selected>
-											--- Select min rating ---
-										</option>
-										{[0, 1, 2, 3, 4, 5].map((rating) => {
-											return (
-												<option
-													key={rating}
-													value={rating}
-												>
-													{rating}
-												</option>
-											);
-										})}
-									</Form.Select>
-								</Form.Group>
-								{/* Sort */}
-								<Form.Group className='mb-3'>
-									<Form.Label className='me-3'>
-										Sort by:
-									</Form.Label>
-									<Form.Check
-										inline
-										label='Date'
-										name='searchSort'
-										type='radio'
-										value='date'
-										onChange={this.updateFormField}
-										checked={
-											this.state.searchSort === 'date'
-										}
-									/>
-									<Form.Check
-										inline
-										label='Rating'
-										name='searchSort'
-										type='radio'
-										value='rating'
-										onChange={this.updateFormField}
-										checked={
-											this.state.searchSort === 'rating'
-										}
-									/>
-								</Form.Group>
-
-								<div className='mt-4'>
-									<Button
-										className='btn-custom-primary me-3'
-										variant='primary'
-										onClick={this.searchRecipes}
-									>
-										Search
-									</Button>
-									<Button
-										className='font-weight-500'
-										variant='danger'
-										onClick={this.clearSearch}
-									>
-										Clear
-									</Button>
-								</div>
-							</div>
+							{this.renderSearchForm()}
 						</Modal.Body>
 					</Modal>
 
 					{/* Advanced search side component (Desktop) */}
+					<div className='col-lg-3 d-none d-lg-block mt-lg-3'>
+						{this.renderSearchForm()}
+					</div>
 
 					{/* Recipes */}
-					<div className='mt-3'>
+					<div className='result-box row col-lg-9 mt-3 mt-lg-3'>
 						{this.state.contentLoaded ? (
 							<React.Fragment>
 								{this.renderRecipes(this.state.recipes)}

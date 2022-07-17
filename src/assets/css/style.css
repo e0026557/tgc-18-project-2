@@ -21,9 +21,12 @@
 /* --- General --- */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
+  overflow-y: scroll;
   font-family: 'Inter', sans-serif;
   color: #432D2D;
   background-color: #d4b095;
@@ -343,5 +346,11 @@ body {
 
   .fa-chevron-down {
     font-size: 3.5rem;
+  }
+
+  /* --- Recipes Section --- */
+  .result-box {
+    height: calc(100vh - 76px - 50px);
+    overflow-y: scroll;
   }
 }
