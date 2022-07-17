@@ -94,7 +94,8 @@ body {
   background-color: #BCC4C7;
 }
 
-/* Error Messages */
+/* Form Styles */
+/* Errors */
 .errorMessage {
   color: red;
   font-weight: 500;
