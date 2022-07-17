@@ -82,12 +82,10 @@ export default class RecipeCard extends React.Component {
 				<Card className='recipe-card mt-3'>
 					<Card.Img variant='top' src={this.props.recipe.image_url} />
 					<Card.Body>
-						<div className='d-flex justify-content-between align-items-start'>
-							<Card.Title>
-								{this.props.recipe.recipe_name}
-							</Card.Title>
+						<Card.Title className='w-100 d-flex justify-content-between align-items-center mb-3'>
+							{this.props.recipe.recipe_name}
 							<Button
-								className='btn btn-sm card-btn-bookmark'
+								className='btn btn-sm card-btn-bookmark me-2'
 								onClick={() =>
 									this.setState({
 										modalShow: true
@@ -96,7 +94,7 @@ export default class RecipeCard extends React.Component {
 							>
 								{this.renderBookmarkIcon()}
 							</Button>
-						</div>
+						</Card.Title>
 						<Card.Text>{this.props.recipe.description}</Card.Text>
 					</Card.Body>
 					<Button
