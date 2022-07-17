@@ -215,7 +215,7 @@ export default class Recipes extends React.Component {
 						value={this.state.searchGrinder}
 						onChange={this.updateFormField}
 					>
-						<option value='' disabled selected>
+						<option value='' disabled>
 							--- Select grinder ---{' '}
 						</option>
 						{this.state.grinders.map((grinder) => {
@@ -235,7 +235,7 @@ export default class Recipes extends React.Component {
 						value={this.state.searchMethod}
 						onChange={this.updateFormField}
 					>
-						<option value='' disabled selected>
+						<option value='' disabled>
 							--- Select brew method ---
 						</option>
 						{this.state.methods.map((method) => {
@@ -255,7 +255,7 @@ export default class Recipes extends React.Component {
 						value={this.state.searchBrewer}
 						onChange={this.updateFormField}
 					>
-						<option value='' disabled selected>
+						<option value='' disabled>
 							--- Select brewer ---{' '}
 						</option>
 						{this.state.brewers.map((brewer) => {
@@ -275,7 +275,7 @@ export default class Recipes extends React.Component {
 						value={this.state.searchMinRating}
 						onChange={this.updateFormField}
 					>
-						<option value='' disabled selected>
+						<option value='' disabled>
 							--- Select min rating ---
 						</option>
 						{[0, 1, 2, 3, 4, 5].map((rating) => {
@@ -287,6 +287,7 @@ export default class Recipes extends React.Component {
 						})}
 					</Form.Select>
 				</Form.Group>
+				
 				{/* Sort */}
 				<Form.Group className='mb-3'>
 					<Form.Label className='me-3'>Sort by:</Form.Label>
