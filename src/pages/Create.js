@@ -814,6 +814,7 @@ export default class Create extends React.Component {
 						<Button
 							className='btn-custom-primary mt-4'
 							type='submit'
+              onClick={this.createRecipe}
 						>
 							Create recipe
 						</Button>
