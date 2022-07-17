@@ -8,6 +8,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 const BASE_API_URL = 'https://coffeetalk-api.herokuapp.com/';
 
 export default class Home extends React.Component {
+	// --- State ---
 	state = {
 		latestRecipes: [],
 		popularRecipes: [],
