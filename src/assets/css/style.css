@@ -13,6 +13,9 @@
 - 7b6c6c
 - 695757 
 
+#ced4da -- Default border color for Bootstrap form inputs
+#212529 -- Default text color for Bootstrap form inputs
+
 */
 
 /* --- General --- */
@@ -68,6 +71,24 @@ body {
 .btn-custom-secondary:active:focus,
 .btn-custom-secondary:focus {
   box-shadow: none;
+}
+
+/* Dropdowns */
+.dropdown-light,
+.dropdown-light:active,
+.dropdown-light:focus,
+.dropdown-light:hover {
+  color: #212529 !important;
+  background-color: #ffffff !important;
+  border-color: #ced4da !important;
+}
+
+.dropdown-light:focus {
+  box-shadow: none !important;
+}
+
+.dropdown-selected {
+  background-color: #BCC4C7;
 }
 
 /* Error Messages */
