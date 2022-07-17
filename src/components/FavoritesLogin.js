@@ -7,9 +7,9 @@ export default function FavoritesLogin(props) {
 	const renderErrorMessage = () => {
 		if (props.emailError) {
 			return (
-				<span className='errorMessage mt-1 ms-1'>
+				<Form.Text className='errorMessage'>
 					Invalid email address
-				</span>
+				</Form.Text>
 			);
 		}
 	};
