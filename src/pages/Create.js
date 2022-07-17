@@ -20,7 +20,9 @@ export default class Create extends React.Component {
 		username: '',
 		email: '',
 		totalBrewTime: '',
+		totalBrewTimeUnits: 'min', // Default units
 		brewYield: '',
+		brewYieldUnits: 'ml', // Default units
 		brewingMethod: '',
 		coffeeBeans: [],
 		coffeeRestPeriod: '',
@@ -28,6 +30,7 @@ export default class Create extends React.Component {
 		grinder: '',
 		grindSetting: '',
 		waterAmount: '',
+		waterAmountUnits: 'ml', // Default units
 		waterTemperature: '',
 		additionalIngredients: [''],
 		brewer: '',
@@ -91,15 +94,17 @@ export default class Create extends React.Component {
 			description: this.state.description,
 			username: this.state.username,
 			email: this.state.email,
-			totalBrewTime: this.state.totalBrewTime,
-			brewYield: this.state.brewYield,
+			totalBrewTime:
+				this.state.totalBrewTime + ' ' + this.state.totalBrewTimeUnits,
+			brewYield: this.state.brewYield + ' ' + this.state.brewYieldUnits,
 			brewingMethod: this.state.brewingMethod,
 			coffeeBeans: this.state.coffeeBeans,
 			coffeeRestPeriod: this.state.coffeeRestPeriod,
 			coffeeAmount: this.state.coffeeAmount,
 			grinder: this.state.grinder,
 			grindSetting: this.state.grindSetting,
-			waterAmount: this.state.waterAmount,
+			waterAmount:
+				this.state.waterAmount + ' ' + this.state.waterAmountUnits,
 			waterTemperature: this.state.waterTemperature,
 			additionalIngredients: this.state.additionalIngredients,
 			brewer: this.state.brewer,
@@ -157,8 +162,8 @@ export default class Create extends React.Component {
 	};
 
 	removeDynamicFormField = (inputField) => {
-    // Get the last index to be removed
-    let index = this.state[inputField].length - 1;
+		// Get the last index to be removed
+		let index = this.state[inputField].length - 1;
 		let data = [...this.state[inputField]];
 		data.splice(index, 1);
 		this.setState({
@@ -249,13 +254,27 @@ export default class Create extends React.Component {
 						{/* Total brew time */}
 						<Form.Group className='mb-3'>
 							<Form.Label>Total brew time</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter total brew time'
-								name='totalBrewTime'
-								value={this.state.totalBrewTime}
-								onChange={this.updateFormField}
-							/>
+							<div className='d-flex'>
+								<Form.Control
+									type='text'
+									placeholder='Enter total brew time'
+									name='totalBrewTime'
+									value={this.state.totalBrewTime}
+									onChange={this.updateFormField}
+								/>
+								<Form.Select
+									name='totalBrewTimeUnits'
+									value={this.state.totalBrewTimeUnits}
+									onChange={this.updateFormField}
+								>
+									<option disabled>
+										--- Select units ---{' '}
+									</option>
+									<option value='s'>s</option>
+									<option value='min'>min</option>
+									<option value='h'>h</option>
+								</Form.Select>
+							</div>
 							<Form.Text className='errorMessage'>
 								Invalid total brew time specified
 							</Form.Text>
@@ -264,13 +283,26 @@ export default class Create extends React.Component {
 						{/* Brew yield */}
 						<Form.Group className='mb-3'>
 							<Form.Label>Brew yield</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter brew yield'
-								name='brewYield'
-								value={this.state.brewYield}
-								onChange={this.updateFormField}
-							/>
+							<div className='d-flex'>
+								<Form.Control
+									type='text'
+									placeholder='Enter brew yield'
+									name='brewYield'
+									value={this.state.brewYield}
+									onChange={this.updateFormField}
+								/>
+								<Form.Select
+									name='brewYieldUnits'
+									value={this.state.brewYieldUnits}
+									onChange={this.updateFormField}
+								>
+									<option disabled>
+										--- Select units ---{' '}
+									</option>
+									<option value='ml'>ml</option>
+									<option value='L'>L</option>
+								</Form.Select>
+							</div>
 							<Form.Text className='errorMessage'>
 								Invalid brew yield specified
 							</Form.Text>
@@ -430,14 +462,27 @@ export default class Create extends React.Component {
 
 						{/* Water amount */}
 						<Form.Group className='mb-3'>
-							<Form.Label>Amount of water (ml)</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter amount of water'
-								name='waterAmount'
-								value={this.state.waterAmount}
-								onChange={this.updateFormField}
-							/>
+							<Form.Label>Amount of water</Form.Label>
+							<div className='d-flex'>
+								<Form.Control
+									type='text'
+									placeholder='Enter amount of water'
+									name='waterAmount'
+									value={this.state.waterAmount}
+									onChange={this.updateFormField}
+								/>
+								<Form.Select
+									name='waterAmountUnits'
+									value={this.state.waterAmountUnits}
+									onChange={this.updateFormField}
+								>
+									<option disabled>
+										--- Select units ---{' '}
+									</option>
+									<option value='ml'>ml</option>
+									<option value='L'>L</option>
+								</Form.Select>
+							</div>
 							<Form.Text className='errorMessage'>
 								Invalid water amount specified
 							</Form.Text>
@@ -513,91 +558,107 @@ export default class Create extends React.Component {
 						</Form.Group>
 
 						{/* Additional ingredients */}
-						<Form.Group className='mb-3'>
-							<Form.Label>Additional ingredients</Form.Label>
-							{this.state.additionalIngredients.map(
-								(ingredient, index) => {
-									return (
-										<Form.Control
-											key={index}
-											type='text'
-											placeholder='Enter ingredient'
-											name='additionalIngredients'
-											value={ingredient}
-											onChange={(event) =>
-												this.updateDynamicFormField(
-													index,
-													event
-												)
-											}
-										/>
-									);
-								}
-							)}
+						{this.state.optionalFields.includes('ingredients') ? (
+							<Form.Group className='mb-3'>
+								<Form.Label>Additional ingredients</Form.Label>
+								{this.state.additionalIngredients.map(
+									(ingredient, index) => {
+										return (
+											<Form.Control
+												key={index}
+												type='text'
+												placeholder='Enter ingredient'
+												name='additionalIngredients'
+												value={ingredient}
+												onChange={(event) =>
+													this.updateDynamicFormField(
+														index,
+														event
+													)
+												}
+											/>
+										);
+									}
+								)}
 
-							<div className='mt-3'>
-								<Button
-									className='btn-custom-primary'
-									onClick={() => {
-										this.addDynamicFormField('additionalIngredients');
-									}}
-								>
-									<FontAwesomeIcon icon={faPlus} />
-								</Button>
-								<Button
-									className='btn-custom-primary'
-									onClick={() => {
-										this.removeDynamicFormField('additionalIngredients');
-									}}
-								>
-									<FontAwesomeIcon icon={faMinus} />
-								</Button>
-							</div>
-						</Form.Group>
+								<div className='mt-3'>
+									<Button
+										className='btn-custom-primary'
+										onClick={() => {
+											this.addDynamicFormField(
+												'additionalIngredients'
+											);
+										}}
+									>
+										<FontAwesomeIcon icon={faPlus} />
+									</Button>
+									<Button
+										className='btn-custom-primary'
+										onClick={() => {
+											this.removeDynamicFormField(
+												'additionalIngredients'
+											);
+										}}
+									>
+										<FontAwesomeIcon icon={faMinus} />
+									</Button>
+								</div>
+							</Form.Group>
+						) : (
+							''
+						)}
 
 						{/* Additional equipment */}
-						<Form.Group className='mb-3'>
-							<Form.Label>Additional equipment</Form.Label>
+						{this.state.optionalFields.includes('equipment') ? (
+							<Form.Group className='mb-3'>
+								<Form.Label>Additional equipment</Form.Label>
 
-							{this.state.additionalEquipment.map(
-								(equipment, index) => {
-									return (
-										<Form.Control
-											key={index}
-											type='text'
-											placeholder='Enter equipment'
-											name='additionalEquipment'
-											value={equipment}
-											onChange={(event) =>
-												this.updateDynamicFormField(
-													index,
-													event
-												)
-											}
-										/>
-									);
-								}
-							)}
+								{this.state.additionalEquipment.map(
+									(equipment, index) => {
+										return (
+											<Form.Control
+												key={index}
+												type='text'
+												placeholder='Enter equipment'
+												name='additionalEquipment'
+												value={equipment}
+												onChange={(event) =>
+													this.updateDynamicFormField(
+														index,
+														event
+													)
+												}
+											/>
+										);
+									}
+								)}
 
-							<div className='mt-3'>
-								<Button
-									className='btn-custom-primary'
-									onClick={() => {
-										this.addDynamicFormField('additionalEquipment');
-									}}
-								>
-									<FontAwesomeIcon icon={faPlus} />
-								</Button>
-								<Button
-									className='btn-custom-primary'
-									onClick={() => {
-										this.removeDynamicFormField('additionalEquipment');
-									}}
-								>
-									<FontAwesomeIcon icon={faMinus} />
-								</Button>
-							</div>
-						</Form.Group>
+								<div className='mt-3'>
+									<Button
+										className='btn-custom-primary'
+										onClick={() => {
+											this.addDynamicFormField(
+												'additionalEquipment'
+											);
+										}}
+									>
+										<FontAwesomeIcon icon={faPlus} />
+									</Button>
+									<Button
+										className='btn-custom-primary'
+										onClick={() => {
+											this.removeDynamicFormField(
+												'additionalEquipment'
+											);
+										}}
+									>
+										<FontAwesomeIcon icon={faMinus} />
+									</Button>
+								</div>
+							</Form.Group>
+						) : (
+							''
+						)}
 
 						{/* Steps */}
 						<Form.Group className='mb-3'>
