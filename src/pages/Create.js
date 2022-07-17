@@ -43,7 +43,7 @@ export default class Create extends React.Component {
 		methods: [],
 		// Status
 		optionalFields: [], // 'ingredients', 'equipment'
-		error: false,
+		errors: [], // Array of fields that have errors
 		submitStatus: false,
 		contentLoaded: false
 	};
@@ -171,6 +171,11 @@ export default class Create extends React.Component {
 		});
 	};
 
+	// TODO
+	validateFormInputs = () => {
+		return;
+	};
+
 	render() {
 		return (
 			<React.Fragment>
@@ -186,14 +191,21 @@ export default class Create extends React.Component {
 								value={this.state.imageUrl}
 								onChange={this.updateFormField}
 							/>
-							<Form.Text className='errorMessage'>
-								Invalid image URL
-							</Form.Text>
+							{this.state.errors.includes('imageUrl') ? (
+								<Form.Text className='errorMessage'>
+									Invalid image URL
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Recipe name */}
 						<Form.Group className='mb-3'>
-							<Form.Label>Recipe name</Form.Label>
+							<Form.Label>
+								Recipe name{' '}
+								<span className='text-danger'>*</span>
+							</Form.Label>
 							<Form.Control
 								type='text'
 								placeholder='Enter recipe name'
@@ -201,14 +213,22 @@ export default class Create extends React.Component {
 								value={this.state.recipeName}
 								onChange={this.updateFormField}
 							/>
-							<Form.Text className='errorMessage'>
-								Recipe name must be at least 5 characters long
-							</Form.Text>
+							{this.state.errors.includes('recipeName') ? (
+								<Form.Text className='errorMessage'>
+									Recipe name must be at least 5 characters
+									long
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Description */}
 						<Form.Group className='mb-3'>
-							<Form.Label>Description</Form.Label>
+							<Form.Label>
+								Description{' '}
+								<span className='text-danger'>*</span>
+							</Form.Label>
 							<Form.Control
 								type='text'
 								placeholder='Enter short description'
@@ -216,14 +236,21 @@ export default class Create extends React.Component {
 								value={this.state.description}
 								onChange={this.updateFormField}
 							/>
-							<Form.Text className='errorMessage'>
-								Description must be at least 5 characters long
-							</Form.Text>
+							{this.state.errors.includes('description') ? (
+								<Form.Text className='errorMessage'>
+									Description must be at least 5 characters
+									long
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Username */}
 						<Form.Group className='mb-3'>
-							<Form.Label>Username</Form.Label>
+							<Form.Label>
+								Username <span className='text-danger'>*</span>
+							</Form.Label>
 							<Form.Control
 								type='text'
 								placeholder='Enter username'
@@ -231,14 +258,20 @@ export default class Create extends React.Component {
 								value={this.state.username}
 								onChange={this.updateFormField}
 							/>
-							<Form.Text className='errorMessage'>
-								Username must be at least 5 characters long
-							</Form.Text>
+							{this.state.errors.includes('username') ? (
+								<Form.Text className='errorMessage'>
+									Username must be at least 5 characters long
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Email */}
 						<Form.Group className='mb-3'>
-							<Form.Label>Email</Form.Label>
+							<Form.Label>
+								Email <span className='text-danger'>*</span>
+							</Form.Label>
 							<Form.Control
 								type='email'
 								placeholder='Enter email'
@@ -246,14 +279,21 @@ export default class Create extends React.Component {
 								value={this.state.email}
 								onChange={this.updateFormField}
 							/>
-							<Form.Text className='errorMessage'>
-								Invalid email address
-							</Form.Text>
+							{this.state.errors.includes('email') ? (
+								<Form.Text className='errorMessage'>
+									Invalid email address
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Total brew time */}
 						<Form.Group className='mb-3'>
-							<Form.Label>Total brew time</Form.Label>
+							<Form.Label>
+								Total brew time{' '}
+								<span className='text-danger'>*</span>
+							</Form.Label>
 							<div className='d-flex'>
 								<Form.Control
 									type='text'
@@ -275,14 +315,21 @@ export default class Create extends React.Component {
 									<option value='h'>h</option>
 								</Form.Select>
 							</div>
-							<Form.Text className='errorMessage'>
-								Invalid total brew time specified
-							</Form.Text>
+							{this.state.errors.includes('totalBrewTime') ? (
+								<Form.Text className='errorMessage'>
+									Invalid total brew time specified
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Brew yield */}
 						<Form.Group className='mb-3'>
-							<Form.Label>Brew yield</Form.Label>
+							<Form.Label>
+								Brew yield{' '}
+								<span className='text-danger'>*</span>
+							</Form.Label>
 							<div className='d-flex'>
 								<Form.Control
 									type='text'
@@ -303,9 +350,13 @@ export default class Create extends React.Component {
 									<option value='L'>L</option>
 								</Form.Select>
 							</div>
-							<Form.Text className='errorMessage'>
-								Invalid brew yield specified
-							</Form.Text>
+							{this.state.errors.includes('brewYield') ? (
+								<Form.Text className='errorMessage'>
+									Invalid brew yield specified
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Brewing method */}
@@ -329,9 +380,13 @@ export default class Create extends React.Component {
 									);
 								})}
 							</Form.Select>
-							<Form.Text className='errorMessage'>
-								Please select a brewing method
-							</Form.Text>
+							{this.state.errors.includes('brewingMethod') ? (
+								<Form.Text className='errorMessage'>
+									Please select a brewing method
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Coffee beans */}
@@ -376,9 +431,13 @@ export default class Create extends React.Component {
 									})}
 								</Dropdown.Menu>
 							</Dropdown>
-							<Form.Text className='errorMessage'>
-								Please select at least one coffee bean
-							</Form.Text>
+							{this.state.errors.includes('coffeeBeans') ? (
+								<Form.Text className='errorMessage'>
+									Please select at least one coffee bean
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Coffee rest period */}
@@ -401,14 +460,21 @@ export default class Create extends React.Component {
 								</option>
 								<option value='14+ days'>14+ days</option>
 							</Form.Select>
-							<Form.Text className='errorMessage'>
-								Please select coffee rest period
-							</Form.Text>
+							{this.state.errors.includes('coffeeRestPeriod') ? (
+								<Form.Text className='errorMessage'>
+									Please select coffee rest period
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Coffee amount */}
 						<Form.Group className='mb-3'>
-							<Form.Label>Amount of coffee (g)</Form.Label>
+							<Form.Label>
+								Amount of coffee (g){' '}
+								<span className='text-danger'>*</span>
+							</Form.Label>
 							<Form.Control
 								type='text'
 								placeholder='Enter amount of coffee'
@@ -416,9 +482,13 @@ export default class Create extends React.Component {
 								value={this.state.coffeeAmount}
 								onChange={this.updateFormField}
 							/>
-							<Form.Text className='errorMessage'>
-								Invalid coffee amount specified
-							</Form.Text>
+							{this.state.errors.includes('coffeeAmount') ? (
+								<Form.Text className='errorMessage'>
+									Invalid coffee amount specified
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Grinder */}
@@ -440,14 +510,21 @@ export default class Create extends React.Component {
 									);
 								})}
 							</Form.Select>
-							<Form.Text className='errorMessage'>
-								Please select a grinder
-							</Form.Text>
+							{this.state.errors.includes('grinder') ? (
+								<Form.Text className='errorMessage'>
+									Please select a grinder
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Grind setting */}
 						<Form.Group className='mb-3'>
-							<Form.Label>Grind setting</Form.Label>
+							<Form.Label>
+								Grind setting{' '}
+								<span className='text-danger'>*</span>
+							</Form.Label>
 							<Form.Control
 								type='text'
 								placeholder='Enter grind setting'
@@ -455,14 +532,21 @@ export default class Create extends React.Component {
 								value={this.state.grindSetting}
 								onChange={this.updateFormField}
 							/>
-							<Form.Text className='errorMessage'>
-								Please specify grind setting
-							</Form.Text>
+							{this.state.errors.includes('grindSetting') ? (
+								<Form.Text className='errorMessage'>
+									Please specify grind setting
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Water amount */}
 						<Form.Group className='mb-3'>
-							<Form.Label>Amount of water</Form.Label>
+							<Form.Label>
+								Amount of water{' '}
+								<span className='text-danger'>*</span>
+							</Form.Label>
 							<div className='d-flex'>
 								<Form.Control
 									type='text'
@@ -483,14 +567,21 @@ export default class Create extends React.Component {
 									<option value='L'>L</option>
 								</Form.Select>
 							</div>
-							<Form.Text className='errorMessage'>
-								Invalid water amount specified
-							</Form.Text>
+							{this.state.errors.includes('waterAmount') ? (
+								<Form.Text className='errorMessage'>
+									Invalid water amount specified
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Water temperature */}
 						<Form.Group className='mb-3'>
-							<Form.Label>Water temperature (celsius)</Form.Label>
+							<Form.Label>
+								Water temperature (celsius){' '}
+								<span className='text-danger'>*</span>
+							</Form.Label>
 							<Form.Control
 								type='text'
 								placeholder='Enter water temperature'
@@ -498,9 +589,13 @@ export default class Create extends React.Component {
 								value={this.state.waterTemperature}
 								onChange={this.updateFormField}
 							/>
-							<Form.Text className='errorMessage'>
-								Invalid water temperature specified
-							</Form.Text>
+							{this.state.errors.includes('waterTemperature') ? (
+								<Form.Text className='errorMessage'>
+									Invalid water temperature specified
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Brewer */}
@@ -522,9 +617,13 @@ export default class Create extends React.Component {
 									);
 								})}
 							</Form.Select>
-							<Form.Text className='errorMessage'>
-								Please select a brewer
-							</Form.Text>
+							{this.state.errors.includes('brewer') ? (
+								<Form.Text className='errorMessage'>
+									Please select a brewer
+								</Form.Text>
+							) : (
+								''
+							)}
 						</Form.Group>
 
 						{/* Options to trigger optional input fields (ingredients and equipment) */}
@@ -662,7 +761,9 @@ export default class Create extends React.Component {
 
 						{/* Steps */}
 						<Form.Group className='mb-3'>
-							<Form.Label>Steps</Form.Label>
+							<Form.Label>
+								Steps <span className='text-danger'>*</span>
+							</Form.Label>
 
 							{this.state.steps.map((step, index) => {
 								return (
@@ -682,9 +783,13 @@ export default class Create extends React.Component {
 								);
 							})}
 
-							<Form.Text className='errorMessage'>
-								Please specify steps
-							</Form.Text>
+							{this.state.errors.includes('steps') ? (
+								<Form.Text className='errorMessage'>
+									Please specify steps
+								</Form.Text>
+							) : (
+								''
+							)}
 
 							<div className='mt-3'>
 								<Button
