@@ -6,10 +6,16 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Pagination from 'react-bootstrap/Pagination';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Table from 'react-bootstrap/Table';
 import RecipeCard from './../components/RecipeCard';
 import LoadingSpinner from './../components/LoadingSpinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faFilter } from '@fortawesome/free-solid-svg-icons';
+import {
+	faMagnifyingGlass,
+	faFilter,
+	faInfo
+} from '@fortawesome/free-solid-svg-icons';
 
 const BASE_API_URL = 'https://coffeetalk-api.herokuapp.com/';
 
@@ -39,7 +45,10 @@ export default class Recipes extends React.Component {
 		contentLoaded: false,
 		// Modal
 		fullscreen: true,
-		show: false
+		show: false,
+		// Offcanvas
+		offcanvasShow: false,
+		beanInfo: {}
 	};
 
 	// --- Functions ---
@@ -171,7 +180,7 @@ export default class Recipes extends React.Component {
 
 				{/* Beans */}
 				<Form.Group className='mb-3'>
-					<Dropdown autoClose='outside'>
+					<Dropdown autoClose={false}>
 						<Dropdown.Toggle className='dropdown-light'>
 							Select coffee bean(s)
 						</Dropdown.Toggle>
@@ -185,8 +194,8 @@ export default class Recipes extends React.Component {
 												this.state.searchBeans.includes(
 													bean._id
 												)
-													? 'w-100 py-1 dropdown-selected'
-													: 'w-100 py-1'
+													? 'py-1 dropdown-selected'
+													: 'py-1'
 											}
 										>
 											<input
@@ -201,6 +210,14 @@ export default class Recipes extends React.Component {
 											/>
 											{bean.name}
 										</label>
+										<Button
+											className='btn-custom-info ms-auto me-3'
+											onClick={() => {
+												this.getBeanInfo(bean);
+											}}
+										>
+											<FontAwesomeIcon icon={faInfo} />
+										</Button>
 									</Dropdown.Item>
 								);
 							})}
@@ -287,7 +304,7 @@ export default class Recipes extends React.Component {
 						})}
 					</Form.Select>
 				</Form.Group>
-				
+
 				{/* Sort */}
 				<Form.Group className='mb-3'>
 					<Form.Label className='me-3'>Sort by:</Form.Label>
@@ -413,10 +430,16 @@ export default class Recipes extends React.Component {
 
 	handleShow = () => {
 		this.setState({
-			fullscreen: true,
+			// fullscreen: true,
 			show: true
 		});
 	};
+
+	handleClose = () => {
+		this.setState({
+			show:false
+		})
+	}
 
 	setShow = (value) => {
 		this.setState({
@@ -429,6 +452,27 @@ export default class Recipes extends React.Component {
 			return 'dropdown-selected';
 		}
 		return '';
+	};
+
+	getBeanInfo = (bean) => {
+		this.setState({
+			beanInfo: bean,
+			offcanvasShow: true
+		});
+	};
+
+	handleOffcanvasClose = () => {
+		this.setState({
+			offcanvasShow: false
+		});
+	};
+
+	formatDisplayValues = (words) => {
+		let arr = words.split(' ');
+		for (let word of arr) {
+			word = word[0].toUpperCase() + word.slice(1);
+		}
+		return arr.join(' ');
 	};
 
 	render() {
@@ -461,7 +505,7 @@ export default class Recipes extends React.Component {
 						</Button>
 					</Container>
 
-					<Modal
+					{/* <Modal
 						show={this.state.show}
 						fullscreen={this.state.fullscreen}
 						onHide={() => this.setShow(false)}
@@ -469,10 +513,17 @@ export default class Recipes extends React.Component {
 						<Modal.Header closeButton>
 							<Modal.Title>Advanced Search</Modal.Title>
 						</Modal.Header>
-						<Modal.Body>
+						<Modal.Body>{this.renderSearchForm()}</Modal.Body>
+					</Modal> */}
+
+					<Offcanvas show={this.state.show} onHide={this.handleClose}>
+						<Offcanvas.Header closeButton>
+							<Offcanvas.Title>Advanced Search</Offcanvas.Title>
+						</Offcanvas.Header>
+						<Offcanvas.Body>
 							{this.renderSearchForm()}
-						</Modal.Body>
-					</Modal>
+						</Offcanvas.Body>
+					</Offcanvas>
 
 					{/* Advanced search side component (Desktop) */}
 					<div className='col-lg-3 d-none d-lg-block mt-lg-3 mx-auto'>
@@ -491,6 +542,75 @@ export default class Recipes extends React.Component {
 						)}
 					</div>
 				</section>
+
+				<Offcanvas
+					show={this.state.offcanvasShow}
+					onHide={this.handleOffcanvasClose}
+					placement='start'
+					responsive='lg'
+				>
+					<Offcanvas.Header closeButton>
+						<Offcanvas.Title>
+							{this.state.beanInfo.name}
+						</Offcanvas.Title>
+					</Offcanvas.Header>
+					<Offcanvas.Body>
+						<Table striped bordered>
+							<thead>
+								<tr>
+									<th>Field</th>
+									<th>Value</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Name</td>
+									<td>{this.state.beanInfo.name}</td>
+								</tr>
+								<tr>
+									<td>Roast level</td>
+									<td>{this.state.beanInfo.roast_level}</td>
+								</tr>
+								<tr>
+									<td>Blend</td>
+									<td>
+										{this.state.beanInfo.blend
+											? 'True'
+											: 'False'}
+									</td>
+								</tr>
+								<tr>
+									<td>Variety</td>
+									<td>{this.state.beanInfo.variety}</td>
+								</tr>
+								<tr>
+									<td>Flavor note</td>
+									<td>
+										{this.state.beanInfo.flavor_notes
+											? this.state.beanInfo.flavor_notes.join(
+													', '
+											  )
+											: ''}
+									</td>
+								</tr>
+								<tr>
+									<td>Roaster</td>
+									<td>{this.state.beanInfo.roaster}</td>
+								</tr>
+								<tr>
+									<td>Origin(s)</td>
+									<td>
+										{this.state.beanInfo.origins
+											? this.state.beanInfo.origins.join(
+													', '
+											  )
+											: ''}
+									</td>
+								</tr>
+							</tbody>
+						</Table>
+					</Offcanvas.Body>
+				</Offcanvas>
 			</React.Fragment>
 		);
 	}
