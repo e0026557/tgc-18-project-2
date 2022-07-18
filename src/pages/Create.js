@@ -87,36 +87,56 @@ export default class Create extends React.Component {
 	}
 
 	createRecipe = async () => {
-		// Build request body
-		let requestBody = {
-			imageUrl: this.state.imageUrl,
-			recipeName: this.state.recipeName,
-			description: this.state.description,
-			username: this.state.username,
-			email: this.state.email,
-			totalBrewTime:
-				this.state.totalBrewTime + ' ' + this.state.totalBrewTimeUnits,
-			brewYield: this.state.brewYield + ' ' + this.state.brewYieldUnits,
-			brewingMethod: this.state.brewingMethod,
-			coffeeBeans: this.state.coffeeBeans,
-			coffeeRestPeriod: this.state.coffeeRestPeriod,
-			coffeeAmount: this.state.coffeeAmount,
-			grinder: this.state.grinder,
-			grindSetting: this.state.grindSetting,
-			waterAmount:
-				this.state.waterAmount + ' ' + this.state.waterAmountUnits,
-			waterTemperature: this.state.waterTemperature,
-			additionalIngredients: this.state.additionalIngredients,
-			brewer: this.state.brewer,
-			additionalEquipment: this.state.additionalEquipment,
-			steps: this.state.steps
-		};
+		// Validate form fields
+		let errors = this.validateFormInputs();
 
-		// Attempt to create a new recipe
-		try {
-			await axios.post(BASE_API_URL + 'recipes', requestBody);
-		} catch (err) {
-			console.log(err);
+		// Create recipe if no errors
+		if (!errors) {
+			// Build request body
+			let requestBody = {
+				imageUrl: this.state.imageUrl,
+				recipeName: this.state.recipeName,
+				description: this.state.description,
+				username: this.state.username,
+				email: this.state.email,
+				totalBrewTime:
+					this.state.totalBrewTime +
+					' ' +
+					this.state.totalBrewTimeUnits,
+				brewYield:
+					this.state.brewYield + ' ' + this.state.brewYieldUnits,
+				brewingMethod: this.state.brewingMethod,
+				coffeeBeans: this.state.coffeeBeans,
+				coffeeRestPeriod: this.state.coffeeRestPeriod,
+				coffeeAmount: this.state.coffeeAmount,
+				grinder: this.state.grinder,
+				grindSetting: this.state.grindSetting,
+				waterAmount:
+					this.state.waterAmount + ' ' + this.state.waterAmountUnits,
+				waterTemperature: this.state.waterTemperature,
+				additionalIngredients: this.state.additionalIngredients,
+				brewer: this.state.brewer,
+				additionalEquipment: this.state.additionalEquipment,
+				steps: this.state.steps
+			};
+
+			// Attempt to create a new recipe
+			try {
+				await axios.post(BASE_API_URL + 'recipes', requestBody);
+			} catch (err) {
+				console.log(err);
+			}
+
+			// Update state
+			this.setState({
+				submitStatus: true,
+				errors: errors
+			});
+		} else {
+			// Update state
+			this.setState({
+				errors: errors
+			});
 		}
 	};
 
@@ -171,16 +191,130 @@ export default class Create extends React.Component {
 		});
 	};
 
-	// TODO
 	validateFormInputs = () => {
-		return;
+		let errors = [];
+
+		// Check image URL
+		if (this.state.imageUrl) {
+			if (!validateUrl(this.state.imageUrl)) {
+				errors.push('imageUrl');
+			}
+		}
+
+		// Check recipe name
+		if (this.state.recipeName.length < 5) {
+			errors.push('recipeName');
+		}
+
+		// Check description
+		if (this.state.description.length < 5) {
+			errors.push('description');
+		}
+
+		// Check username
+		if (this.state.username.length < 5) {
+			errors.push('username');
+		}
+
+		// Check email
+		if (!this.state.email || !validateEmail(this.state.email)) {
+			errors.push('email');
+		}
+
+		// Check total brew time
+		if (!this.state.totalBrewTime || isNaN(this.state.totalBrewTime)) {
+			errors.push('totalBrewTime');
+		}
+
+		// Check brew yield
+		if (!this.state.brewYield || isNaN(this.state.brewYield)) {
+			errors.push('brewYield');
+		}
+
+		// Check brewing method
+		if (!this.state.brewingMethod) {
+			errors.push('brewingMethod');
+		}
+
+		// Check coffee beans
+		if (this.state.coffeeBeans.length < 0) {
+			errors.push('coffeeBeans');
+		}
+
+		// Check coffee rest period
+		if (!this.state.coffeeRestPeriod) {
+			errors.push('coffeeRestPeriod');
+		}
+
+		// Check coffee amount
+		if (!this.state.coffeeAmount || isNaN(this.state.coffeeAmount)) {
+			errors.push('coffeeAmount');
+		}
+
+		// Check grinder
+		if (!this.state.grinder) {
+			errors.push('grinder');
+		}
+
+		// Check grind setting
+		if (!this.state.grindSetting) {
+			errors.push('grindSetting');
+		}
+
+		// Check water amount
+		if (!this.state.waterAmount || isNaN(this.state.waterAmount)) {
+			errors.push('waterAmount');
+		}
+
+		// Check water temperature
+		if (
+			!this.state.waterTemperature ||
+			isNaN(this.state.waterTemperature)
+		) {
+			errors.push('waterTemperature');
+		}
+
+		// Check brewer
+		if (!this.state.brewer) {
+			errors.push('brewer');
+		}
+
+		// Check additional ingredients
+		if (this.state.additionalIngredients.length > 0) {
+			for (let ingredient of this.state.additionalIngredients) {
+				if (!ingredient) {
+					errors.push('additionalIngredients');
+					break;
+				}
+			}
+		}
+
+		// Check additional equipment
+		if (this.state.additionalEquipment.length > 0) {
+			for (let equipment of this.state.additionalEquipment) {
+				if (!equipment) {
+					errors.push('additionalEquipment');
+					break;
+				}
+			}
+		}
+
+		// Check steps
+		if (
+			this.state.steps.length < 0 ||
+			this.state.steps.filter((step) => !step).length > 0
+		) {
+			errors.push('steps');
+		}
+
+		return errors;
 	};
 
 	render() {
 		return (
 			<React.Fragment>
 				<section className='container-fluid d-flex flex-column justify-content-center align-items-center adjust-margin-top'>
-					<div className='container mt-3'>
+					<div className='container mt-3 mb-5'>
 						{/* Image URL */}
 						<Form.Group className='mb-3'>
 							<Form.Label>Image URL</Form.Label>
@@ -630,30 +764,32 @@ export default class Create extends React.Component {
 						<Form.Group className='mb-3'>
 							<Form.Label>Optional Fields:</Form.Label>
 							<br />
-							<label className='ms-1 me-3'>
-								<input
-									type='checkbox'
-									name='optionalFields'
-									value='ingredients'
-									onChange={this.updateFormField}
-									checked={this.state.optionalFields.includes(
-										'ingredients'
-									)}
-								/>
-								Additional Ingredients
-							</label>
-							<label>
-								<input
-									type='checkbox'
-									name='optionalFields'
-									value='equipment'
-									onChange={this.updateFormField}
-									checked={this.state.optionalFields.includes(
-										'equipment'
-									)}
-								/>
-								Additional Equipment
-							</label>
+							<div className='d-flex justify-content-start align-items-center flex-wrap gap-1'>
+								<label>
+									<input
+										type='checkbox'
+										name='optionalFields'
+										value='ingredients'
+										onChange={this.updateFormField}
+										checked={this.state.optionalFields.includes(
+											'ingredients'
+										)}
+									/>
+									Additional Ingredients
+								</label>
+								<label>
+									<input
+										type='checkbox'
+										name='optionalFields'
+										value='equipment'
+										onChange={this.updateFormField}
+										checked={this.state.optionalFields.includes(
+											'equipment'
+										)}
+									/>
+									Additional Equipment
+								</label>
+							</div>
 						</Form.Group>
 
 						{/* Additional ingredients */}
@@ -678,6 +814,16 @@ export default class Create extends React.Component {
 											/>
 										);
 									}
+								)}
+
+								{this.state.errors.includes(
+									'additionalIngredients'
+								) ? (
+									<Form.Text className='errorMessage'>
+										Please specify additional ingredients
+									</Form.Text>
+								) : (
+									''
 								)}
 
 								<div className='mt-3'>
@@ -730,6 +876,16 @@ export default class Create extends React.Component {
 											/>
 										);
 									}
+								)}
+
+								{this.state.errors.includes(
+									'additionalEquipment'
+								) ? (
+									<Form.Text className='errorMessage'>
+										Please specify additional equipment
+									</Form.Text>
+								) : (
+									''
 								)}
 
 								<div className='mt-3'>
@@ -814,7 +970,7 @@ export default class Create extends React.Component {
 						<Button
 							className='btn-custom-primary mt-4'
 							type='submit'
-              onClick={this.createRecipe}
+							onClick={this.createRecipe}
 						>
 							Create recipe
 						</Button>
