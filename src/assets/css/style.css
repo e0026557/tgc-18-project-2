@@ -77,6 +77,11 @@ body {
 }
 
 /* Dropdowns */
+.dropdown-menu {
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
 .dropdown-light,
 .dropdown-light:active,
 .dropdown-light:focus,
