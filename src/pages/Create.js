@@ -323,9 +323,13 @@ export default class Create extends React.Component {
 	renderSuccessModal = () => {
 		if (this.state.submitStatus) {
 			return (
-				<Modal show={this.state.show} onHide={this.handleClose} onExiting={()=> {
-					this.props.setActivePage('recipes')
-				}}>
+				<Modal
+					show={this.state.show}
+					onHide={this.handleClose}
+					onExiting={() => {
+						this.props.setActivePage('recipes');
+					}}
+				>
 					<Modal.Header closeButton>
 						<Modal.Title>Status</Modal.Title>
 					</Modal.Header>
@@ -348,513 +352,683 @@ export default class Create extends React.Component {
 		return (
 			<React.Fragment>
 				<section className='container-fluid d-flex flex-column justify-content-center align-items-center adjust-margin-top'>
-					<div className='container mt-3 mb-5'>
-						{/* Image URL */}
-						<Form.Group className='mb-3'>
-							<Form.Label>Image URL</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter image URL'
-								name='imageUrl'
-								value={this.state.imageUrl}
-								onChange={this.updateFormField}
-							/>
-							{this.state.errors.includes('imageUrl') ? (
-								<Form.Text className='errorMessage'>
-									Invalid image URL
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
-
-						{/* Recipe name */}
-						<Form.Group className='mb-3'>
-							<Form.Label>
-								Recipe name{' '}
-								<span className='text-danger'>*</span>
-							</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter recipe name'
-								name='recipeName'
-								value={this.state.recipeName}
-								onChange={this.updateFormField}
-							/>
-							{this.state.errors.includes('recipeName') ? (
-								<Form.Text className='errorMessage'>
-									Recipe name must be at least 5 characters
-									long
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
-
-						{/* Description */}
-						<Form.Group className='mb-3'>
-							<Form.Label>
-								Description{' '}
-								<span className='text-danger'>*</span>
-							</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter short description'
-								name='description'
-								value={this.state.description}
-								onChange={this.updateFormField}
-							/>
-							{this.state.errors.includes('description') ? (
-								<Form.Text className='errorMessage'>
-									Description must be at least 5 characters
-									long
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
-
-						{/* Username */}
-						<Form.Group className='mb-3'>
-							<Form.Label>
-								Username <span className='text-danger'>*</span>
-							</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter username'
-								name='username'
-								value={this.state.username}
-								onChange={this.updateFormField}
-							/>
-							{this.state.errors.includes('username') ? (
-								<Form.Text className='errorMessage'>
-									Username must be at least 5 characters long
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
-
-						{/* Email */}
-						<Form.Group className='mb-3'>
-							<Form.Label>
-								Email <span className='text-danger'>*</span>
-							</Form.Label>
-							<Form.Control
-								type='email'
-								placeholder='Enter email'
-								name='email'
-								value={this.state.email}
-								onChange={this.updateFormField}
-							/>
-							{this.state.errors.includes('email') ? (
-								<Form.Text className='errorMessage'>
-									Invalid email address
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
-
-						{/* Total brew time */}
-						<Form.Group className='mb-3'>
-							<Form.Label>
-								Total brew time{' '}
-								<span className='text-danger'>*</span>
-							</Form.Label>
-							<div className='d-flex'>
+						<div className='container row mt-3 mb-5 px-5'>
+							<h1 className='mt-3 mb-4 mb-lg-5'>Upload recipe</h1>
+							{/* Image URL */}
+							<Form.Group className='col-lg-6 mb-3'>
+								<Form.Label>Image URL</Form.Label>
 								<Form.Control
 									type='text'
-									placeholder='Enter total brew time'
-									name='totalBrewTime'
-									value={this.state.totalBrewTime}
+									placeholder='Enter image URL'
+									name='imageUrl'
+									value={this.state.imageUrl}
 									onChange={this.updateFormField}
 								/>
-								<Form.Select
-									name='totalBrewTimeUnits'
-									value={this.state.totalBrewTimeUnits}
-									onChange={this.updateFormField}
-								>
-									<option disabled>
-										--- Select units ---{' '}
-									</option>
-									<option value='s'>s</option>
-									<option value='min'>min</option>
-									<option value='h'>h</option>
-								</Form.Select>
-							</div>
-							{this.state.errors.includes('totalBrewTime') ? (
-								<Form.Text className='errorMessage'>
-									Invalid total brew time specified
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
+								{this.state.errors.includes('imageUrl') ? (
+									<Form.Text className='errorMessage'>
+										Invalid image URL
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
 
-						{/* Brew yield */}
-						<Form.Group className='mb-3'>
-							<Form.Label>
-								Brew yield{' '}
-								<span className='text-danger'>*</span>
-							</Form.Label>
-							<div className='d-flex'>
+							{/* Recipe name */}
+							<Form.Group className='col-lg-6 mb-3'>
+								<Form.Label>
+									Recipe name{' '}
+									<span className='text-danger'>*</span>
+								</Form.Label>
 								<Form.Control
 									type='text'
-									placeholder='Enter brew yield'
-									name='brewYield'
-									value={this.state.brewYield}
+									placeholder='Enter recipe name'
+									name='recipeName'
+									value={this.state.recipeName}
 									onChange={this.updateFormField}
 								/>
-								<Form.Select
-									name='brewYieldUnits'
-									value={this.state.brewYieldUnits}
-									onChange={this.updateFormField}
-								>
-									<option disabled>
-										--- Select units ---{' '}
-									</option>
-									<option value='ml'>ml</option>
-									<option value='L'>L</option>
-								</Form.Select>
-							</div>
-							{this.state.errors.includes('brewYield') ? (
-								<Form.Text className='errorMessage'>
-									Invalid brew yield specified
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
+								{this.state.errors.includes('recipeName') ? (
+									<Form.Text className='errorMessage'>
+										Recipe name must be at least 5
+										characters long
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
 
-						{/* Brewing method */}
-						<Form.Group className='mb-3'>
-							<Form.Select
-								name='brewingMethod'
-								value={this.state.brewingMethod}
-								onChange={this.updateFormField}
-							>
-								<option value='' disabled>
-									--- Select brew method ---
-								</option>
-								{this.state.methods.map((method) => {
-									return (
-										<option
-											key={method._id}
-											value={method._id}
-										>
-											{method.name}
+							{/* Description */}
+							<Form.Group className='mb-3'>
+								<Form.Label>
+									Description{' '}
+									<span className='text-danger'>*</span>
+								</Form.Label>
+								<Form.Control
+									type='text'
+									placeholder='Enter short description'
+									name='description'
+									value={this.state.description}
+									onChange={this.updateFormField}
+								/>
+								{this.state.errors.includes('description') ? (
+									<Form.Text className='errorMessage'>
+										Description must be at least 5
+										characters long
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
+
+							{/* Username */}
+							<Form.Group className='col-lg-6 mb-3'>
+								<Form.Label>
+									Username{' '}
+									<span className='text-danger'>*</span>
+								</Form.Label>
+								<Form.Control
+									type='text'
+									placeholder='Enter username'
+									name='username'
+									value={this.state.username}
+									onChange={this.updateFormField}
+								/>
+								{this.state.errors.includes('username') ? (
+									<Form.Text className='errorMessage'>
+										Username must be at least 5 characters
+										long
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
+
+							{/* Email */}
+							<Form.Group className='col-lg-6 mb-3'>
+								<Form.Label>
+									Email <span className='text-danger'>*</span>
+								</Form.Label>
+								<Form.Control
+									type='email'
+									placeholder='Enter email'
+									name='email'
+									value={this.state.email}
+									onChange={this.updateFormField}
+								/>
+								{this.state.errors.includes('email') ? (
+									<Form.Text className='errorMessage'>
+										Invalid email address
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
+
+							{/* Total brew time */}
+							<Form.Group className='col-lg-6 mb-3'>
+								<Form.Label>
+									Total brew time{' '}
+									<span className='text-danger'>*</span>
+								</Form.Label>
+								<div className='d-flex'>
+									<Form.Control
+										type='text'
+										placeholder='Enter total brew time'
+										name='totalBrewTime'
+										value={this.state.totalBrewTime}
+										onChange={this.updateFormField}
+									/>
+									<Form.Select
+										name='totalBrewTimeUnits'
+										value={this.state.totalBrewTimeUnits}
+										onChange={this.updateFormField}
+									>
+										<option disabled>
+											--- Select units ---{' '}
 										</option>
-									);
-								})}
-							</Form.Select>
-							{this.state.errors.includes('brewingMethod') ? (
-								<Form.Text className='errorMessage'>
-									Please select a brewing method
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
+										<option value='s'>s</option>
+										<option value='min'>min</option>
+										<option value='h'>h</option>
+									</Form.Select>
+								</div>
+								{this.state.errors.includes('totalBrewTime') ? (
+									<Form.Text className='errorMessage'>
+										Invalid total brew time specified
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
 
-						{/* Coffee beans */}
-						<Form.Group className='mb-3'>
-							<Dropdown autoClose='outside'>
-								<Dropdown.Toggle className='dropdown-light'>
-									--- Select coffee bean(s) ---
-								</Dropdown.Toggle>
+							{/* Brew yield */}
+							<Form.Group className='col-lg-6 mb-3'>
+								<Form.Label>
+									Brew yield{' '}
+									<span className='text-danger'>*</span>
+								</Form.Label>
+								<div className='d-flex'>
+									<Form.Control
+										type='text'
+										placeholder='Enter brew yield'
+										name='brewYield'
+										value={this.state.brewYield}
+										onChange={this.updateFormField}
+									/>
+									<Form.Select
+										name='brewYieldUnits'
+										value={this.state.brewYieldUnits}
+										onChange={this.updateFormField}
+									>
+										<option disabled>
+											--- Select units ---{' '}
+										</option>
+										<option value='ml'>ml</option>
+										<option value='L'>L</option>
+									</Form.Select>
+								</div>
+								{this.state.errors.includes('brewYield') ? (
+									<Form.Text className='errorMessage'>
+										Invalid brew yield specified
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
 
-								<Dropdown.Menu>
-									{this.state.beans.map((bean) => {
+							{/* Brewing method */}
+							<Form.Group className='col-lg-4 mb-3'>
+								<Form.Label>
+									Brewing method
+									<span className='text-danger'>*</span>
+								</Form.Label>
+								<Form.Select
+									name='brewingMethod'
+									value={this.state.brewingMethod}
+									onChange={this.updateFormField}
+								>
+									<option value='' disabled>
+										--- Select brew method ---
+									</option>
+									{this.state.methods.map((method) => {
 										return (
-											<Dropdown.Item
-												as='button'
-												key={bean._id}
+											<option
+												key={method._id}
+												value={method._id}
 											>
-												<label
-													className={
-														this.state.coffeeBeans.includes(
-															bean._id
-														)
-															? 'w-100 py-1 dropdown-selected'
-															: 'w-100 py-1'
-													}
-												>
-													<input
-														type='checkbox'
-														className='mx-2'
-														name='coffeeBeans'
-														value={bean._id}
-														onChange={
-															this.updateFormField
-														}
-														checked={this.state.coffeeBeans.includes(
-															bean._id
-														)}
-													/>
-													{bean.name}
-												</label>
-											</Dropdown.Item>
+												{method.name}
+											</option>
 										);
 									})}
-								</Dropdown.Menu>
-							</Dropdown>
-							{this.state.errors.includes('coffeeBeans') ? (
-								<Form.Text className='errorMessage'>
-									Please select at least one coffee bean
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
+								</Form.Select>
+								{this.state.errors.includes('brewingMethod') ? (
+									<Form.Text className='errorMessage'>
+										Please select a brewing method
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
 
-						{/* Coffee rest period */}
-						<Form.Group className='mb-3'>
-							<Form.Select
-								name='coffeeRestPeriod'
-								value={this.state.coffeeRestPeriod}
-								onChange={this.updateFormField}
-							>
-								<option value='' disabled>
-									--- Select coffee rest period ---
-								</option>
-								<option value='1 to 3 days'>1 to 3 days</option>
-								<option value='4 to 6 days'>4 to 6 days</option>
-								<option value='7 to 10 days'>
-									7 to 10 days
-								</option>
-								<option value='10 to 13 days'>
-									10 to 13 days
-								</option>
-								<option value='14+ days'>14+ days</option>
-							</Form.Select>
-							{this.state.errors.includes('coffeeRestPeriod') ? (
-								<Form.Text className='errorMessage'>
-									Please select coffee rest period
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
+							{/* Coffee beans */}
+							<Form.Group className='col-lg-4 mb-3'>
+								<Form.Label>
+									Coffee bean(s)
+									<span className='text-danger'>*</span>
+								</Form.Label>
+								<Dropdown autoClose='outside'>
+									<Dropdown.Toggle className='dropdown-light'>
+										--- Select coffee bean(s) ---
+									</Dropdown.Toggle>
 
-						{/* Coffee amount */}
-						<Form.Group className='mb-3'>
-							<Form.Label>
-								Amount of coffee (g){' '}
-								<span className='text-danger'>*</span>
-							</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter amount of coffee'
-								name='coffeeAmount'
-								value={this.state.coffeeAmount}
-								onChange={this.updateFormField}
-							/>
-							{this.state.errors.includes('coffeeAmount') ? (
-								<Form.Text className='errorMessage'>
-									Invalid coffee amount specified
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
+									<Dropdown.Menu>
+										{this.state.beans.map((bean) => {
+											return (
+												<Dropdown.Item
+													as='button'
+													key={bean._id}
+												>
+													<label
+														className={
+															this.state.coffeeBeans.includes(
+																bean._id
+															)
+																? 'w-100 py-1 dropdown-selected'
+																: 'w-100 py-1'
+														}
+													>
+														<input
+															type='checkbox'
+															className='mx-2'
+															name='coffeeBeans'
+															value={bean._id}
+															onChange={
+																this
+																	.updateFormField
+															}
+															checked={this.state.coffeeBeans.includes(
+																bean._id
+															)}
+														/>
+														{bean.name}
+													</label>
+												</Dropdown.Item>
+											);
+										})}
+									</Dropdown.Menu>
+								</Dropdown>
+								{this.state.errors.includes('coffeeBeans') ? (
+									<Form.Text className='errorMessage'>
+										Please select at least one coffee bean
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
 
-						{/* Grinder */}
-						<Form.Group className='mb-3'>
-							<Form.Select
-								name='grinder'
-								value={this.state.grinder}
-								onChange={this.updateFormField}
-							>
-								<option value=''>--- Select grinder ---</option>
-								{this.state.grinders.map((grinder) => {
-									return (
-										<option
-											key={grinder._id}
-											value={grinder._id}
-										>
-											{grinder.brand} {grinder.model}
-										</option>
-									);
-								})}
-							</Form.Select>
-							{this.state.errors.includes('grinder') ? (
-								<Form.Text className='errorMessage'>
-									Please select a grinder
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
+							{/* Coffee rest period */}
+							<Form.Group className='col-lg-4 mb-3'>
+								<Form.Label>
+									coffee rest period
+									<span className='text-danger'>*</span>
+								</Form.Label>
+								<Form.Select
+									name='coffeeRestPeriod'
+									value={this.state.coffeeRestPeriod}
+									onChange={this.updateFormField}
+								>
+									<option value='' disabled>
+										--- Select coffee rest period ---
+									</option>
+									<option value='1 to 3 days'>
+										1 to 3 days
+									</option>
+									<option value='4 to 6 days'>
+										4 to 6 days
+									</option>
+									<option value='7 to 10 days'>
+										7 to 10 days
+									</option>
+									<option value='10 to 13 days'>
+										10 to 13 days
+									</option>
+									<option value='14+ days'>14+ days</option>
+								</Form.Select>
+								{this.state.errors.includes(
+									'coffeeRestPeriod'
+								) ? (
+									<Form.Text className='errorMessage'>
+										Please select coffee rest period
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
 
-						{/* Grind setting */}
-						<Form.Group className='mb-3'>
-							<Form.Label>
-								Grind setting{' '}
-								<span className='text-danger'>*</span>
-							</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter grind setting'
-								name='grindSetting'
-								value={this.state.grindSetting}
-								onChange={this.updateFormField}
-							/>
-							{this.state.errors.includes('grindSetting') ? (
-								<Form.Text className='errorMessage'>
-									Please specify grind setting
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
-
-						{/* Water amount */}
-						<Form.Group className='mb-3'>
-							<Form.Label>
-								Amount of water{' '}
-								<span className='text-danger'>*</span>
-							</Form.Label>
-							<div className='d-flex'>
+							{/* Coffee amount */}
+							<Form.Group className='col-lg-6 mb-3'>
+								<Form.Label>
+									Amount of coffee (g)
+									<span className='text-danger'>*</span>
+								</Form.Label>
 								<Form.Control
 									type='text'
-									placeholder='Enter amount of water'
-									name='waterAmount'
-									value={this.state.waterAmount}
+									placeholder='Enter amount of coffee'
+									name='coffeeAmount'
+									value={this.state.coffeeAmount}
 									onChange={this.updateFormField}
 								/>
+								{this.state.errors.includes('coffeeAmount') ? (
+									<Form.Text className='errorMessage'>
+										Invalid coffee amount specified
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
+
+							{/* Grinder */}
+							<Form.Group className='col-lg-6 mb-3'>
+								<Form.Label>
+									Grinder
+									<span className='text-danger'>*</span>
+								</Form.Label>
 								<Form.Select
-									name='waterAmountUnits'
-									value={this.state.waterAmountUnits}
+									name='grinder'
+									value={this.state.grinder}
 									onChange={this.updateFormField}
 								>
-									<option disabled>
-										--- Select units ---{' '}
+									<option value=''>
+										--- Select grinder ---
 									</option>
-									<option value='ml'>ml</option>
-									<option value='L'>L</option>
+									{this.state.grinders.map((grinder) => {
+										return (
+											<option
+												key={grinder._id}
+												value={grinder._id}
+											>
+												{grinder.brand} {grinder.model}
+											</option>
+										);
+									})}
 								</Form.Select>
-							</div>
-							{this.state.errors.includes('waterAmount') ? (
-								<Form.Text className='errorMessage'>
-									Invalid water amount specified
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
+								{this.state.errors.includes('grinder') ? (
+									<Form.Text className='errorMessage'>
+										Please select a grinder
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
 
-						{/* Water temperature */}
-						<Form.Group className='mb-3'>
-							<Form.Label>
-								Water temperature (celsius){' '}
-								<span className='text-danger'>*</span>
-							</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter water temperature'
-								name='waterTemperature'
-								value={this.state.waterTemperature}
-								onChange={this.updateFormField}
-							/>
-							{this.state.errors.includes('waterTemperature') ? (
-								<Form.Text className='errorMessage'>
-									Invalid water temperature specified
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
+							{/* Grind setting */}
+							<Form.Group className='col-lg-6 mb-3'>
+								<Form.Label>
+									Grind setting{' '}
+									<span className='text-danger'>*</span>
+								</Form.Label>
+								<Form.Control
+									type='text'
+									placeholder='Enter grind setting'
+									name='grindSetting'
+									value={this.state.grindSetting}
+									onChange={this.updateFormField}
+								/>
+								{this.state.errors.includes('grindSetting') ? (
+									<Form.Text className='errorMessage'>
+										Please specify grind setting
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
 
-						{/* Brewer */}
-						<Form.Group className='mb-3'>
-							<Form.Select
-								name='brewer'
-								value={this.state.brewer}
-								onChange={this.updateFormField}
-							>
-								<option value=''>--- Select brewer ---</option>
-								{this.state.brewers.map((brewer) => {
-									return (
-										<option
-											key={brewer._id}
-											value={brewer._id}
-										>
-											{brewer.brand} {brewer.model}
+							{/* Water amount */}
+							<Form.Group className='col-lg-6 mb-3'>
+								<Form.Label>
+									Amount of water{' '}
+									<span className='text-danger'>*</span>
+								</Form.Label>
+								<div className='d-flex'>
+									<Form.Control
+										type='text'
+										placeholder='Enter amount of water'
+										name='waterAmount'
+										value={this.state.waterAmount}
+										onChange={this.updateFormField}
+									/>
+									<Form.Select
+										name='waterAmountUnits'
+										value={this.state.waterAmountUnits}
+										onChange={this.updateFormField}
+									>
+										<option disabled>
+											--- Select units ---{' '}
 										</option>
+										<option value='ml'>ml</option>
+										<option value='L'>L</option>
+									</Form.Select>
+								</div>
+								{this.state.errors.includes('waterAmount') ? (
+									<Form.Text className='errorMessage'>
+										Invalid water amount specified
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
+
+							{/* Water temperature */}
+							<Form.Group className='col-lg-6 mb-3'>
+								<Form.Label>
+									Water temperature (celsius){' '}
+									<span className='text-danger'>*</span>
+								</Form.Label>
+								<Form.Control
+									type='text'
+									placeholder='Enter water temperature'
+									name='waterTemperature'
+									value={this.state.waterTemperature}
+									onChange={this.updateFormField}
+								/>
+								{this.state.errors.includes(
+									'waterTemperature'
+								) ? (
+									<Form.Text className='errorMessage'>
+										Invalid water temperature specified
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
+
+							{/* Brewer */}
+							<Form.Group className='col-lg-6 mb-3'>
+								<Form.Label>
+									Brewer
+									<span className='text-danger'>*</span>
+								</Form.Label>
+								<Form.Select
+									name='brewer'
+									value={this.state.brewer}
+									onChange={this.updateFormField}
+								>
+									<option value=''>
+										--- Select brewer ---
+									</option>
+									{this.state.brewers.map((brewer) => {
+										return (
+											<option
+												key={brewer._id}
+												value={brewer._id}
+											>
+												{brewer.brand} {brewer.model}
+											</option>
+										);
+									})}
+								</Form.Select>
+								{this.state.errors.includes('brewer') ? (
+									<Form.Text className='errorMessage'>
+										Please select a brewer
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
+
+							{/* Options to trigger optional input fields (ingredients and equipment) */}
+							<Form.Group className='mb-3'>
+								<Form.Label>Optional Fields:</Form.Label>
+								<br />
+								<div className='d-flex justify-content-start align-items-center flex-wrap gap-1'>
+									<label>
+										<input
+											type='checkbox'
+											name='optionalFields'
+											value='ingredients'
+											onChange={this.updateFormField}
+											checked={this.state.optionalFields.includes(
+												'ingredients'
+											)}
+										/>
+										Additional Ingredients
+									</label>
+									<label>
+										<input
+											type='checkbox'
+											name='optionalFields'
+											value='equipment'
+											onChange={this.updateFormField}
+											checked={this.state.optionalFields.includes(
+												'equipment'
+											)}
+										/>
+										Additional Equipment
+									</label>
+								</div>
+							</Form.Group>
+
+							{/* Additional ingredients */}
+							{this.state.optionalFields.includes(
+								'ingredients'
+							) ? (
+								<Form.Group className='col-lg-6 mb-3'>
+									<Form.Label>
+										Additional ingredients
+									</Form.Label>
+									{this.state.additionalIngredients.map(
+										(ingredient, index) => {
+											return (
+												<Form.Control
+													key={index}
+													type='text'
+													placeholder={
+														'Ingredient ' +
+														(index + 1)
+													}
+													name='additionalIngredients'
+													value={ingredient}
+													onChange={(event) =>
+														this.updateDynamicFormField(
+															index,
+															event
+														)
+													}
+												/>
+											);
+										}
+									)}
+
+									{this.state.errors.includes(
+										'additionalIngredients'
+									) ? (
+										<Form.Text className='errorMessage'>
+											Please specify additional
+											ingredients
+										</Form.Text>
+									) : (
+										''
+									)}
+
+									<div className='mt-3'>
+										<Button
+											className='btn-custom-primary'
+											onClick={() => {
+												this.addDynamicFormField(
+													'additionalIngredients'
+												);
+											}}
+										>
+											<FontAwesomeIcon icon={faPlus} />
+										</Button>
+										<Button
+											className='btn-custom-primary'
+											onClick={() => {
+												this.removeDynamicFormField(
+													'additionalIngredients'
+												);
+											}}
+										>
+											<FontAwesomeIcon icon={faMinus} />
+										</Button>
+									</div>
+								</Form.Group>
+							) : (
+								''
+							)}
+
+							{/* Additional equipment */}
+							{this.state.optionalFields.includes('equipment') ? (
+								<Form.Group className='col-lg-6 mb-3'>
+									<Form.Label>
+										Additional equipment
+									</Form.Label>
+
+									{this.state.additionalEquipment.map(
+										(equipment, index) => {
+											return (
+												<Form.Control
+													key={index}
+													type='text'
+													placeholder={
+														'Equipment ' +
+														(index + 1)
+													}
+													name='additionalEquipment'
+													value={equipment}
+													onChange={(event) =>
+														this.updateDynamicFormField(
+															index,
+															event
+														)
+													}
+												/>
+											);
+										}
+									)}
+
+									{this.state.errors.includes(
+										'additionalEquipment'
+									) ? (
+										<Form.Text className='errorMessage'>
+											Please specify additional equipment
+										</Form.Text>
+									) : (
+										''
+									)}
+
+									<div className='mt-3'>
+										<Button
+											className='btn-custom-primary'
+											onClick={() => {
+												this.addDynamicFormField(
+													'additionalEquipment'
+												);
+											}}
+										>
+											<FontAwesomeIcon icon={faPlus} />
+										</Button>
+										<Button
+											className='btn-custom-primary'
+											onClick={() => {
+												this.removeDynamicFormField(
+													'additionalEquipment'
+												);
+											}}
+										>
+											<FontAwesomeIcon icon={faMinus} />
+										</Button>
+									</div>
+								</Form.Group>
+							) : (
+								''
+							)}
+
+							{/* Steps */}
+							<Form.Group className='mb-3'>
+								<Form.Label>
+									Steps <span className='text-danger'>*</span>
+								</Form.Label>
+
+								{this.state.steps.map((step, index) => {
+									return (
+										<Form.Control
+											key={index}
+											type='text'
+											placeholder={'Step ' + (index + 1)}
+											name='steps'
+											value={step}
+											onChange={(event) =>
+												this.updateDynamicFormField(
+													index,
+													event
+												)
+											}
+										/>
 									);
 								})}
-							</Form.Select>
-							{this.state.errors.includes('brewer') ? (
-								<Form.Text className='errorMessage'>
-									Please select a brewer
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
 
-						{/* Options to trigger optional input fields (ingredients and equipment) */}
-						<Form.Group className='mb-3'>
-							<Form.Label>Optional Fields:</Form.Label>
-							<br />
-							<div className='d-flex justify-content-start align-items-center flex-wrap gap-1'>
-								<label>
-									<input
-										type='checkbox'
-										name='optionalFields'
-										value='ingredients'
-										onChange={this.updateFormField}
-										checked={this.state.optionalFields.includes(
-											'ingredients'
-										)}
-									/>
-									Additional Ingredients
-								</label>
-								<label>
-									<input
-										type='checkbox'
-										name='optionalFields'
-										value='equipment'
-										onChange={this.updateFormField}
-										checked={this.state.optionalFields.includes(
-											'equipment'
-										)}
-									/>
-									Additional Equipment
-								</label>
-							</div>
-						</Form.Group>
-
-						{/* Additional ingredients */}
-						{this.state.optionalFields.includes('ingredients') ? (
-							<Form.Group className='mb-3'>
-								<Form.Label>Additional ingredients</Form.Label>
-								{this.state.additionalIngredients.map(
-									(ingredient, index) => {
-										return (
-											<Form.Control
-												key={index}
-												type='text'
-												placeholder='Enter ingredient'
-												name='additionalIngredients'
-												value={ingredient}
-												onChange={(event) =>
-													this.updateDynamicFormField(
-														index,
-														event
-													)
-												}
-											/>
-										);
-									}
-								)}
-
-								{this.state.errors.includes(
-									'additionalIngredients'
-								) ? (
+								{this.state.errors.includes('steps') ? (
 									<Form.Text className='errorMessage'>
-										Please specify additional ingredients
+										Please specify steps
 									</Form.Text>
 								) : (
 									''
@@ -864,9 +1038,7 @@ export default class Create extends React.Component {
 									<Button
 										className='btn-custom-primary'
 										onClick={() => {
-											this.addDynamicFormField(
-												'additionalIngredients'
-											);
+											this.addDynamicFormField('steps');
 										}}
 									>
 										<FontAwesomeIcon icon={faPlus} />
@@ -875,7 +1047,7 @@ export default class Create extends React.Component {
 										className='btn-custom-primary'
 										onClick={() => {
 											this.removeDynamicFormField(
-												'additionalIngredients'
+												'steps'
 											);
 										}}
 									>
@@ -883,133 +1055,18 @@ export default class Create extends React.Component {
 									</Button>
 								</div>
 							</Form.Group>
-						) : (
-							''
-						)}
-
-						{/* Additional equipment */}
-						{this.state.optionalFields.includes('equipment') ? (
-							<Form.Group className='mb-3'>
-								<Form.Label>Additional equipment</Form.Label>
-
-								{this.state.additionalEquipment.map(
-									(equipment, index) => {
-										return (
-											<Form.Control
-												key={index}
-												type='text'
-												placeholder='Enter equipment'
-												name='additionalEquipment'
-												value={equipment}
-												onChange={(event) =>
-													this.updateDynamicFormField(
-														index,
-														event
-													)
-												}
-											/>
-										);
-									}
-								)}
-
-								{this.state.errors.includes(
-									'additionalEquipment'
-								) ? (
-									<Form.Text className='errorMessage'>
-										Please specify additional equipment
-									</Form.Text>
-								) : (
-									''
-								)}
-
-								<div className='mt-3'>
-									<Button
-										className='btn-custom-primary'
-										onClick={() => {
-											this.addDynamicFormField(
-												'additionalEquipment'
-											);
-										}}
-									>
-										<FontAwesomeIcon icon={faPlus} />
-									</Button>
-									<Button
-										className='btn-custom-primary'
-										onClick={() => {
-											this.removeDynamicFormField(
-												'additionalEquipment'
-											);
-										}}
-									>
-										<FontAwesomeIcon icon={faMinus} />
-									</Button>
-								</div>
-							</Form.Group>
-						) : (
-							''
-						)}
-
-						{/* Steps */}
-						<Form.Group className='mb-3'>
-							<Form.Label>
-								Steps <span className='text-danger'>*</span>
-							</Form.Label>
-
-							{this.state.steps.map((step, index) => {
-								return (
-									<Form.Control
-										key={index}
-										type='text'
-										placeholder='Enter step'
-										name='steps'
-										value={step}
-										onChange={(event) =>
-											this.updateDynamicFormField(
-												index,
-												event
-											)
-										}
-									/>
-								);
-							})}
-
-							{this.state.errors.includes('steps') ? (
-								<Form.Text className='errorMessage'>
-									Please specify steps
-								</Form.Text>
-							) : (
-								''
-							)}
-
-							<div className='mt-3'>
+							<div className='d-flex justify-content-center'>
 								<Button
-									className='btn-custom-primary'
-									onClick={() => {
-										this.addDynamicFormField('steps');
-									}}
+									className='btn-custom-primary mt-4'
+									type='submit'
+									onClick={this.createRecipe}
 								>
-									<FontAwesomeIcon icon={faPlus} />
-								</Button>
-								<Button
-									className='btn-custom-primary'
-									onClick={() => {
-										this.removeDynamicFormField('steps');
-									}}
-								>
-									<FontAwesomeIcon icon={faMinus} />
+									Create recipe
 								</Button>
 							</div>
-						</Form.Group>
+						</div>
 
-						<Button
-							className='btn-custom-primary mt-4'
-							type='submit'
-							onClick={this.createRecipe}
-						>
-							Create recipe
-						</Button>
-					</div>
-
+					{/* Modal */}
 					{this.renderSuccessModal()}
 				</section>
 			</React.Fragment>
