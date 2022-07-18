@@ -394,7 +394,7 @@ export default class Create extends React.Component {
 						{/* Recipe name */}
 						<Form.Group className='col-lg-6 mb-3'>
 							<Form.Label>
-								Recipe name{' '}
+								Recipe name
 								<span className='text-danger'>*</span>
 							</Form.Label>
 							<Form.Control
@@ -406,8 +406,8 @@ export default class Create extends React.Component {
 							/>
 							{this.state.errors.includes('recipeName') ? (
 								<Form.Text className='errorMessage'>
-									Recipe name must be at least 5
-									characters long
+									Recipe name must be at least 5 characters
+									long
 								</Form.Text>
 							) : (
 								''
@@ -417,7 +417,7 @@ export default class Create extends React.Component {
 						{/* Description */}
 						<Form.Group className='mb-3'>
 							<Form.Label>
-								Description{' '}
+								Description
 								<span className='text-danger'>*</span>
 							</Form.Label>
 							<Form.Control
@@ -429,8 +429,8 @@ export default class Create extends React.Component {
 							/>
 							{this.state.errors.includes('description') ? (
 								<Form.Text className='errorMessage'>
-									Description must be at least 5
-									characters long
+									Description must be at least 5 characters
+									long
 								</Form.Text>
 							) : (
 								''
@@ -440,8 +440,7 @@ export default class Create extends React.Component {
 						{/* Username */}
 						<Form.Group className='col-lg-6 mb-3'>
 							<Form.Label>
-								Username{' '}
-								<span className='text-danger'>*</span>
+								Username <span className='text-danger'>*</span>
 							</Form.Label>
 							<Form.Control
 								type='text'
@@ -452,8 +451,7 @@ export default class Create extends React.Component {
 							/>
 							{this.state.errors.includes('username') ? (
 								<Form.Text className='errorMessage'>
-									Username must be at least 5 characters
-									long
+									Username must be at least 5 characters long
 								</Form.Text>
 							) : (
 								''
@@ -484,7 +482,7 @@ export default class Create extends React.Component {
 						{/* Total brew time */}
 						<Form.Group className='col-lg-6 mb-3'>
 							<Form.Label>
-								Total brew time{' '}
+								Total brew time
 								<span className='text-danger'>*</span>
 							</Form.Label>
 							<div className='d-flex'>
@@ -617,7 +615,9 @@ export default class Create extends React.Component {
 														className='mx-2'
 														name='coffeeBeans'
 														value={bean._id}
-														onChange={this.updateFormField}
+														onChange={
+															this.updateFormField
+														}
 														checked={this.state.coffeeBeans.includes(
 															bean._id
 														)}
@@ -630,7 +630,9 @@ export default class Create extends React.Component {
 														this.showBeanInfo(bean);
 													}}
 												>
-													<FontAwesomeIcon icon={faInfo} />
+													<FontAwesomeIcon
+														icon={faInfo}
+													/>
 												</Button>
 											</Dropdown.Item>
 										);
@@ -660,12 +662,8 @@ export default class Create extends React.Component {
 								<option value='' disabled>
 									--- Select coffee rest period ---
 								</option>
-								<option value='1 to 3 days'>
-									1 to 3 days
-								</option>
-								<option value='4 to 6 days'>
-									4 to 6 days
-								</option>
+								<option value='1 to 3 days'>1 to 3 days</option>
+								<option value='4 to 6 days'>4 to 6 days</option>
 								<option value='7 to 10 days'>
 									7 to 10 days
 								</option>
@@ -674,9 +672,7 @@ export default class Create extends React.Component {
 								</option>
 								<option value='14+ days'>14+ days</option>
 							</Form.Select>
-							{this.state.errors.includes(
-								'coffeeRestPeriod'
-							) ? (
+							{this.state.errors.includes('coffeeRestPeriod') ? (
 								<Form.Text className='errorMessage'>
 									Please select coffee rest period
 								</Form.Text>
@@ -718,9 +714,7 @@ export default class Create extends React.Component {
 								value={this.state.grinder}
 								onChange={this.updateFormField}
 							>
-								<option value=''>
-									--- Select grinder ---
-								</option>
+								<option value=''>--- Select grinder ---</option>
 								{this.state.grinders.map((grinder) => {
 									return (
 										<option
@@ -744,7 +738,7 @@ export default class Create extends React.Component {
 						{/* Grind setting */}
 						<Form.Group className='col-lg-6 mb-3'>
 							<Form.Label>
-								Grind setting{' '}
+								Grind setting
 								<span className='text-danger'>*</span>
 							</Form.Label>
 							<Form.Control
@@ -766,7 +760,7 @@ export default class Create extends React.Component {
 						{/* Water amount */}
 						<Form.Group className='col-lg-6 mb-3'>
 							<Form.Label>
-								Amount of water{' '}
+								Amount of water
 								<span className='text-danger'>*</span>
 							</Form.Label>
 							<div className='d-flex'>
@@ -783,7 +777,7 @@ export default class Create extends React.Component {
 									onChange={this.updateFormField}
 								>
 									<option disabled>
-										--- Select units ---{' '}
+										--- Select units ---
 									</option>
 									<option value='ml'>ml</option>
 									<option value='L'>L</option>
@@ -801,7 +795,7 @@ export default class Create extends React.Component {
 						{/* Water temperature */}
 						<Form.Group className='col-lg-6 mb-3'>
 							<Form.Label>
-								Water temperature (celsius){' '}
+								Water temperature (celsius)
 								<span className='text-danger'>*</span>
 							</Form.Label>
 							<Form.Control
@@ -811,9 +805,7 @@ export default class Create extends React.Component {
 								value={this.state.waterTemperature}
 								onChange={this.updateFormField}
 							/>
-							{this.state.errors.includes(
-								'waterTemperature'
-							) ? (
+							{this.state.errors.includes('waterTemperature') ? (
 								<Form.Text className='errorMessage'>
 									Invalid water temperature specified
 								</Form.Text>
@@ -833,9 +825,7 @@ export default class Create extends React.Component {
 								value={this.state.brewer}
 								onChange={this.updateFormField}
 							>
-								<option value=''>
-									--- Select brewer ---
-								</option>
+								<option value=''>--- Select brewer ---</option>
 								{this.state.brewers.map((brewer) => {
 									return (
 										<option
@@ -889,13 +879,9 @@ export default class Create extends React.Component {
 						</Form.Group>
 
 						{/* Additional ingredients */}
-						{this.state.optionalFields.includes(
-							'ingredients'
-						) ? (
+						{this.state.optionalFields.includes('ingredients') ? (
 							<Form.Group className='col-lg-6 mb-3'>
-								<Form.Label>
-									Additional ingredients
-								</Form.Label>
+								<Form.Label>Additional ingredients</Form.Label>
 								{this.state.additionalIngredients.map(
 									(ingredient, index) => {
 										return (
@@ -903,8 +889,7 @@ export default class Create extends React.Component {
 												key={index}
 												type='text'
 												placeholder={
-													'Ingredient ' +
-													(index + 1)
+													'Ingredient ' + (index + 1)
 												}
 												name='additionalIngredients'
 												value={ingredient}
@@ -923,8 +908,7 @@ export default class Create extends React.Component {
 									'additionalIngredients'
 								) ? (
 									<Form.Text className='errorMessage'>
-										Please specify additional
-										ingredients
+										Please specify additional ingredients
 									</Form.Text>
 								) : (
 									''
@@ -960,9 +944,7 @@ export default class Create extends React.Component {
 						{/* Additional equipment */}
 						{this.state.optionalFields.includes('equipment') ? (
 							<Form.Group className='col-lg-6 mb-3'>
-								<Form.Label>
-									Additional equipment
-								</Form.Label>
+								<Form.Label>Additional equipment</Form.Label>
 
 								{this.state.additionalEquipment.map(
 									(equipment, index) => {
@@ -971,8 +953,7 @@ export default class Create extends React.Component {
 												key={index}
 												type='text'
 												placeholder={
-													'Equipment ' +
-													(index + 1)
+													'Equipment ' + (index + 1)
 												}
 												name='additionalEquipment'
 												value={equipment}
@@ -1068,9 +1049,7 @@ export default class Create extends React.Component {
 								<Button
 									className='btn-custom-primary'
 									onClick={() => {
-										this.removeDynamicFormField(
-											'steps'
-										);
+										this.removeDynamicFormField('steps');
 									}}
 								>
 									<FontAwesomeIcon icon={faMinus} />
@@ -1117,7 +1096,9 @@ export default class Create extends React.Component {
 									</tr>
 									<tr>
 										<td>Roast level</td>
-										<td>{this.state.beanInfo.roast_level}</td>
+										<td>
+											{this.state.beanInfo.roast_level}
+										</td>
 									</tr>
 									<tr>
 										<td>Blend</td>
@@ -1136,8 +1117,8 @@ export default class Create extends React.Component {
 										<td>
 											{this.state.beanInfo.flavor_notes
 												? this.state.beanInfo.flavor_notes.join(
-													', '
-												)
+														', '
+												  )
 												: ''}
 										</td>
 									</tr>
@@ -1150,8 +1131,8 @@ export default class Create extends React.Component {
 										<td>
 											{this.state.beanInfo.origins
 												? this.state.beanInfo.origins.join(
-													', '
-												)
+														', '
+												  )
 												: ''}
 										</td>
 									</tr>
