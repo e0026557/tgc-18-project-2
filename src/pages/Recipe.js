@@ -12,6 +12,7 @@ export default class Recipe extends React.Component {
 	// --- State ---
 	state = {
 		recipe: {},
+    email: '',
 		contentLoaded: false,
 		// Modal
 		show: false,
@@ -179,7 +180,7 @@ export default class Recipe extends React.Component {
 				<div>
 					{this.state.recipe.steps.map((step, index) => {
 						return (
-							<ul>
+							<ul key={index}>
 								Step {index + 1}: {step}
 							</ul>
 						);
