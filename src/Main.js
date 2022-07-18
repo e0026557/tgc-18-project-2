@@ -54,12 +54,12 @@ export default class Main extends React.Component {
 		}
 		else if (activePage === 'recipe') {
 			return (
-				<Recipe setActivePage={this.setActivePage} />
+				<Recipe activeRecipe={this.state.activeRecipe} setActivePage={this.setActivePage} />
 			)
 		}
 		else if (activePage === 'edit') {
 			return (
-				<Edit setActivePage={this.setActivePage} />
+				<Edit activeRecipe={this.state.activeRecipe} setActivePage={this.setActivePage} />
 			)
 		}
 	}
