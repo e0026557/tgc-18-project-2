@@ -3,6 +3,8 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Modal from 'react-bootstrap/Modal';
+import Alert from 'react-bootstrap/Alert';
 import validateEmail from './../utilities/validateEmail';
 import validateUrl from './../utilities/validateUrl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -41,10 +43,12 @@ export default class Create extends React.Component {
 		grinders: [],
 		brewers: [],
 		methods: [],
+		// Modal
+		show: true,
 		// Status
 		optionalFields: [], // 'ingredients', 'equipment'
 		errors: [], // Array of fields that have errors
-		submitStatus: false,
+		submitStatus: false, // set to true for testing purposes
 		contentLoaded: false
 	};
 
@@ -308,6 +312,36 @@ export default class Create extends React.Component {
 		}
 
 		return errors;
+	};
+
+	handleClose = () => {
+		this.setState({
+			show: false
+		});
+	};
+
+	renderSuccessModal = () => {
+		if (this.state.submitStatus) {
+			return (
+				<Modal show={this.state.show} onHide={this.handleClose} onExiting={()=> {
+					this.props.setActivePage('recipes')
+				}}>
+					<Modal.Header closeButton>
+						<Modal.Title>Status</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<Alert variant='success'>
+							Recipe successfully added!
+						</Alert>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button variant='primary' onClick={this.handleClose}>
+							Close
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			);
+		}
 	};
 
 	render() {
@@ -975,6 +1009,8 @@ export default class Create extends React.Component {
 							Create recipe
 						</Button>
 					</div>
+
+					{this.renderSuccessModal()}
 				</section>
 			</React.Fragment>
 		);
