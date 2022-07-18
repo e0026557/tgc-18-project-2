@@ -107,6 +107,12 @@ body {
   background-color: #BCC4C7;
 }
 
+/* Offcanvas */
+.offcanvas,
+.offcanvas-backdrop {
+  z-index: 10000;
+}
+
 /* Form Styles */
 /* Errors */
 .errorMessage {
