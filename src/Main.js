@@ -5,6 +5,7 @@ import Recipes from './pages/Recipes';
 import Create from './pages/Create';
 import Favorites from './pages/Favorites';
 import Recipe from './pages/Recipe';
+import Edit from './pages/Edit';
 
 // import { Nav, Navbar, Container } from 'react-bootstrap';
 
@@ -54,6 +55,11 @@ export default class Main extends React.Component {
 		else if (activePage === 'recipe') {
 			return (
 				<Recipe setActivePage={this.setActivePage} />
+			)
+		}
+		else if (activePage === 'edit') {
+			return (
+				<Edit setActivePage={this.setActivePage} />
 			)
 		}
 	}
