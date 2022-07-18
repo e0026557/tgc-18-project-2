@@ -48,11 +48,18 @@ export default class Recipes extends React.Component {
 		show: false,
 		// Offcanvas
 		offcanvasShow: false,
-		beanInfo: {}
+		beanInfo: {},
+		windowWidth: window.innerWidth
 	};
 
 	// --- Functions ---
 	async componentDidMount() {
+		window.addEventListener('resize', ()=> {
+			this.setState({
+				windowWidth: window.innerWidth
+			})
+		})
+
 		// Load all resources in parallel
 		let recipeRequest = axios.get(
 			BASE_API_URL + 'recipes' + `?page=${this.state.activePageNumber}`
@@ -101,7 +108,7 @@ export default class Recipes extends React.Component {
 			methods: methods,
 			pages: totalPages,
 			activePageNumber: 1,
-			contentLoaded: true
+			contentLoaded: true,
 		});
 	}
 
@@ -437,9 +444,9 @@ export default class Recipes extends React.Component {
 
 	handleClose = () => {
 		this.setState({
-			show:false
-		})
-	}
+			show: false
+		});
+	};
 
 	setShow = (value) => {
 		this.setState({
@@ -526,9 +533,13 @@ export default class Recipes extends React.Component {
 					</Offcanvas>
 
 					{/* Advanced search side component (Desktop) */}
-					<div className='col-lg-3 d-none d-lg-block mt-lg-3 mx-auto'>
-						{this.renderSearchForm()}
-					</div>
+					{this.state.windowWidth < 992 ? (
+						''
+					) : (
+						<div className='col-lg-3 d-none d-lg-block mt-lg-3 mx-auto'>
+							{this.renderSearchForm()}
+						</div>
+					)}
 
 					{/* Recipes */}
 					<div className='result-box row col-lg-9 mt-3 mt-lg-3'>
