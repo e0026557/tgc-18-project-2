@@ -3,7 +3,6 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Pagination from 'react-bootstrap/Pagination';
 import Offcanvas from 'react-bootstrap/Offcanvas';
@@ -33,7 +32,7 @@ export default class Recipes extends React.Component {
 		searchBrewer: '',
 		searchMinRating: '', // Default value
 		searchSort: 'date', // Default sorting
-		// Resources
+		// Resources and Status
 		recipes: [],
 		beans: [],
 		grinders: [],
@@ -43,22 +42,22 @@ export default class Recipes extends React.Component {
 		activePageNumber: 1,
 		submitStatus: false,
 		contentLoaded: false,
-		// Modal
-		fullscreen: true,
+		windowWidth: window.innerWidth,
+		// Offcanvas (Mobile search form)
 		show: false,
-		// Offcanvas
+		// Offcanvas (Coffee bean info)
 		offcanvasShow: false,
-		beanInfo: {},
-		windowWidth: window.innerWidth
+		beanInfo: {}
 	};
 
 	// --- Functions ---
 	async componentDidMount() {
-		window.addEventListener('resize', ()=> {
+		// Event listener to listen for window resize
+		window.addEventListener('resize', () => {
 			this.setState({
 				windowWidth: window.innerWidth
-			})
-		})
+			});
+		});
 
 		// Load all resources in parallel
 		let recipeRequest = axios.get(
@@ -108,7 +107,7 @@ export default class Recipes extends React.Component {
 			methods: methods,
 			pages: totalPages,
 			activePageNumber: 1,
-			contentLoaded: true,
+			contentLoaded: true
 		});
 	}
 
@@ -189,22 +188,24 @@ export default class Recipes extends React.Component {
 				<Form.Group className='mb-3'>
 					<Dropdown autoClose={false}>
 						<Dropdown.Toggle className='dropdown-light'>
-							Select coffee bean(s)
+							--- Select coffee bean(s) ---
 						</Dropdown.Toggle>
 
 						<Dropdown.Menu>
 							{this.state.beans.map((bean) => {
 								return (
-									<Dropdown.Item as='button' key={bean._id}>
-										<label
-											className={
-												this.state.searchBeans.includes(
-													bean._id
-												)
-													? 'py-1 dropdown-selected'
-													: 'py-1'
-											}
-										>
+									<Dropdown.Item
+										as='button'
+										key={bean._id}
+										className={
+											this.state.searchBeans.includes(
+												bean._id
+											)
+												? 'd-flex align-items-center dropdown-selected'
+												: 'd-flex align-items-center'
+										}
+									>
+										<label className='py-1'>
 											<input
 												type='checkbox'
 												className='mx-2'
@@ -218,9 +219,9 @@ export default class Recipes extends React.Component {
 											{bean.name}
 										</label>
 										<Button
-											className='btn-custom-info ms-auto me-3'
+											className='btn-bean-info ms-auto me-4'
 											onClick={() => {
-												this.getBeanInfo(bean);
+												this.showBeanInfo(bean);
 											}}
 										>
 											<FontAwesomeIcon icon={faInfo} />
@@ -240,7 +241,7 @@ export default class Recipes extends React.Component {
 						onChange={this.updateFormField}
 					>
 						<option value='' disabled>
-							--- Select grinder ---{' '}
+							--- Select grinder ---
 						</option>
 						{this.state.grinders.map((grinder) => {
 							return (
@@ -280,7 +281,7 @@ export default class Recipes extends React.Component {
 						onChange={this.updateFormField}
 					>
 						<option value='' disabled>
-							--- Select brewer ---{' '}
+							--- Select brewer ---
 						</option>
 						{this.state.brewers.map((brewer) => {
 							return (
@@ -388,8 +389,8 @@ export default class Recipes extends React.Component {
 				<Pagination.Item
 					key={pageNumber}
 					active={pageNumber === activePageNumber}
-					onClick={async () => {
-						await this.setActivePageNumber(pageNumber);
+					onClick={() => {
+						this.setActivePageNumber(pageNumber);
 					}}
 				>
 					{pageNumber}
@@ -437,7 +438,6 @@ export default class Recipes extends React.Component {
 
 	handleShow = () => {
 		this.setState({
-			// fullscreen: true,
 			show: true
 		});
 	};
@@ -448,38 +448,17 @@ export default class Recipes extends React.Component {
 		});
 	};
 
-	setShow = (value) => {
-		this.setState({
-			show: value
-		});
-	};
-
-	highlightOption = (value) => {
-		if (this.state.beans.includes(value)) {
-			return 'dropdown-selected';
-		}
-		return '';
-	};
-
-	getBeanInfo = (bean) => {
+	showBeanInfo = (bean) => {
 		this.setState({
 			beanInfo: bean,
 			offcanvasShow: true
 		});
 	};
 
-	handleOffcanvasClose = () => {
+	hideBeanInfo = () => {
 		this.setState({
 			offcanvasShow: false
 		});
-	};
-
-	formatDisplayValues = (words) => {
-		let arr = words.split(' ');
-		for (let word of arr) {
-			word = word[0].toUpperCase() + word.slice(1);
-		}
-		return arr.join(' ');
 	};
 
 	render() {
@@ -503,7 +482,6 @@ export default class Recipes extends React.Component {
 							<FontAwesomeIcon icon={faMagnifyingGlass} />
 						</Button>
 
-						{/* Advanced search modal (Mobile) */}
 						<Button
 							className='btn-custom-primary'
 							onClick={() => this.handleShow()}
@@ -512,17 +490,7 @@ export default class Recipes extends React.Component {
 						</Button>
 					</Container>
 
-					{/* <Modal
-						show={this.state.show}
-						fullscreen={this.state.fullscreen}
-						onHide={() => this.setShow(false)}
-					>
-						<Modal.Header closeButton>
-							<Modal.Title>Advanced Search</Modal.Title>
-						</Modal.Header>
-						<Modal.Body>{this.renderSearchForm()}</Modal.Body>
-					</Modal> */}
-
+					{/* Advanced search offcanvas (Mobile) */}
 					<Offcanvas show={this.state.show} onHide={this.handleClose}>
 						<Offcanvas.Header closeButton>
 							<Offcanvas.Title>Advanced Search</Offcanvas.Title>
@@ -556,9 +524,8 @@ export default class Recipes extends React.Component {
 
 				<Offcanvas
 					show={this.state.offcanvasShow}
-					onHide={this.handleOffcanvasClose}
+					onHide={this.hideBeanInfo}
 					placement='start'
-					responsive='lg'
 				>
 					<Offcanvas.Header closeButton>
 						<Offcanvas.Title>
