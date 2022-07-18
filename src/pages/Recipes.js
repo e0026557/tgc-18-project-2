@@ -335,7 +335,7 @@ export default class Recipes extends React.Component {
 					/>
 				</Form.Group>
 
-				<div className='d-flex justify-content-center mt-4'>
+				<div className='d-flex justify-content-center align-items-center mt-4'>
 					<Button
 						className='btn-custom-primary me-3'
 						variant='primary'
