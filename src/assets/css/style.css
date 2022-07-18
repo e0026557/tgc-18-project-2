@@ -290,6 +290,10 @@ body {
   align-items: center;
 }
 
+.btn-bean-info:hover {
+  cursor: pointer;
+}
+
 .btn-bean-info:focus,
 .btn-bean-info:active,
 .btn-bean-info:hover {
@@ -304,6 +308,7 @@ body {
 
 .fa-info {
   font-size: 0.75rem;
+  color: white;
 }
 
 /* --- Favorites Section --- */

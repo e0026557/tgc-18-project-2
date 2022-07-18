@@ -218,14 +218,14 @@ export default class Recipes extends React.Component {
 											/>
 											{bean.name}
 										</label>
-										<Button
+										<div
 											className='btn-bean-info ms-auto me-4'
 											onClick={() => {
 												this.showBeanInfo(bean);
 											}}
 										>
 											<FontAwesomeIcon icon={faInfo} />
-										</Button>
+										</div>
 									</Dropdown.Item>
 								);
 							})}

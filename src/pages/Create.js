@@ -624,7 +624,7 @@ export default class Create extends React.Component {
 													/>
 													{bean.name}
 												</label>
-												<Button
+												<div
 													className='btn-bean-info ms-auto me-4'
 													onClick={() => {
 														this.showBeanInfo(bean);
@@ -633,7 +633,7 @@ export default class Create extends React.Component {
 													<FontAwesomeIcon
 														icon={faInfo}
 													/>
-												</Button>
+												</div>
 											</Dropdown.Item>
 										);
 									})}
