@@ -522,6 +522,7 @@ export default class Recipes extends React.Component {
 					</div>
 				</section>
 
+				{/* Offcanvas for coffee bean information */}
 				<Offcanvas
 					show={this.state.offcanvasShow}
 					onHide={this.hideBeanInfo}
@@ -553,8 +554,8 @@ export default class Recipes extends React.Component {
 									<td>Blend</td>
 									<td>
 										{this.state.beanInfo.blend
-											? 'True'
-											: 'False'}
+											? 'Yes'
+											: 'No'}
 									</td>
 								</tr>
 								<tr>
