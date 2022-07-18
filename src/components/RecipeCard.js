@@ -101,7 +101,7 @@ export default class RecipeCard extends React.Component {
 						className='card-btn-info mt-2'
 						variant='primary'
 						onClick={() => {
-							this.props.setActivePage('recipe');
+							this.props.setActivePage('recipe', this.props.recipe._id);
 						}}
 					>
 						More info

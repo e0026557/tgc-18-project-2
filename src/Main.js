@@ -10,14 +10,23 @@ import Recipe from './pages/Recipe';
 
 export default class Main extends React.Component {
 	state = {
-		activePage: 'home' // 'home', 'recipes', 'create', 'favorites', and 'recipe' (To display individual recipe)
+		activePage: 'home', // 'home', 'recipes', 'create', 'favorites', 'edit' and 'recipe' (To display individual recipe)
+		activeRecipe: ''
 	};
 
 	// --- Functions ---
-	setActivePage = (page) => {
-		this.setState({
-			activePage: page
-		});
+	setActivePage = (page, recipeId) => {
+		if (recipeId) {
+			this.setState({
+				activePage: page,
+				activeRecipe: recipeId
+			})
+		}
+		else {
+			this.setState({
+				activePage: page
+			});
+		}
 	};
 
 	renderActivePage = () => {
