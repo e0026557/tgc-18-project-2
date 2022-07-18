@@ -527,7 +527,7 @@ export default class Create extends React.Component {
 						<Form.Group className='mb-3'>
 							<Dropdown autoClose='outside'>
 								<Dropdown.Toggle className='dropdown-light'>
-									Select coffee bean(s)
+									--- Select coffee bean(s) ---
 								</Dropdown.Toggle>
 
 								<Dropdown.Menu>
