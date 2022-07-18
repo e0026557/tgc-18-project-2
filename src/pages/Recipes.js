@@ -475,7 +475,7 @@ export default class Recipes extends React.Component {
 					</Modal>
 
 					{/* Advanced search side component (Desktop) */}
-					<div className='col-lg-3 d-none d-lg-block mt-lg-3'>
+					<div className='col-lg-3 d-none d-lg-block mt-lg-3 mx-auto'>
 						{this.renderSearchForm()}
 					</div>
 
