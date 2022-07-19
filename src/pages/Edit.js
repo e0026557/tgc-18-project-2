@@ -18,7 +18,7 @@ const BASE_API_URL = 'https://coffeetalk-api.herokuapp.com/';
 export default class Edit extends React.Component {
 	// --- State ---
 	state = {
-		// Recipe fields
+		// Updated recipe fields
 		imageUrl: '',
 		recipeName: '',
 		description: '',
@@ -61,18 +61,23 @@ export default class Edit extends React.Component {
 	// --- Functions ---
 	async componentDidMount() {
 		// Load all resources in parallel
+		let recipeRequest = axios.get(BASE_API_URL + 'recipes/' + this.props.activeRecipe);
 		let beanRequest = axios.get(BASE_API_URL + 'beans');
 		let grinderRequest = axios.get(BASE_API_URL + 'grinders');
 		let brewerRequest = axios.get(BASE_API_URL + 'brewers');
 		let methodRequest = axios.get(BASE_API_URL + 'methods');
 
-		let [beanResponse, grinderResponse, brewerResponse, methodResponse] =
+		let [recipeResponse, beanResponse, grinderResponse, brewerResponse, methodResponse] =
 			await axios.all([
+				recipeRequest,
 				beanRequest,
 				grinderRequest,
 				brewerRequest,
 				methodRequest
 			]);
+
+		// Get recipe details
+		let recipe = recipeResponse.data.data.result || []; // Set to empty array if no recipe in database
 
 		// Get beans
 		let beans = beanResponse.data.data.result || []; // Set to empty array if no beans in database
@@ -88,6 +93,35 @@ export default class Edit extends React.Component {
 
 		// Update state
 		this.setState({
+			// Recipe fields
+			imageUrl: recipe.image_url,
+			recipeName: recipe.recipe_name,
+			description: recipe.description,
+			totalBrewTime: recipe.total_brew_time.split(' ')[0],
+			totalBrewTimeUnits: recipe.total_brew_time.split(' ')[1], // Default units
+			brewYield: recipe.brew_yield.split(' ')[0],
+			brewYieldUnits: recipe.brew_yield.split(' ')[1], // Default units
+			brewingMethod: recipe.brewing_method._id,
+			coffeeBeans: recipe.coffee_beans.map( (bean) => bean._id ),
+			coffeeRestPeriod: recipe.coffee_rest_period,
+			coffeeAmount: recipe.amount_of_coffee,
+			grinder: recipe.grinder._id,
+			grindSetting: recipe.grind_setting,
+			waterAmount: recipe.amount_of_water.split(' ')[0],
+			waterAmountUnits: recipe.amount_of_water.split(' ')[1], // Default units
+			waterTemperature: recipe.water_temperature,
+			additionalIngredients: recipe.additional_ingredients.length > 0 ? recipe.additional_ingredients : [''],
+			brewer: recipe.brewer._id,
+			additionalEquipment: recipe.additional_equipment.length > 0 ? recipe.additional_equipment : [''],
+			steps: recipe.steps,
+			// Status
+			optionalFields: ['ingredients', 'equipment'], // 'ingredients', 'equipment'
+			// Resources
+			beans: [],
+			grinders: [],
+			brewers: [],
+			methods: [],
+			// Resources
 			beans: beans,
 			grinders: grinders,
 			brewers: brewers,
@@ -372,7 +406,7 @@ export default class Edit extends React.Component {
 			<React.Fragment>
 				<section className='container-fluid d-flex flex-column justify-content-center align-items-center adjust-margin-top'>
 					<div className='container row mt-3 mb-5 px-2 px-md-5'>
-						<h1 className='mt-3 mb-4 mb-lg-5'>Upload recipe</h1>
+						<h1 className='mt-3 mb-4 mb-lg-5'>Update recipe</h1>
 						{/* Image URL */}
 						<Form.Group className='col-lg-6 mb-3'>
 							<Form.Label>Image URL</Form.Label>
@@ -1118,8 +1152,8 @@ export default class Edit extends React.Component {
 										<td>
 											{this.state.beanInfo.flavor_notes
 												? this.state.beanInfo.flavor_notes.join(
-														', '
-												  )
+													', '
+												)
 												: ''}
 										</td>
 									</tr>
@@ -1132,8 +1166,8 @@ export default class Edit extends React.Component {
 										<td>
 											{this.state.beanInfo.origins
 												? this.state.beanInfo.origins.join(
-														', '
-												  )
+													', '
+												)
 												: ''}
 										</td>
 									</tr>
