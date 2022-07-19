@@ -3,8 +3,10 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 import LoadingSpinner from './../components/LoadingSpinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import validateEmail from './../utilities/validateEmail';
 
 const BASE_API_URL = 'https://coffeetalk-api.herokuapp.com/';
 
@@ -12,12 +14,14 @@ export default class Recipe extends React.Component {
 	// --- State ---
 	state = {
 		recipe: {},
-    email: '',
+		email: '',
 		contentLoaded: false,
 		// Modal
 		show: false,
 		editStatus: false,
-		deleteStatus: false
+		deleteStatus: false,
+		emailError: false, // set to true for testing purposes
+		accessDeniedShow: false
 	};
 
 	// --- Functions ---
@@ -59,7 +63,48 @@ export default class Recipe extends React.Component {
 		});
 	};
 
-  updateFormField = (event) => {
+	processRequest = async () => {
+		// Validate email
+		if (!validateEmail(this.state.email)) {
+			this.setState({
+				emailError: true,
+				accessDeniedShow: false
+			});
+			return;
+		}
+
+		// Check if user has access to recipe
+		let response = await axios.post(
+			BASE_API_URL + 'recipes/' + this.props.activeRecipe + '/access',
+			{
+				email: this.state.email
+			}
+		);
+		let accessPermission = response.data.data.result;
+
+		// Proceed to handle edit/delete request
+		if (accessPermission) {
+			if (this.state.deleteStatus) {
+				try {
+					await axios.delete(BASE_API_URL + 'recipes/' + this.props.activeRecipe);
+					this.props.setActivePage('recipes');
+				} catch (err) {
+					console.log(err);
+				}
+			} else if (this.state.editStatus) {
+				// Redirect user to Edit page
+				this.props.setActivePage('edit');
+			}
+		}
+		else {
+			this.setState({
+				accessDeniedShow: true,
+				emailError: false
+			})
+		}
+	};
+
+	updateFormField = (event) => {
 		// Check if input type is checkbox
 		if (event.target.type !== 'checkbox') {
 			this.setState({
@@ -206,34 +251,6 @@ export default class Recipe extends React.Component {
 						Delete
 					</Button>
 				</div>
-
-				<Modal show={this.state.show} onHide={this.handleClose}>
-					<Modal.Header closeButton>
-						<Modal.Title>
-							{this.state.editStatus ? 'Edit' : 'Delete'}
-						</Modal.Title>
-					</Modal.Header>
-					<Modal.Body>
-						<h4>Enter email to proceed</h4>
-						<div className='mt-3'>
-							<Form.Control
-								name='email'
-								type='email'
-								placeholder='Enter email'
-								value={this.state.email}
-								onChange={this.updateFormField}
-							/>
-						</div>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button variant='secondary' onClick={this.handleClose}>
-							Close
-						</Button>
-						<Button variant='primary' onClick={this.handleClose}>
-							Submit
-						</Button>
-					</Modal.Footer>
-				</Modal>
 			</React.Fragment>
 		);
 	};
@@ -247,6 +264,63 @@ export default class Recipe extends React.Component {
 					) : (
 						<LoadingSpinner />
 					)}
+
+					{/* Validation modal for edit/delete */}
+					<Modal show={this.state.show} onHide={this.handleClose}>
+						<Modal.Header closeButton>
+							<Modal.Title>
+								{this.state.editStatus
+									? 'Edit Recipe'
+									: 'Delete Recipe'}
+							</Modal.Title>
+						</Modal.Header>
+						<Modal.Body>
+							{this.state.accessDeniedShow ? (
+								<Alert variant='danger'>
+									Permission denied
+								</Alert>
+							) : (
+								''
+							)}
+							<h6>Enter email to proceed</h6>
+							<Form.Group className='mt-3'>
+								<Form.Control
+									name='email'
+									type='email'
+									placeholder='Enter email'
+									value={this.state.email}
+									onChange={this.updateFormField}
+								/>
+								{this.state.emailError ? (
+									<Form.Text className='errorMessage'>
+										Invalid email address
+									</Form.Text>
+								) : (
+									''
+								)}
+							</Form.Group>
+						</Modal.Body>
+						<Modal.Footer>
+							<Button
+								variant='secondary'
+								onClick={this.handleClose}
+							>
+								Close
+							</Button>
+							<Button
+								variant={
+									this.state.deleteStatus
+										? 'danger'
+										: 'primary'
+								}
+								onClick={this.processRequest}
+							>
+								{this.state.deleteStatus
+									? 'Confirm delete'
+									: 'Proceed'}
+							</Button>
+						</Modal.Footer>
+					</Modal>
 				</section>
 			</React.Fragment>
 		);
