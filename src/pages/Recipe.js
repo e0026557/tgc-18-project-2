@@ -21,7 +21,14 @@ export default class Recipe extends React.Component {
 		editStatus: false,
 		deleteStatus: false,
 		emailError: false, // set to true for testing purposes
-		accessDeniedShow: false
+		accessDeniedShow: false,
+		// Review
+		reviewTitle: '',
+		reviewContent: '',
+		reviewRating: '',
+		reviewUsername: '',
+		reviewEmail: '',
+		reviewErrors: []
 	};
 
 	// --- Functions ---
@@ -258,7 +265,18 @@ export default class Recipe extends React.Component {
 	renderReviews = () => {
 		return (
 			<React.Fragment>
-
+				<h3>Reviews</h3>
+				{this.state.recipe.reviews.map( (review) => {
+					return (
+						<div key={review._id}>
+							<p>Date: {new Date(review.date.slice(0,10)).toDateString()}</p>
+							<p>Title: {review.title}</p>
+							<p>Content: {review.content}</p>
+							<p>Rating: {review.rating}</p>
+							<p>Username: {review.username}</p>
+						</div>
+					)
+				} )}
 			</React.Fragment>
 		)
 	}
@@ -282,7 +300,10 @@ export default class Recipe extends React.Component {
 			<React.Fragment>
 				<section className='adjust-margin-top'>
 					{this.state.contentLoaded ? (
-						this.renderRecipeDetails()
+						<React.Fragment>
+							{this.renderRecipeDetails()}
+							{this.renderReviews()}
+						</React.Fragment>
 					) : (
 						<LoadingSpinner />
 					)}
