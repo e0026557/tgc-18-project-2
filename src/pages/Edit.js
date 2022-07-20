@@ -229,6 +229,12 @@ export default class Edit extends React.Component {
 		// Get the last index to be removed
 		let index = this.state[inputField].length - 1;
 		let data = [...this.state[inputField]];
+		
+		// Do not remove the input field if it is the last input field left
+		if (data.length === 1) {
+			return;
+		}
+
 		data.splice(index, 1);
 		this.setState({
 			[inputField]: data
