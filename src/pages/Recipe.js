@@ -254,6 +254,29 @@ export default class Recipe extends React.Component {
 		);
 	};
 
+	// TODO
+	renderReviews = () => {
+		return (
+			<React.Fragment>
+
+			</React.Fragment>
+		)
+	}
+
+	// TODO
+	renderAddReviewForm = () => {
+		return (
+			<React.Fragment>
+
+			</React.Fragment>
+		)
+	}
+
+	// TODO
+	addReview = async () => {
+		return;
+	}
+
 	render() {
 		return (
 			<React.Fragment>
