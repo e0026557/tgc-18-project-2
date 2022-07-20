@@ -100,7 +100,7 @@ export default class Create extends React.Component {
 		let errors = this.validateFormInputs();
 
 		// Create recipe if no errors
-		if (!errors) {
+		if (errors.length === 0) {
 			// Build request body
 			let requestBody = {
 				imageUrl: this.state.imageUrl,
