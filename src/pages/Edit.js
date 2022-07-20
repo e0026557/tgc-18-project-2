@@ -8,7 +8,6 @@ import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Table from 'react-bootstrap/Table';
-import validateEmail from './../utilities/validateEmail';
 import validateUrl from './../utilities/validateUrl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus, faInfo } from '@fortawesome/free-solid-svg-icons';
@@ -22,8 +21,6 @@ export default class Edit extends React.Component {
 		imageUrl: '',
 		recipeName: '',
 		description: '',
-		// username: '',
-		// email: '',
 		totalBrewTime: '',
 		totalBrewTimeUnits: 'min', // Default units
 		brewYield: '',
@@ -117,11 +114,6 @@ export default class Edit extends React.Component {
 			// Status
 			optionalFields: ['ingredients', 'equipment'], // 'ingredients', 'equipment'
 			// Resources
-			beans: [],
-			grinders: [],
-			brewers: [],
-			methods: [],
-			// Resources
 			beans: beans,
 			grinders: grinders,
 			brewers: brewers,
@@ -141,8 +133,6 @@ export default class Edit extends React.Component {
 				imageUrl: this.state.imageUrl,
 				recipeName: this.state.recipeName,
 				description: this.state.description,
-				// username: this.state.username,
-				// email: this.state.email,
 				totalBrewTime:
 					this.state.totalBrewTime +
 					' ' +
@@ -260,16 +250,6 @@ export default class Edit extends React.Component {
 		if (this.state.description.length < 5) {
 			errors.push('description');
 		}
-
-		// // Check username
-		// if (this.state.username.length < 5) {
-		// 	errors.push('username');
-		// }
-
-		// // Check email
-		// if (!this.state.email || !validateEmail(this.state.email)) {
-		// 	errors.push('email');
-		// }
 
 		// Check total brew time
 		if (!this.state.totalBrewTime || isNaN(this.state.totalBrewTime)) {
