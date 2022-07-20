@@ -22,8 +22,8 @@ export default class Edit extends React.Component {
 		imageUrl: '',
 		recipeName: '',
 		description: '',
-		username: '',
-		email: '',
+		// username: '',
+		// email: '',
 		totalBrewTime: '',
 		totalBrewTimeUnits: 'min', // Default units
 		brewYield: '',
@@ -130,19 +130,19 @@ export default class Edit extends React.Component {
 		});
 	}
 
-	createRecipe = async () => {
+	updateRecipe = async () => {
 		// Validate form fields
 		let errors = this.validateFormInputs();
 
 		// Create recipe if no errors
-		if (!errors) {
+		if (errors.length === 0) {
 			// Build request body
 			let requestBody = {
 				imageUrl: this.state.imageUrl,
 				recipeName: this.state.recipeName,
 				description: this.state.description,
-				username: this.state.username,
-				email: this.state.email,
+				// username: this.state.username,
+				// email: this.state.email,
 				totalBrewTime:
 					this.state.totalBrewTime +
 					' ' +
@@ -164,9 +164,9 @@ export default class Edit extends React.Component {
 				steps: this.state.steps
 			};
 
-			// Attempt to create a new recipe
+			// Attempt to update recipe
 			try {
-				await axios.post(BASE_API_URL + 'recipes', requestBody);
+				await axios.put(BASE_API_URL + 'recipes/' + this.props.activeRecipe, requestBody);
 			} catch (err) {
 				console.log(err);
 			}
@@ -255,15 +255,15 @@ export default class Edit extends React.Component {
 			errors.push('description');
 		}
 
-		// Check username
-		if (this.state.username.length < 5) {
-			errors.push('username');
-		}
+		// // Check username
+		// if (this.state.username.length < 5) {
+		// 	errors.push('username');
+		// }
 
-		// Check email
-		if (!this.state.email || !validateEmail(this.state.email)) {
-			errors.push('email');
-		}
+		// // Check email
+		// if (!this.state.email || !validateEmail(this.state.email)) {
+		// 	errors.push('email');
+		// }
 
 		// Check total brew time
 		if (!this.state.totalBrewTime || isNaN(this.state.totalBrewTime)) {
@@ -367,7 +367,7 @@ export default class Edit extends React.Component {
 					show={this.state.show}
 					onHide={this.handleClose}
 					onExiting={() => {
-						this.props.setActivePage('recipes');
+						this.props.setActivePage('recipe', this.props.activeRecipe); // Redirect to recipe page
 					}}
 				>
 					<Modal.Header closeButton>
@@ -375,7 +375,7 @@ export default class Edit extends React.Component {
 					</Modal.Header>
 					<Modal.Body>
 						<Alert variant='success'>
-							Recipe successfully added!
+							Recipe successfully updated!
 						</Alert>
 					</Modal.Body>
 					<Modal.Footer>
@@ -466,48 +466,6 @@ export default class Edit extends React.Component {
 								<Form.Text className='errorMessage'>
 									Description must be at least 5 characters
 									long
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
-
-						{/* Username */}
-						<Form.Group className='col-lg-6 mb-3'>
-							<Form.Label>
-								Username <span className='text-danger'>*</span>
-							</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter username'
-								name='username'
-								value={this.state.username}
-								onChange={this.updateFormField}
-							/>
-							{this.state.errors.includes('username') ? (
-								<Form.Text className='errorMessage'>
-									Username must be at least 5 characters long
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
-
-						{/* Email */}
-						<Form.Group className='col-lg-6 mb-3'>
-							<Form.Label>
-								Email <span className='text-danger'>*</span>
-							</Form.Label>
-							<Form.Control
-								type='email'
-								placeholder='Enter email'
-								name='email'
-								value={this.state.email}
-								onChange={this.updateFormField}
-							/>
-							{this.state.errors.includes('email') ? (
-								<Form.Text className='errorMessage'>
-									Invalid email address
 								</Form.Text>
 							) : (
 								''
@@ -1095,9 +1053,9 @@ export default class Edit extends React.Component {
 							<Button
 								className='btn-custom-primary mt-4'
 								type='submit'
-								onClick={this.createRecipe}
+								onClick={this.updateRecipe}
 							>
-								Create recipe
+								Update recipe
 							</Button>
 						</div>
 					</div>
