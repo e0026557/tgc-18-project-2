@@ -252,7 +252,7 @@ export default class Create extends React.Component {
 		}
 
 		// Check coffee beans
-		if (this.state.coffeeBeans.length < 0) {
+		if (this.state.coffeeBeans.length === 0) {
 			errors.push('coffeeBeans');
 		}
 
