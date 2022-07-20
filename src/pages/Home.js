@@ -17,18 +17,13 @@ export default class Home extends React.Component {
 
 	// --- Functions ---
 	async componentDidMount() {
-		// Loading JSON Files in parallel
-		let latestRecipesRequest = axios.get(
+		// Loading JSON Files in sequence
+		let latestRecipesResponse = await axios.get(
 			BASE_API_URL + 'recipes?sort=date&limit=3'
 		);
-		let popularRecipesRequest = axios.get(
+		let popularRecipesResponse = await axios.get(
 			BASE_API_URL + 'recipes?sort=rating&limit=3'
 		);
-
-		let [latestRecipesResponse, popularRecipesResponse] = await axios.all([
-			latestRecipesRequest,
-			popularRecipesRequest
-		]);
 
 		this.setState({
 			latestRecipes: latestRecipesResponse.data.data.result,
