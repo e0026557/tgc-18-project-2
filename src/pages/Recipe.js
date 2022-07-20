@@ -86,7 +86,9 @@ export default class Recipe extends React.Component {
 		if (accessPermission) {
 			if (this.state.deleteStatus) {
 				try {
-					await axios.delete(BASE_API_URL + 'recipes/' + this.props.activeRecipe);
+					await axios.delete(
+						BASE_API_URL + 'recipes/' + this.props.activeRecipe
+					);
 					this.props.setActivePage('recipes');
 				} catch (err) {
 					console.log(err);
@@ -95,12 +97,11 @@ export default class Recipe extends React.Component {
 				// Redirect user to Edit page
 				this.props.setActivePage('edit');
 			}
-		}
-		else {
+		} else {
 			this.setState({
 				accessDeniedShow: true,
 				emailError: false
-			})
+			});
 		}
 	};
 
@@ -148,12 +149,10 @@ export default class Recipe extends React.Component {
 					<p>Average rating: {this.state.recipe.average_rating}</p>
 					<p>By: {this.state.recipe.user.username}</p>
 					<p>
-						{Date(
-							this.state.recipe.date.slice(
-								0,
-								this.state.recipe.date.indexOf('T')
-							)
-						)}
+						Upload date:{' '}
+						{new Date(
+							this.state.recipe.date.slice(0, 10)
+						).toDateString()}
 					</p>
 				</div>
 
@@ -214,11 +213,11 @@ export default class Recipe extends React.Component {
 				<div>
 					<p>
 						Additional ingredients:{' '}
-						{this.state.recipe.additional_ingredients}
+						{this.state.recipe.additional_ingredients[0] ? this.state.recipe.additional_ingredients.join(', ') : 'None'}
 					</p>
 					<p>
 						Additional equipment:{' '}
-						{this.state.recipe.additional_equipment}
+						{this.state.recipe.additional_equipment[0] ? this.state.recipe.additional_equipment.join(', ') : 'None'}
 					</p>
 				</div>
 
