@@ -324,7 +324,7 @@ export default class Edit extends React.Component {
 		}
 
 		// Check additional ingredients
-		if (this.state.additionalIngredients.length > 0) {
+		if (this.state.additionalIngredients.length > 0 && this.state.optionalFields.includes('ingredients')) {
 			for (let ingredient of this.state.additionalIngredients) {
 				if (!ingredient) {
 					errors.push('additionalIngredients');
@@ -334,7 +334,7 @@ export default class Edit extends React.Component {
 		}
 
 		// Check additional equipment
-		if (this.state.additionalEquipment.length > 0) {
+		if (this.state.additionalEquipment.length > 0 && this.state.optionalFields.includes('equipment')) {
 			for (let equipment of this.state.additionalEquipment) {
 				if (!equipment) {
 					errors.push('additionalEquipment');
