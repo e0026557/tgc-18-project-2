@@ -458,33 +458,47 @@ export default class Recipe extends React.Component {
 		return (
 			<React.Fragment>
 				<ul className='list-group'>
-					{this.state.recipe.reviews.map((review) => {
-						return (
-							<li
-								key={review._id}
-								className='list-group-item my-2'
-							>
-								<div className='d-flex justify-content-start align-items-center gap-3 py-2 px-1'>
-									<div className='review-user-box'>
-										<FontAwesomeIcon icon={faUser} />
+					{this.state.recipe.reviews.length > 0 ? (
+						this.state.recipe.reviews.map((review) => {
+							return (
+								<li
+									key={review._id}
+									className='list-group-item my-2'
+								>
+									<div className='d-flex justify-content-start align-items-center gap-3 py-2 px-1'>
+										<div className='review-user-box'>
+											<FontAwesomeIcon icon={faUser} />
+										</div>
+										<div>
+											{this.renderRatingStars(
+												review.rating
+											)}
+										</div>
 									</div>
-									<div>
-										{this.renderRatingStars(review.rating)}
+									<h5 className='review-title mt-1'>
+										{review.title}
+									</h5>
+									<div className='d-flex flex-column justify-content-start align-items-start'>
+										<span className='ps-2'>
+											{review.username}
+										</span>
+										<span className='review-date mt-1 ps-2'>
+											{new Date(
+												review.date.slice(0, 10)
+											).toDateString()}
+										</span>
+										<p className='review-content mt-3'>
+											{review.content}
+										</p>
 									</div>
-								</div>
-								<h5 className='review-title mt-1'>{review.title}</h5>
-								<div className='d-flex flex-column justify-content-start align-items-start'>
-									<span className='ps-2'>{review.username}</span>
-									<span className='review-date mt-1 ps-2'>
-										{new Date(
-											review.date.slice(0, 10)
-										).toDateString()}
-									</span>
-									<p className='review-content mt-3'>{review.content}</p>
-								</div>
-							</li>
-						);
-					})}
+								</li>
+							);
+						})
+					) : (
+						<li className='list-group-item my-2'>
+							There are no reviews to show
+						</li>
+					)}
 				</ul>
 			</React.Fragment>
 		);
