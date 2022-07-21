@@ -1,6 +1,8 @@
 /* 
 --- Color Scheme ---
 #E1C9A9 -- Beige
+-- Tints:
+- f0e4d4
 
 #d4b095 -- Peach
 
@@ -10,6 +12,7 @@
 
 #432D2D -- Dark brown
 -- Tints: 
+- d9d5d5
 - 7b6c6c
 - 695757 
 
@@ -119,6 +122,12 @@ body {
   color: red;
   font-weight: 500;
   display: inline-block;
+}
+
+/* List group */
+.list-group-item {
+  background-color: #ead9c3;
+  border-radius: 1rem !important;
 }
 
 /* *** MOBILE SETTINGS (BELOW 768PX) *** */
@@ -309,6 +318,39 @@ body {
 .fa-info {
   font-size: 0.75rem;
   color: white;
+}
+
+/* --- Individual Recipe Section --- */
+.img-box {
+  width: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.img-box > img {
+  object-fit: cover;
+  width: 100%;
+  height: 300px;
+}
+
+.recipe-name {
+  font-weight: 600;
+}
+
+.recipe-field-header {
+  font-weight: 600;
+}
+
+.review-box {
+  background-color: #f0e4d4;
+  max-height: 50vh;
+  border-radius: 0.5rem;
+  overflow-y: scroll;
+}
+
+.review-form {
+  background-color: #f0e4d4;
+  border-radius: 1rem;
 }
 
 /* --- Favorites Section --- */
