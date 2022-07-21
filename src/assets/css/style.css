@@ -289,6 +289,11 @@ body {
   max-width: 350px;
 }
 
+.search-form {
+  background-color: #f0e4d4;
+  border-radius: 1rem;
+}
+
 .btn-bean-info {
   height: 1.5rem;
   width: 1.5rem;

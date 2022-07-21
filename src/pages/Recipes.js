@@ -507,7 +507,7 @@ export default class Recipes extends React.Component {
 					{this.state.windowWidth < 992 ? (
 						''
 					) : (
-						<div className='col-lg-3 d-none d-lg-block mt-lg-3 mx-auto'>
+						<div className='search-form col-lg-3 d-none d-lg-block mt-lg-4 px-3 pt-2 pb-3 mx-auto'>
 							{this.renderSearchForm()}
 						</div>
 					)}
