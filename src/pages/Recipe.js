@@ -15,6 +15,7 @@ export default class Recipe extends React.Component {
 	state = {
 		recipe: {},
 		email: '',
+		reviewChanged: false,
 		contentLoaded: false,
 		// Modal
 		show: false,
@@ -44,6 +45,23 @@ export default class Recipe extends React.Component {
 			recipe: recipe,
 			contentLoaded: true
 		});
+	}
+
+	async componentDidUpdate() {
+		if (this.state.reviewChanged) {
+			// Get Recipe Details
+			let response = await axios.get(
+				BASE_API_URL + 'recipes/' + this.props.activeRecipe
+			);
+			let recipe = response.data.data.result;
+
+			// Update state
+			this.setState({
+				recipe: recipe,
+				contentLoaded: true,
+				reviewChanged: false // Reset to default
+			});
+		}
 	}
 
 	handleShow = (option) => {
@@ -220,11 +238,17 @@ export default class Recipe extends React.Component {
 				<div>
 					<p>
 						Additional ingredients:{' '}
-						{this.state.recipe.additional_ingredients[0] ? this.state.recipe.additional_ingredients.join(', ') : 'None'}
+						{this.state.recipe.additional_ingredients[0]
+							? this.state.recipe.additional_ingredients.join(
+									', '
+							  )
+							: 'None'}
 					</p>
 					<p>
 						Additional equipment:{' '}
-						{this.state.recipe.additional_equipment[0] ? this.state.recipe.additional_equipment.join(', ') : 'None'}
+						{this.state.recipe.additional_equipment[0]
+							? this.state.recipe.additional_equipment.join(', ')
+							: 'None'}
 					</p>
 				</div>
 
@@ -261,43 +285,222 @@ export default class Recipe extends React.Component {
 		);
 	};
 
-	// TODO
 	renderReviews = () => {
 		return (
 			<React.Fragment>
 				<h3>Reviews</h3>
-				{this.state.recipe.reviews.map( (review) => {
+				{this.state.recipe.reviews.map((review) => {
 					return (
 						<div key={review._id}>
-							<p>Date: {new Date(review.date.slice(0,10)).toDateString()}</p>
+							<p>
+								Date:{' '}
+								{new Date(
+									review.date.slice(0, 10)
+								).toDateString()}
+							</p>
 							<p>Title: {review.title}</p>
 							<p>Content: {review.content}</p>
 							<p>Rating: {review.rating}</p>
 							<p>Username: {review.username}</p>
 						</div>
-					)
-				} )}
+					);
+				})}
 			</React.Fragment>
-		)
-	}
+		);
+	};
 
-	// TODO
 	renderAddReviewForm = () => {
 		return (
 			<React.Fragment>
 				<div className='container'>
-					<div>
-						<label className="form-label"></label>
-					</div>
+					{/* Reviewer's username */}
+					<Form.Group className=''>
+						<Form.Label>
+							Username <span className='text-danger'>*</span>
+						</Form.Label>
+						<Form.Control
+							type='text'
+							placeholder='Enter username'
+							name='reviewUsername'
+							value={this.state.reviewUsername}
+							onChange={this.updateFormField}
+						/>
+						{this.state.reviewErrors.includes('reviewUsername') ? (
+							<Form.Text className='errorMessage'>
+								Username must be at least 5 characters long
+							</Form.Text>
+						) : (
+							''
+						)}
+					</Form.Group>
+
+					{/* Reviewer's email */}
+					<Form.Group className=''>
+						<Form.Label>
+							Email <span className='text-danger'>*</span>
+						</Form.Label>
+						<Form.Control
+							type='email'
+							placeholder='Enter email'
+							name='reviewEmail'
+							value={this.state.reviewEmail}
+							onChange={this.updateFormField}
+						/>
+						{this.state.reviewErrors.includes('reviewEmail') ? (
+							<Form.Text className='errorMessage'>
+								Invalid email address
+							</Form.Text>
+						) : (
+							''
+						)}
+					</Form.Group>
+
+					{/* Review title */}
+					<Form.Group className=''>
+						<Form.Label>
+							Title <span className='text-danger'>*</span>
+						</Form.Label>
+						<Form.Control
+							type='text'
+							placeholder='Enter review title'
+							name='reviewTitle'
+							value={this.state.reviewTitle}
+							onChange={this.updateFormField}
+						/>
+						{this.state.reviewErrors.includes('reviewTitle') ? (
+							<Form.Text className='errorMessage'>
+								Title must be at least 5 characters long
+							</Form.Text>
+						) : (
+							''
+						)}
+					</Form.Group>
+
+					{/* Review content */}
+					<Form.Group className=''>
+						<Form.Label>
+							Content <span className='text-danger'>*</span>
+						</Form.Label>
+						<Form.Control
+							type='text'
+							placeholder='Enter review content'
+							name='reviewContent'
+							value={this.state.reviewContent}
+							onChange={this.updateFormField}
+						/>
+						{this.state.reviewErrors.includes('reviewContent') ? (
+							<Form.Text className='errorMessage'>
+								Content must be at least 5 characters long
+							</Form.Text>
+						) : (
+							''
+						)}
+					</Form.Group>
+
+					{/* Review rating */}
+					<Form.Group className='mb-3'>
+						<Form.Label>
+							Rating <span className='text-danger'>*</span>
+						</Form.Label>
+						<Form.Select
+							name='reviewRating'
+							value={this.state.reviewRating}
+							onChange={this.updateFormField}
+						>
+							<option value='' disabled>
+								--- Select rating ---
+							</option>
+							{[0, 1, 2, 3, 4, 5].map((rating) => {
+								return (
+									<option key={rating} value={rating}>
+										{rating}
+									</option>
+								);
+							})}
+						</Form.Select>
+						{this.state.reviewErrors.includes('reviewRating') ? (
+							<Form.Text className='errorMessage'>
+								Please select a rating
+							</Form.Text>
+						) : (
+							''
+						)}
+					</Form.Group>
+
+					{/* Submit review button */}
+					<Button variant='primary' onClick={this.addReview}>
+						Add review
+					</Button>
 				</div>
 			</React.Fragment>
-		)
-	}
+		);
+	};
 
-	// TODO
 	addReview = async () => {
-		return;
-	}
+		// Validate review form inputs
+		const reviewErrors = this.validateReviewInputs();
+
+		if (reviewErrors.length === 0) {
+			// Process review
+			let newReview = {
+				title: this.state.reviewTitle,
+				content: this.state.reviewContent,
+				rating: this.state.reviewRating,
+				username: this.state.reviewUsername,
+				email: this.state.reviewEmail
+			};
+
+			await axios.post(
+				BASE_API_URL +
+					'recipes/' +
+					this.props.activeRecipe +
+					'/reviews',
+				newReview
+			);
+
+			// Update state
+			this.setState({
+				reviewChanged: true,
+				contentLoaded: false // Trigger loading animation
+			});
+		} else {
+			this.setState({
+				reviewErrors: reviewErrors
+			});
+		}
+	};
+
+	// Validate review form inputs
+	validateReviewInputs = () => {
+		let reviewErrors = [];
+
+		// Check username
+		if (this.state.reviewUsername.length < 5) {
+			reviewErrors.push('reviewUsername');
+		}
+
+		// Check email
+		if (!this.state.reviewEmail || !validateEmail(this.state.reviewEmail)) {
+			reviewErrors.push('reviewEmail');
+		}
+
+		// Check title
+		if (this.state.reviewTitle.length < 5) {
+			reviewErrors.push('reviewTitle');
+		}
+
+		// Check content
+		if (this.state.reviewContent.length < 5) {
+			reviewErrors.push('reviewContent');
+		}
+
+		// Check rating
+		if (!this.state.reviewRating) {
+			reviewErrors.push('reviewRating');
+		}
+
+		return reviewErrors;
+	};
 
 	render() {
 		return (
@@ -306,6 +509,7 @@ export default class Recipe extends React.Component {
 					{this.state.contentLoaded ? (
 						<React.Fragment>
 							{this.renderRecipeDetails()}
+							{this.renderAddReviewForm()}
 							{this.renderReviews()}
 						</React.Fragment>
 					) : (
