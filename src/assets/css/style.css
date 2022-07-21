@@ -118,6 +118,19 @@ body {
   z-index: 10000;
 }
 
+.offcanvas {
+  background-color: #f0e4d4;
+}
+
+.offcanvas table {
+  background-color: white;
+}
+
+/* Modal */
+.modal-content {
+  background-color: #f0e4d4;
+}
+
 /* Form Styles */
 /* Errors */
 .errorMessage {
