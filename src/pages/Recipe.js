@@ -578,7 +578,8 @@ export default class Recipe extends React.Component {
 							Content <span className='text-danger'>*</span>
 						</Form.Label>
 						<Form.Control
-							type='text'
+							// type='text'
+							as='textarea'
 							placeholder='Enter review content'
 							name='reviewContent'
 							value={this.state.reviewContent}

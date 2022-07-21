@@ -442,7 +442,8 @@ export default class Edit extends React.Component {
 								<span className='text-danger'>*</span>
 							</Form.Label>
 							<Form.Control
-								type='text'
+								// type='text'
+								as='textarea'
 								placeholder='Enter short description'
 								name='description'
 								value={this.state.description}
@@ -994,7 +995,8 @@ export default class Edit extends React.Component {
 								return (
 									<Form.Control
 										key={index}
-										type='text'
+										// type='text'
+										as='textarea'
 										placeholder={'Step ' + (index + 1)}
 										name='steps'
 										value={step}
