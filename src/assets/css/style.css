@@ -325,6 +325,7 @@ body {
 /* --- Individual Recipe Section --- */
 .img-box {
   width: 100%;
+  height: 300px;
   border-radius: 1rem;
   overflow: hidden;
 }
@@ -333,7 +334,7 @@ body {
   object-fit: cover;
   object-position: center;
   width: 100%;
-  height: 300px;
+  height: 100%;
 }
 
 .recipe-name {
@@ -430,6 +431,11 @@ body {
   .fa-chevron-down {
     font-size: 3rem;
   }
+
+  /* --- Individual Recipe Section --- */
+.img-box {
+  height: 400px;
+}
 }
 
 
@@ -477,6 +483,10 @@ body {
   }
 
   /* --- Individual Recipe Section --- */
+  .img-box {
+    height: 450px;
+  }
+
   .review-box {
     max-height: 60vh;
   }
