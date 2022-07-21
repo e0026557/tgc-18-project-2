@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import LoadingSpinner from './../components/LoadingSpinner';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import validateEmail from './../utilities/validateEmail';
 
 const BASE_API_URL = 'https://coffeetalk-api.herokuapp.com/';
@@ -285,7 +285,11 @@ export default class Recipe extends React.Component {
 	renderAddReviewForm = () => {
 		return (
 			<React.Fragment>
-
+				<div className='container'>
+					<div>
+						<label className="form-label"></label>
+					</div>
+				</div>
 			</React.Fragment>
 		)
 	}

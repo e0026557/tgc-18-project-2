@@ -322,15 +322,18 @@ export default class Recipes extends React.Component {
 						name='searchSort'
 						type='radio'
 						value='date'
+						id='date'
 						onChange={this.updateFormField}
 						checked={this.state.searchSort === 'date'}
 					/>
+
 					<Form.Check
 						inline
 						label='Rating'
 						name='searchSort'
 						type='radio'
 						value='rating'
+						id='rating'
 						onChange={this.updateFormField}
 						checked={this.state.searchSort === 'rating'}
 					/>
