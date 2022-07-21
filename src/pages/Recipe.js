@@ -638,7 +638,7 @@ export default class Recipe extends React.Component {
 									<div className='review-box px-4 py-4 my-3'>
 										{this.renderReviews()}
 									</div>
-									<div className='review-form pt-4 pb-3 px-3 mb-5'>
+									<div className='container review-form pt-4 pb-3 px-3 mb-5'>
 										{this.renderAddReviewForm()}
 									</div>
 								</div>
