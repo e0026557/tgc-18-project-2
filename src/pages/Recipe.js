@@ -8,7 +8,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Table from 'react-bootstrap/Table';
 import LoadingSpinner from './../components/LoadingSpinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfo } from '@fortawesome/free-solid-svg-icons';
+import { faInfo, faStar, faUser } from '@fortawesome/free-solid-svg-icons';
 import validateEmail from './../utilities/validateEmail';
 
 const BASE_API_URL = 'https://coffeetalk-api.herokuapp.com/';
@@ -174,6 +174,14 @@ export default class Recipe extends React.Component {
 		this.setState({
 			offcanvasShow: false
 		});
+	};
+
+	renderRatingStars = (num) => {
+		let stars = [];
+		for (let i = 0; i < num; i++) {
+			stars.push(<FontAwesomeIcon icon={faStar} />);
+		}
+		return stars;
 	};
 
 	validateReviewInputs = () => {
@@ -456,16 +464,24 @@ export default class Recipe extends React.Component {
 								key={review._id}
 								className='list-group-item my-2'
 							>
-								<p>
-									Date:{' '}
-									{new Date(
-										review.date.slice(0, 10)
-									).toDateString()}
-								</p>
-								<p>Title: {review.title}</p>
-								<p>Content: {review.content}</p>
-								<p>Rating: {review.rating}</p>
-								<p>Username: {review.username}</p>
+								<div className='d-flex justify-content-start align-items-center gap-3 py-2 px-1'>
+									<div className='review-user-box'>
+										<FontAwesomeIcon icon={faUser} />
+									</div>
+									<div>
+										{this.renderRatingStars(review.rating)}
+									</div>
+								</div>
+								<h5 className='review-title mt-1'>{review.title}</h5>
+								<div className='d-flex flex-column justify-content-start align-items-start'>
+									<span className='ps-2'>{review.username}</span>
+									<span className='review-text-sm mt-1 ps-2'>
+										{new Date(
+											review.date.slice(0, 10)
+										).toDateString()}
+									</span>
+									<p className='review-content mt-3'>{review.content}</p>
+								</div>
 							</li>
 						);
 					})}

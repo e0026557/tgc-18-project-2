@@ -16,6 +16,8 @@
 - 7b6c6c
 - 695757 
 
+#e6cb2f -- Yellow color for rating stars
+
 #ced4da -- Default border color for Bootstrap form inputs
 #212529 -- Default text color for Bootstrap form inputs
 
@@ -346,6 +348,30 @@ body {
   max-height: 50vh;
   border-radius: 0.5rem;
   overflow-y: scroll;
+}
+
+.fa-star {
+  color: #e6cb2f;
+}
+
+.review-user-box {
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 100%;
+  background-color: #c9d0d2;
+  border-color: #bcc4c7;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-user {
+  font-size: 2rem;
+}
+
+.review-text-sm {
+  font-size: 12px;
 }
 
 .review-form {
