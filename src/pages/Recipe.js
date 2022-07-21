@@ -475,7 +475,7 @@ export default class Recipe extends React.Component {
 								<h5 className='review-title mt-1'>{review.title}</h5>
 								<div className='d-flex flex-column justify-content-start align-items-start'>
 									<span className='ps-2'>{review.username}</span>
-									<span className='review-text-sm mt-1 ps-2'>
+									<span className='review-date mt-1 ps-2'>
 										{new Date(
 											review.date.slice(0, 10)
 										).toDateString()}

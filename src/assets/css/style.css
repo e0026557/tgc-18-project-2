@@ -370,7 +370,7 @@ body {
   font-size: 2rem;
 }
 
-.review-text-sm {
+.review-date {
   font-size: 12px;
 }
 
@@ -473,5 +473,10 @@ body {
   .result-box {
     height: calc(100vh - 76px - 50px);
     overflow-y: scroll;
+  }
+
+  /* --- Individual Recipe Section --- */
+  .review-box {
+    max-height: 60vh;
   }
 }
