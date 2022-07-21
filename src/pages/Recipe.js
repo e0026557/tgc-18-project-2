@@ -493,10 +493,10 @@ export default class Recipe extends React.Component {
 	renderAddReviewForm = () => {
 		return (
 			<React.Fragment>
-				<div className='container'>
+				<div className='container row'>
 					<h4>Add review</h4>
 					{/* Reviewer's username */}
-					<Form.Group className='mt-3'>
+					<Form.Group className='col-lg-6 mt-3'>
 						<Form.Label>
 							Username <span className='text-danger'>*</span>
 						</Form.Label>
@@ -517,7 +517,7 @@ export default class Recipe extends React.Component {
 					</Form.Group>
 
 					{/* Reviewer's email */}
-					<Form.Group className=''>
+					<Form.Group className='col-lg-6 mt-3'>
 						<Form.Label>
 							Email <span className='text-danger'>*</span>
 						</Form.Label>
@@ -538,7 +538,7 @@ export default class Recipe extends React.Component {
 					</Form.Group>
 
 					{/* Review title */}
-					<Form.Group className=''>
+					<Form.Group className='mt-3'>
 						<Form.Label>
 							Title <span className='text-danger'>*</span>
 						</Form.Label>
@@ -559,7 +559,7 @@ export default class Recipe extends React.Component {
 					</Form.Group>
 
 					{/* Review content */}
-					<Form.Group className=''>
+					<Form.Group className='mt-3'>
 						<Form.Label>
 							Content <span className='text-danger'>*</span>
 						</Form.Label>
@@ -580,7 +580,7 @@ export default class Recipe extends React.Component {
 					</Form.Group>
 
 					{/* Review rating */}
-					<Form.Group className='mb-3'>
+					<Form.Group className='mt-3'>
 						<Form.Label>
 							Rating <span className='text-danger'>*</span>
 						</Form.Label>
@@ -610,7 +610,7 @@ export default class Recipe extends React.Component {
 					</Form.Group>
 
 					{/* Submit review button */}
-					<div className='d-flex justify-content-center align-items-center'>
+					<div className='d-flex justify-content-center align-items-center mt-4'>
 						<Button
 							className='btn-custom-primary my-3'
 							onClick={this.addReview}
@@ -638,7 +638,7 @@ export default class Recipe extends React.Component {
 									<div className='review-box px-4 py-4 my-3'>
 										{this.renderReviews()}
 									</div>
-									<div className='container review-form pt-4 pb-3 px-3 mb-5'>
+									<div className='container review-form pt-4 pb-3 px-1 px-md-3 mb-5 d-flex justify-content-center'>
 										{this.renderAddReviewForm()}
 									</div>
 								</div>
