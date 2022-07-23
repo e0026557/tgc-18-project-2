@@ -187,6 +187,9 @@ export default class Recipe extends React.Component {
 		for (let i = 0; i < num; i++) {
 			stars.push(<FontAwesomeIcon icon={faStar} />);
 		}
+		for (let i = 0; i < 5-num; i++) {
+			stars.push(<FontAwesomeIcon className='empty-star' icon={faStar} />);
+		}
 		return stars;
 	};
 
@@ -237,9 +240,9 @@ export default class Recipe extends React.Component {
 
 			await axios.post(
 				BASE_API_URL +
-					'recipes/' +
-					this.props.activeRecipe +
-					'/reviews',
+				'recipes/' +
+				this.props.activeRecipe +
+				'/reviews',
 				newReview
 			);
 
@@ -815,8 +818,8 @@ export default class Recipe extends React.Component {
 										<td>
 											{this.state.beanInfo.flavor_notes
 												? this.state.beanInfo.flavor_notes.join(
-														', '
-												  )
+													', '
+												)
 												: ''}
 										</td>
 									</tr>
@@ -829,8 +832,8 @@ export default class Recipe extends React.Component {
 										<td>
 											{this.state.beanInfo.origins
 												? this.state.beanInfo.origins.join(
-														', '
-												  )
+													', '
+												)
 												: ''}
 										</td>
 									</tr>

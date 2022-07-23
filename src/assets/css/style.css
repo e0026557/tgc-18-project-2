@@ -2,6 +2,7 @@
 --- Color Scheme ---
 #E1C9A9 -- Beige
 -- Tints:
+- ead9c3
 - f0e4d4
 
 #d4b095 -- Peach
@@ -13,10 +14,12 @@
 #432D2D -- Dark brown
 -- Tints: 
 - d9d5d5
+- a19696
 - 7b6c6c
 - 695757 
 
 #e6cb2f -- Yellow color for rating stars
+#a19696 -- Grey color for empty rating stars
 
 #ced4da -- Default border color for Bootstrap form inputs
 #212529 -- Default text color for Bootstrap form inputs
@@ -411,6 +414,10 @@ body {
 
 .fa-star {
   color: #e6cb2f;
+}
+
+.empty-star {
+  color: #a19696;
 }
 
 .review-user-box {
