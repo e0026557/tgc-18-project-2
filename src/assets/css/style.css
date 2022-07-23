@@ -438,6 +438,17 @@ body {
   border-radius: 1rem;
 }
 
+/* --- Create/Edit Recipe Section --- */
+.recipe-form {
+  background-color: #f0e4d4;
+  border-radius: 1rem;
+}
+
+.recipe-form-group {
+  background-color: #ead9c3;
+  border-radius: 1rem;
+}
+
 /* --- Favorites Section --- */
 /* Email Box */
 .email-box {
