@@ -208,7 +208,7 @@ export default class Recipes extends React.Component {
 										<label className='py-1'>
 											<input
 												type='checkbox'
-												className='mx-2'
+												className='me-2'
 												name='searchBeans'
 												value={bean._id}
 												onChange={this.updateFormField}
@@ -219,7 +219,7 @@ export default class Recipes extends React.Component {
 											{bean.name}
 										</label>
 										<div
-											className='btn-bean-info ms-auto me-4'
+											className='btn-bean-info ms-auto me-3'
 											onClick={() => {
 												this.showBeanInfo(bean);
 											}}

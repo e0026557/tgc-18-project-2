@@ -649,7 +649,7 @@ export default class Edit extends React.Component {
 															{bean.name}
 														</label>
 														<div
-															className='btn-bean-info ms-auto me-4'
+															className='btn-bean-info ms-auto me-3'
 															onClick={() => {
 																this.showBeanInfo(bean);
 															}}
