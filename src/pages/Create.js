@@ -376,8 +376,9 @@ export default class Create extends React.Component {
 		return (
 			<React.Fragment>
 				<section className='container-fluid d-flex flex-column justify-content-center align-items-center adjust-margin-top'>
-					<div className='container row mt-3 mb-5 px-2 px-md-5'>
+					<div className='container mt-3 mb-5 px-2 px-md-5'>
 						<h1 className='mt-3 mb-4 mb-lg-5'>Upload recipe</h1>
+						<div className='row'>
 						{/* Image URL */}
 						<Form.Group className='col-lg-6 mb-3'>
 							<Form.Label>Image URL</Form.Label>
@@ -396,7 +397,6 @@ export default class Create extends React.Component {
 								''
 							)}
 						</Form.Group>
-
 						{/* Recipe name */}
 						<Form.Group className='col-lg-6 mb-3'>
 							<Form.Label>
@@ -558,7 +558,7 @@ export default class Create extends React.Component {
 						</Form.Group>
 
 						{/* Brewing method */}
-						<Form.Group className='col-lg-4 mb-3'>
+						<Form.Group className='col-lg-6 mb-3'>
 							<Form.Label>
 								Brewing method
 								<span className='text-danger'>*</span>
@@ -585,6 +585,38 @@ export default class Create extends React.Component {
 							{this.state.errors.includes('brewingMethod') ? (
 								<Form.Text className='errorMessage'>
 									Please select a brewing method
+								</Form.Text>
+							) : (
+								''
+							)}
+						</Form.Group>
+
+						{/* Brewer */}
+						<Form.Group className='col-lg-6 mb-3'>
+							<Form.Label>
+								Brewer
+								<span className='text-danger'>*</span>
+							</Form.Label>
+							<Form.Select
+								name='brewer'
+								value={this.state.brewer}
+								onChange={this.updateFormField}
+							>
+								<option value=''>--- Select brewer ---</option>
+								{this.state.brewers.map((brewer) => {
+									return (
+										<option
+											key={brewer._id}
+											value={brewer._id}
+										>
+											{brewer.brand} {brewer.model}
+										</option>
+									);
+								})}
+							</Form.Select>
+							{this.state.errors.includes('brewer') ? (
+								<Form.Text className='errorMessage'>
+									Please select a brewer
 								</Form.Text>
 							) : (
 								''
@@ -689,7 +721,7 @@ export default class Create extends React.Component {
 						</Form.Group>
 
 						{/* Coffee amount */}
-						<Form.Group className='col-lg-6 mb-3'>
+						<Form.Group className='col-lg-4 mb-3'>
 							<Form.Label>
 								Amount of coffee (g)
 								<span className='text-danger'>*</span>
@@ -815,38 +847,6 @@ export default class Create extends React.Component {
 							{this.state.errors.includes('waterTemperature') ? (
 								<Form.Text className='errorMessage'>
 									Invalid water temperature specified
-								</Form.Text>
-							) : (
-								''
-							)}
-						</Form.Group>
-
-						{/* Brewer */}
-						<Form.Group className='col-lg-6 mb-3'>
-							<Form.Label>
-								Brewer
-								<span className='text-danger'>*</span>
-							</Form.Label>
-							<Form.Select
-								name='brewer'
-								value={this.state.brewer}
-								onChange={this.updateFormField}
-							>
-								<option value=''>--- Select brewer ---</option>
-								{this.state.brewers.map((brewer) => {
-									return (
-										<option
-											key={brewer._id}
-											value={brewer._id}
-										>
-											{brewer.brand} {brewer.model}
-										</option>
-									);
-								})}
-							</Form.Select>
-							{this.state.errors.includes('brewer') ? (
-								<Form.Text className='errorMessage'>
-									Please select a brewer
 								</Form.Text>
 							) : (
 								''
@@ -1073,6 +1073,7 @@ export default class Create extends React.Component {
 								Create recipe
 							</Button>
 						</div>
+					</div>
 					</div>
 
 					{/* Modal */}
