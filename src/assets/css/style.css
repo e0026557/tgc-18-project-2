@@ -535,7 +535,7 @@ body {
 
   /* --- Recipes Section --- */
   .result-box {
-    height: calc(100vh - 76px - 50px);
+    height: calc(100vh - 76px - 30px);
     overflow-y: scroll;
   }
 
