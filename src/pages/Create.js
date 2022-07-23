@@ -688,7 +688,7 @@ export default class Create extends React.Component {
 														<label className='py-1'>
 															<input
 																type='checkbox'
-																className='mx-2'
+																className='me-2'
 																name='coffeeBeans'
 																value={bean._id}
 																onChange={
