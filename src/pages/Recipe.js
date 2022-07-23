@@ -243,8 +243,13 @@ export default class Recipe extends React.Component {
 				newReview
 			);
 
-			// Update state
+			// Update state and reset review form
 			this.setState({
+				reviewTitle: '',
+				reviewContent: '',
+				reviewRating: '',
+				reviewUsername: '',
+				reviewEmail: '',
 				reviewChanged: true,
 				contentLoaded: false // Trigger loading animation
 			});
