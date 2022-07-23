@@ -1,8 +1,8 @@
 # **CoffeeTalk**
 
-![Screenshots of CoffeeTalk's homepage]()
+![Screenshots of CoffeeTalk's homepage](readme/mockup.png)
 
-Link to demo : [CoffeeTalk]()
+Link to demo : [CoffeeTalk](https://tgc-coffeetalk.netlify.app/)
 
 ## Summary
 
@@ -40,7 +40,7 @@ As a coffee hobbyist who likes to experiment new coffee recipes and enhance my c
 
 #### Color scheme
 
-![Screenshot of color scheme]()
+![Screenshot of color scheme](readme/color-scheme.png)
 
 (description of design decision) 
 
@@ -72,8 +72,8 @@ As a coffee hobbyist who likes to experiment new coffee recipes and enhance my c
 2. CSS
 
 3. [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/) 
-    - Used for buttons, tabs and offcanvas of website
 
+4. [React Bootstrap](https://react-bootstrap.github.io/)
 
 ---
 
