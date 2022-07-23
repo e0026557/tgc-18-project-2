@@ -10,6 +10,8 @@
 #BCC4C7 -- Light grey 
 -- Shades:
 - a9b0b3
+- 84898b
+- 717677
 
 #432D2D -- Dark brown
 -- Tints: 
@@ -62,17 +64,38 @@ body {
 }
 
 /* Buttons */
+.btn-primary {
+  background-color: #7b6c6c;
+  border-color: #7b6c6c;
+}
+
+
 .btn-custom-primary {
   font-weight: 500;
   background-color: #7b6c6c;
   border-color: #7b6c6c;
 }
 
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:hover,
 .btn-custom-primary:focus,
 .btn-custom-primary:active,
 .btn-custom-primary:hover {
   background-color: #695757;
   border-color: #695757;
+}
+
+.btn-secondary {
+  background-color: #84898b;
+  border-color: #84898b;
+}
+
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-secondary:hover {
+  background-color: #717677;
+  border-color: #717677;
 }
 
 .btn-custom-secondary {
@@ -88,6 +111,10 @@ body {
   border-color: #a9b0b3;
 }
 
+.btn-primary:active:focus,
+.btn-primary:focus,
+.btn-secondary:active:focus,
+.btn-secondary:focus,
 .btn-custom-primary:active:focus,
 .btn-custom-primary:focus,
 .btn-custom-secondary:active:focus,
