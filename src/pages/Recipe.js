@@ -278,7 +278,7 @@ export default class Recipe extends React.Component {
 							Recipe Details
 						</h5>
 
-						<h6 className='font-weight-500 mt-3'>General Info</h6>
+						<h6 className='font-weight-500 mt-4'>General Info</h6>
 						<ul className='recipe-detail-list px-3 pt-2 pb-3 mt-2'>
 							<li className='mt-2'>
 								<span className='recipe-field-header'>
