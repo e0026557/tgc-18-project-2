@@ -157,6 +157,17 @@ body {
   border-radius: 1rem !important;
 }
 
+/* Pagination */
+.page-link,
+.page-link:hover {
+  color: #432D2D;
+}
+
+.page-item.active .page-link {
+  background-color: #7b6c6c;
+  border-color: #7b6c6c;
+}
+
 /* *** MOBILE SETTINGS (BELOW 768PX) *** */
 /* --- Navbar --- */
 .navbar {
