@@ -929,10 +929,10 @@ export default class Create extends React.Component {
 								{/* Options to trigger optional input fields (ingredients and equipment) */}
 								<Form.Group className='mb-3'>
 									<Form.Label>Optional Fields:</Form.Label>
-									<br />
-									<div className='d-flex justify-content-start align-items-center flex-wrap gap-1'>
-										<label>
+									<div className='d-flex justify-content-start align-items-center flex-wrap gap-1 gap-md-3 mt-1'>
+										<div>
 											<input
+												id='option-ingredients-create'
 												type='checkbox'
 												name='optionalFields'
 												value='ingredients'
@@ -941,10 +941,16 @@ export default class Create extends React.Component {
 													'ingredients'
 												)}
 											/>
-											Additional Ingredients
-										</label>
-										<label>
+											<label
+												htmlFor='option-ingredients-create'
+												className='ms-2'
+											>
+												Additional Ingredients
+											</label>
+										</div>
+										<div>
 											<input
+												id='option-equipment-create'
 												type='checkbox'
 												name='optionalFields'
 												value='equipment'
@@ -953,8 +959,13 @@ export default class Create extends React.Component {
 													'equipment'
 												)}
 											/>
-											Additional Equipment
-										</label>
+											<label
+												htmlFor='option-equipment-create'
+												className='ms-2'
+											>
+												Additional Equipment
+											</label>
+										</div>
 									</div>
 								</Form.Group>
 
