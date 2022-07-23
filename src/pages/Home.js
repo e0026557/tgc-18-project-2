@@ -33,20 +33,29 @@ export default class Home extends React.Component {
 	}
 
 	renderRecipes = (recipes) => {
-		return recipes.map((recipe) => {
+		if (recipes.length > 0) {
+			return recipes.map((recipe) => {
+				return (
+					<div
+						className='col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-stretch'
+						key={recipe._id}
+					>
+						<RecipeCard
+							bookmarkCta='add'
+							recipe={recipe}
+							setActivePage={this.props.setActivePage}
+						/>
+					</div>
+				);
+			});
+		}
+		else {
 			return (
-				<div
-					className='col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-stretch'
-					key={recipe._id}
-				>
-					<RecipeCard
-						bookmarkCta='add'
-						recipe={recipe}
-						setActivePage={this.props.setActivePage}
-					/>
+				<div className='container mt-4'>
+					<span className='ms-3'>No results found</span>
 				</div>
-			);
-		});
+			)
+		}
 	};
 
 	render() {
