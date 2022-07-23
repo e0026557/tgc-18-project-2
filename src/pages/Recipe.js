@@ -8,7 +8,13 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Table from 'react-bootstrap/Table';
 import LoadingSpinner from './../components/LoadingSpinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfo, faStar, faUser } from '@fortawesome/free-solid-svg-icons';
+import {
+	faInfo,
+	faPenToSquare,
+	faStar,
+	faTrashCan,
+	faUser
+} from '@fortawesome/free-solid-svg-icons';
 import validateEmail from './../utilities/validateEmail';
 
 const BASE_API_URL = 'https://coffeetalk-api.herokuapp.com/';
@@ -253,7 +259,7 @@ export default class Recipe extends React.Component {
 		return (
 			<React.Fragment>
 				{/* Image */}
-				<div className='img-box mb-4'>
+				<div className='img-box'>
 					<img
 						src={this.state.recipe.image_url}
 						alt='Photo of coffee'
@@ -261,194 +267,213 @@ export default class Recipe extends React.Component {
 				</div>
 
 				{/* Recipe Name */}
-				<h2 className='recipe-name mb-3'>
+				<h2 className='recipe-name mt-4'>
 					{this.state.recipe.recipe_name}
 				</h2>
 
-				{/* Recipe Details */}
-				<div>
-					<ul>
-						<li>
-							<span className='recipe-field-header'>
-								Average rating :
-							</span>{' '}
-							{this.state.recipe.average_rating}
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Author :
-							</span>{' '}
-							{this.state.recipe.user.username}
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Date posted :
-							</span>{' '}
-							{new Date(
-								this.state.recipe.date.slice(0, 10)
-							).toDateString()}
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Description :
-							</span>
-							<p>{this.state.recipe.description}</p>
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Total brew time :
-							</span>{' '}
-							{this.state.recipe.total_brew_time}
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Brew yield :
-							</span>{' '}
-							{this.state.recipe.brew_yield}
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Brewing method :
-							</span>{' '}
-							{this.state.recipe.brewing_method.name}
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Coffee bean(s) :
-							</span>
-							<ul>
-								{this.state.recipe.coffee_beans.map((bean) => {
-									return (
-										<li className='d-flex justify-content-start align-items-center gap-2 py-1'>
-											<Button
-												className='btn-bean-info'
-												onClick={() => {
-													this.showBeanInfo(bean);
-												}}
-											>
-												<FontAwesomeIcon
-													icon={faInfo}
-												/>
-											</Button>
-											{bean.name}
-										</li>
-									);
-								})}
+				<div className='recipe-box pt-3 pb-4 px-4 mt-4'>
+					{/* Recipe Details */}
+					<div>
+						<h5 className='font-weight-600 text-decoration-underline'>
+							Recipe Details
+						</h5>
+
+							<ul className='recipe-detail-list px-3 pt-2 pb-3 mt-3'>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Average rating :
+									</span>{' '}
+									{this.state.recipe.average_rating}
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Author :
+									</span>{' '}
+									{this.state.recipe.user.username}
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Date posted :
+									</span>{' '}
+									{new Date(
+										this.state.recipe.date.slice(0, 10)
+									).toDateString()}
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Description :
+									</span>
+									<p>{this.state.recipe.description}</p>
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Total brew time :
+									</span>{' '}
+									{this.state.recipe.total_brew_time}
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Brew yield :
+									</span>{' '}
+									{this.state.recipe.brew_yield}
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Brewing method :
+									</span>{' '}
+									{this.state.recipe.brewing_method.name}
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Coffee bean(s) :
+									</span>
+									<ul>
+										{this.state.recipe.coffee_beans.map(
+											(bean) => {
+												return (
+													<li className='d-flex justify-content-start align-items-center gap-2 py-1'>
+														<Button
+															className='btn-bean-info'
+															onClick={() => {
+																this.showBeanInfo(
+																	bean
+																);
+															}}
+														>
+															<FontAwesomeIcon
+																icon={faInfo}
+															/>
+														</Button>
+														{bean.name}
+													</li>
+												);
+											}
+										)}
+									</ul>
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Coffee rest period :
+									</span>{' '}
+									{this.state.recipe.coffee_rest_period}
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Amount of coffee :
+									</span>{' '}
+									{this.state.recipe.amount_of_coffee}g
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Grinder :
+									</span>{' '}
+									{this.state.recipe.grinder.brand}{' '}
+									{this.state.recipe.grinder.model}
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Grind setting :
+									</span>{' '}
+									{this.state.recipe.grind_setting}
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Amount of water :
+									</span>{' '}
+									{this.state.recipe.amount_of_water}
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Water temperature :
+									</span>{' '}
+									{this.state.recipe.water_temperature}{' '}
+									&#8451;
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Brewer :
+									</span>{' '}
+									{this.state.recipe.brewer.brand}{' '}
+									{this.state.recipe.brewer.model}
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Additional ingredients :
+									</span>{' '}
+									{this.state.recipe
+										.additional_ingredients[0] ? (
+										<ul>
+											{this.state.recipe.additional_ingredients.map(
+												(ingredient) => {
+													return (
+														<li>{ingredient}</li>
+													);
+												}
+											)}
+										</ul>
+									) : (
+										'None'
+									)}
+								</li>
+								<li className='mt-2'>
+									<span className='recipe-field-header'>
+										Additional equipment :
+									</span>{' '}
+									{this.state.recipe
+										.additional_equipment[0] ? (
+										<ul>
+											{this.state.recipe.additional_equipment.map(
+												(equipment) => {
+													return <li>{equipment}</li>;
+												}
+											)}
+										</ul>
+									) : (
+										'None'
+									)}
+								</li>
 							</ul>
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Coffee rest period :
-							</span>{' '}
-							{this.state.recipe.coffee_rest_period}
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Amount of coffee :
-							</span>{' '}
-							{this.state.recipe.amount_of_coffee}g
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Grinder :
-							</span>{' '}
-							{this.state.recipe.grinder.brand}{' '}
-							{this.state.recipe.grinder.model}
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Grind setting :
-							</span>{' '}
-							{this.state.recipe.grind_setting}
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Amount of water :
-							</span>{' '}
-							{this.state.recipe.amount_of_water}
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Water temperature :
-							</span>{' '}
-							{this.state.recipe.water_temperature} &#8451;
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Brewer :
-							</span>{' '}
-							{this.state.recipe.brewer.brand}{' '}
-							{this.state.recipe.brewer.model}
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Additional ingredients :
-							</span>{' '}
-							{this.state.recipe.additional_ingredients[0] ? (
-								<ul>
-									{this.state.recipe.additional_ingredients.map(
-										(ingredient) => {
-											return <li>{ingredient}</li>;
-										}
-									)}
-								</ul>
-							) : (
-								'None'
-							)}
-						</li>
-						<li>
-							<span className='recipe-field-header'>
-								Additional equipment :
-							</span>{' '}
-							{this.state.recipe.additional_equipment[0] ? (
-								<ul>
-									{this.state.recipe.additional_equipment.map(
-										(equipment) => {
-											return <li>{equipment}</li>;
-										}
-									)}
-								</ul>
-							) : (
-								'None'
-							)}
-						</li>
-					</ul>
-				</div>
+					</div>
 
-				{/* Recipe instructions */}
-				<h6 className='recipe-field-header'>Instructions :</h6>
-				<ul>
-					{this.state.recipe.steps.map((step, index) => {
-						return (
-							<li key={index}>
-								<span className='recipe-field-header'>
-									Step {index + 1} :
-								</span>{' '}
-								{step}
-							</li>
-						);
-					})}
-				</ul>
+					{/* Recipe instructions */}
+					<div className='mt-4'>
+						<h5 className='font-weight-600 text-decoration-underline'>
+							Instructions
+						</h5>
+						<ul className='recipe-step-list px-3 pt-2 pb-3 mt-3'>
+							{this.state.recipe.steps.map((step, index) => {
+								return (
+									<li key={index} className='mt-2'>
+										<span className='recipe-field-header'>
+											Step {index + 1} :
+										</span>{' '}
+										{step}
+									</li>
+								);
+							})}
+						</ul>
+					</div>
 
-				{/* Recipe buttons */}
-				<div className='d-flex justify-content-center align-items-center gap-3 mt-3'>
-					<Button
-						className='btn-custom-primary'
-						onClick={() => {
-							this.handleShow('edit');
-						}}
-					>
-						Edit
-					</Button>
+					{/* Recipe buttons */}
+					<div className='d-flex justify-content-center align-items-center gap-3 gap-md-4 mt-5'>
+						<Button
+							className='btn-custom-primary'
+							onClick={() => {
+								this.handleShow('edit');
+							}}
+						>
+							<FontAwesomeIcon icon={faPenToSquare} />
+						</Button>
 
-					<Button
-						variant='danger'
-						onClick={() => {
-							this.handleShow('delete');
-						}}
-					>
-						Delete
-					</Button>
+						<Button
+							variant='danger'
+							onClick={() => {
+								this.handleShow('delete');
+							}}
+						>
+							<FontAwesomeIcon icon={faTrashCan} />
+						</Button>
+					</div>
 				</div>
 			</React.Fragment>
 		);
@@ -645,15 +670,15 @@ export default class Recipe extends React.Component {
 					<div className='container d-flex flex-column justify-content-center pt-3'>
 						{this.state.contentLoaded ? (
 							<React.Fragment>
-								<div className='container-fluid mb-5'>
+								<div className='container'>
 									{this.renderRecipeDetails()}
 								</div>
-								<div className='container mt-3'>
+								<div className='container mt-5'>
 									<h3>Reviews</h3>
-									<div className='review-box px-4 py-4 my-3'>
+									<div className='review-box px-4 py-4 mt-3'>
 										{this.renderReviews()}
 									</div>
-									<div className='container review-form pt-4 pb-3 px-1 px-md-3 mb-5 d-flex justify-content-center'>
+									<div className='container review-form pt-4 pb-3 px-1 px-md-3 mt-4 mb-5 d-flex justify-content-center'>
 										{this.renderAddReviewForm()}
 									</div>
 								</div>

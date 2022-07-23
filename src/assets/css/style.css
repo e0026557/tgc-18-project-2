@@ -43,8 +43,20 @@ body {
 }
 
 /* Fonts */
+.font-weight-400 {
+  font-weight: 400;
+}
+
 .font-weight-500 {
   font-weight: 500;
+}
+
+.font-weight-600 {
+  font-weight: 600;
+}
+
+.font-weight-700 {
+  font-weight: 700;
 }
 
 /* Buttons */
@@ -357,6 +369,23 @@ body {
 
 .recipe-name {
   font-weight: 600;
+}
+
+.recipe-box {
+  background-color: #f0e4d4;
+  border-radius: 1rem;
+}
+
+.recipe-detail-list {
+  list-style: none;
+  background-color: #ead9c3;
+  border-radius: 1rem;
+}
+
+.recipe-step-list {
+  list-style: none;
+  background-color: #ead9c3;
+  border-radius: 1rem;
 }
 
 .recipe-field-header {
