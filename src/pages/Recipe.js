@@ -7,8 +7,10 @@ import Alert from 'react-bootstrap/Alert';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Table from 'react-bootstrap/Table';
 import LoadingSpinner from './../components/LoadingSpinner';
+import AddToFavoritesModal from '../components/AddToFavoritesModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+	faHeartCirclePlus,
 	faInfo,
 	faPenToSquare,
 	faStar,
@@ -41,7 +43,9 @@ export default class Recipe extends React.Component {
 		reviewErrors: [],
 		// Offcanvas (Coffee bean info)
 		offcanvasShow: false,
-		beanInfo: {}
+		beanInfo: {},
+		// Bookmark modal
+		modalShow: false
 	};
 
 	// --- Functions ---
@@ -263,6 +267,12 @@ export default class Recipe extends React.Component {
 		}
 	};
 
+	hideModal = () => {
+		this.setState({
+			modalShow: false
+		});
+	};
+
 	renderRecipeDetails = () => {
 		return (
 			<React.Fragment>
@@ -482,6 +492,20 @@ export default class Recipe extends React.Component {
 
 					{/* Recipe buttons */}
 					<div className='d-flex justify-content-center align-items-center gap-3 gap-md-4 mt-5'>
+							{/* Add to favorites button */}
+						<Button
+							className='font-weight-500'
+							variant='secondary'
+							onClick={() => {
+								this.setState({
+									modalShow: true
+								});
+							}}
+						>
+							<FontAwesomeIcon icon={faHeartCirclePlus} />
+						</Button>
+
+							{/* Edit button */}
 						<Button
 							className='btn-custom-primary'
 							onClick={() => {
@@ -491,6 +515,7 @@ export default class Recipe extends React.Component {
 							<FontAwesomeIcon icon={faPenToSquare} />
 						</Button>
 
+							{/* Delete button */}
 						<Button
 							variant='danger'
 							onClick={() => {
@@ -841,6 +866,13 @@ export default class Recipe extends React.Component {
 							</Table>
 						</Offcanvas.Body>
 					</Offcanvas>
+
+					{/* Add to favorites modal */}
+					<AddToFavoritesModal
+					recipeid={this.props.activeRecipe}
+					show={this.state.modalShow}
+					onHide={this.hideModal}
+				/>
 				</section>
 			</React.Fragment>
 		);

@@ -50,11 +50,6 @@ export default class RecipeCard extends React.Component {
 				<AddToFavoritesModal
 					recipeid={this.props.recipe._id}
 					show={this.state.modalShow}
-					// onHide={() =>
-					// 	this.setState({
-					// 		modalShow: false
-					// 	})
-					// }
 					onHide={this.hideModal}
 				/>
 			);
@@ -63,11 +58,6 @@ export default class RecipeCard extends React.Component {
 				<RemoveFromFavoritesModal
 					recipeid={this.props.recipe._id}
 					show={this.state.modalShow}
-					// onHide={() =>
-					// 	this.setState({
-					// 		modalShow: false
-					// 	})
-					// }
 					onHide={this.hideModal}
 					removeFromFavorites={this.props.removeFromFavorites}
 				/>
