@@ -33,7 +33,7 @@ As a coffee hobbyist who likes to experiment new coffee recipes and enhance my c
 ![Sitemap](readme/sitemap.png)
 
 #### Wireframes
-[Wireframes]()
+[Wireframes](readme/wireframes.pdf)
 
 
 ### Design Decisions
