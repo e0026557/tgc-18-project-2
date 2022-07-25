@@ -153,8 +153,16 @@ The test cases can be found [here]().
 
 ## Deployment
 
+### Frontend
+
 The website is hosted using [Netlify](https://www.netlify.com/), deployed directly from the main branch of this Github repository.
 For the detailed deployment steps, you can refer to the blog post on Netlify [here](https://www.netlify.com/blog/2016/09/29/a-step-by-step-guide-deploying-on-netlify/).
+
+
+### Backend
+
+The Express server is hosted using [Heroku](https://www.heroku.com/), deployed directly from the main branch of the Github repository [here](https://github.com/e0026557/tgc-18-project-2-api).
+For the detailed deployment steps, you can refer to the documentation on Heroku [here](https://devcenter.heroku.com/articles/git#deploy-your-code).
 
 ---
 
