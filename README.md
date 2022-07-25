@@ -16,15 +16,19 @@ CoffeeTalk is a web application that aims to be a platform where coffee enthusia
 
 ### Strategy
 
+#### Organisational Goals
+
+As a coffee hobbyist who likes to experiment new coffee recipes to enhance my coffee-making experience, I often find myself spend large amount of time searching for coffee recipes across multiple sources such as Facebook groups and YouTube videos. However, most recipes found either use a different setup or are not detailed enough, making it difficult to re-create. Thus, a centralized informational site where coffee recipes are categorised by various coffee-related categories will be beneficial for those who are getting into coffee or are looking for coffee recipes that fit their coffee-making setups.
+
 #### User Goals
 
 The users of CoffeeTalk are mainly people who have an interest in specialty coffee and coffee-brewing. The aim of users is to be able to find coffee recipes that suit their coffee preferences and setup with ease. Also, users would also want to be able to contribute their coffee recipes to be shared with the CoffeeTalk community who share the same interests as them. 
 
-
-#### Organisational Goals
-
-As a coffee hobbyist who likes to experiment new coffee recipes and enhance my coffee-making experience, I often find myself spending a large amount of time searching for coffee recipes across multiple sources such as Facebook groups and YouTube videos. However, most recipes found use a different set of coffee brewing equipment or are not detailed enough, and hence are difficult to re-create. Thus, a centralized informational site where coffee recipes are categorised by various coffee-related categories will be beneficial for those who are getting into coffee or are looking for coffee recipes that fit their coffee-making setups.
-
+| User Stories | Accceptance Criteria |
+| ----------- | ----------- |
+| As a coffee enthusiast, I want to find coffee recipes that adopt a similar setup as mine so that I can try out | Coffee recipes should be able to be searched by the various equipment used in a particular coffee-making setup |
+| As a coffee enthusiast, I want to be able to save my favorite coffee recipes for future reference | Coffee recipes should be able to be bookmarked and accessed by user |
+| As someone who is getting into specialty coffee, I want to be able to find coffee recipes that are detailed enough for me to follow along and get started with | Coffee recipes posted on CoffeeTalk should adopt a fixed structure for specifying setups and details to make it easy for users to follow along |
 
 ### Structure and Skeleton
 
