@@ -72,12 +72,30 @@ The color scheme chosen revolves around a brown-based primary color as it repres
 | Add to favorites | This feature allows users to bookmark their favorite coffee recipes and access them via the *Favorites* page |
 | Average rating | This feature calculates the average rating for each coffee recipe based on the ratings in reviews posted |
 
-
 ---
 
 ## Limitations and Future Implementations
 
+1. Implement form steps for *Create* and *Edit* pages
+    - Current limitation: 
+      - The current forms for creating and editing recipes are very long and on a single page, making it daunting for users to fill in.
+    
+    - Future implementation:
+      - To divide the large form into smaller form steps to make it easier for users to fill in.
 
+2. Allow users to edit and delete reviews
+    - Current limitation:
+      - Due to time constraint, users currently can only post reviews for coffee recipes.
+
+    - Future implementation:
+      - Allow users the option to edit and delete the reviews they had posted.
+
+3. Allow users to post, edit and delete entries for coffee beans, grinders, and brewers
+    - Current limitation:
+      - Due to time constraint, users currently can only post and edit coffee recipes with the pre-defined selection of coffee beans, grinders, and brewers.
+
+    - Future implementation:
+      - Create forms for users to post, edit and delete entries for coffee beans, grinders, and brewers.
 
 ---
 
