@@ -197,6 +197,11 @@ body {
   border-color: #7b6c6c;
 }
 
+/* Cards */
+.card {
+  border: none;
+}
+
 /* *** MOBILE SETTINGS (BELOW 768PX) *** */
 /* --- Navbar --- */
 .navbar {
