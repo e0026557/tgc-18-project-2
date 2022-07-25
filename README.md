@@ -6,7 +6,7 @@ Link to demo : [CoffeeTalk](https://tgc-coffeetalk.netlify.app/)
 
 ## Summary
 
-
+Specialty coffee making is an art, often involving many rounds of experimentation to achieve the "perfect" cup of coffee. In the process to reach this goal, many variables such as coffee rest period and water temperature have to be considered and controlled for. While every coffee bean is different and replicating the same cup of coffee is very hard, having access to relevant recipes can help narrow down the right variables to adjust, making the process less tedious and wasting less coffee beans along the way. 
 
 ---
 
