@@ -101,13 +101,46 @@ The color scheme chosen revolves around a brown-based primary color as it repres
 
 ## Technologies Used
 
+### Backend
+
+1. Javascript
+
+2. [Express](https://expressjs.com/)
+
+3. [MongoDB Node Driver](https://www.mongodb.com/docs/drivers/node/current/)
+    - To communicate with MongoDB database
+
+4. [cors](https://www.npmjs.com/package/cors)
+    - Middleware to enable Cross-Origin Resource Sharing (CORS)
+
+5. [dotenv](https://www.npmjs.com/package/dotenv)
+    - To allow loading of environment variables from .env file
+
+6. [Bcrypt](https://www.npmjs.com/package/bcrypt)
+    - For hashing and validating email
+
+
+### Frontend
+
 1. HTML
 
 2. CSS
 
-3. [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/) 
+3. Javascript
 
-4. [React Bootstrap](https://react-bootstrap.github.io/)
+4. [React](https://reactjs.org/)
+
+5. [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/) 
+    - Used for styling website
+
+6. [React Bootstrap](https://react-bootstrap.github.io/)
+    - Used for styling website
+
+7. [Axios](https://github.com/axios/axios)
+    - Used to communicate with Express server to create, read, update and delete data in database
+
+8. [Fontawesome](https://fontawesome.com/)
+    - Used for icons in website
 
 ---
 
