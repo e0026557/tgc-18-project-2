@@ -35,6 +35,10 @@ The users of CoffeeTalk are mainly people who have an interest in specialty coff
 #### Database
 ![ERD Diagram](readme/ERD-diagram.png)
 
+Entity-Relationship Diagram (ERD) is drawn to demostrate the various relationships between entities for the website prior to modelling the database in MongoDB.
+
+An Express server is set up and deployed to [Heroku](https://www.heroku.com/), where API endpoints are accessible via the base URL at [https://coffeetalk-api.herokuapp.com/](https://coffeetalk-api.herokuapp.com/).
+
 #### Sitemap
 ![Sitemap](readme/sitemap.png)
 
@@ -48,11 +52,11 @@ The users of CoffeeTalk are mainly people who have an interest in specialty coff
 
 ![Screenshot of color scheme](readme/color-scheme.png)
 
-(description of design decision) 
+The color scheme chosen revolves around a brown-based primary color as it represents the color of coffee, which is the theme of the website. Brown also implies friendliness and simplicity, which matches the look that the website aims to achieve.
 
 #### Fonts
 
-(description of font decision)
+*Inter* is the font family used for the website as it maintains great readability whether used at small or large sizes. It also helps to create space between lines of text, which is ideal for long text used in coffee recipes.
 
 ---
 
@@ -60,7 +64,13 @@ The users of CoffeeTalk are mainly people who have an interest in specialty coff
 
 | Features | Description |
 | ----------- | ----------- |
-
+| Search / filter coffee recipes | This feature allows users to search and filter coffee recipes by recipe name (case-insensitive), setup, and minimum average rating. |
+| Dynamic form input | This feature is implemented in *Create* and *Edit* pages, where users can dynamically add/remove input fields for *additional ingredients*,  *additional equipment*, and *steps* by clicking on the '+' and '-' buttons. Adding a new dynamic form field is achieved by appending an empty string as an element to the back of an array, whereas removing a dynamic form field is achieved by splicing the last element of the array. |
+| Coffee bean information (Offcanvas) | This feature allows users to be able view detailed information about each coffee bean in a separate offcanvas by clicking on the *More Info* button next to each dropdown select option. | 
+| What's new section | This feature provides user with a quick look at the latest 3 coffee recipes posted to CoffeeTalk |
+| What's popular section | This feature provides user with a quick look at the top 3 coffee recipes by average rating |
+| Add to favorites | This feature allows users to bookmark their favorite coffee recipes and access them via the *Favorites* page |
+| Average rating | This feature calculates the average rating for each coffee recipe based on the ratings in reviews posted |
 
 
 ---
