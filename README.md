@@ -22,7 +22,7 @@ As a coffee hobbyist who likes to experiment new coffee recipes to enhance my co
 
 #### User Goals
 
-The users of CoffeeTalk are mainly people who have an interest in specialty coffee and coffee-brewing. The aim of users is to be able to find coffee recipes that suit their coffee preferences and setup with ease. Also, users would also want to be able to contribute their coffee recipes to be shared with the CoffeeTalk community who share the same interests as them. 
+The users of CoffeeTalk are mainly people who have an interest in specialty coffee and coffee-brewing. The aim of users is to be able to find coffee recipes that suit their coffee preferences and setup with ease. The coffee recipes should also be standardised to specify details on the setups and basic recipe information for users to be able to follow along. Also, users would also want to be able to contribute their coffee recipes to be shared with the CoffeeTalk community who share the same interests as them. 
 
 | User Stories | Accceptance Criteria |
 | ----------- | ----------- |
