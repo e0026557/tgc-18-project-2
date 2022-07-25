@@ -139,8 +139,8 @@ The color scheme chosen revolves around a brown-based primary color as it repres
 7. [Axios](https://github.com/axios/axios)
     - Used to communicate with Express server to create, read, update and delete data in database
 
-8. [Fontawesome](https://fontawesome.com/)
-    - Used for icons in website
+8. [Font Awesome](https://fontawesome.com/)
+    - Used for icons displayed in website
 
 ---
 
@@ -169,17 +169,24 @@ For the detailed deployment steps, you can refer to the documentation on Heroku 
 ## Credits and Acknowledgement
 
 ### Logo :
-1. [Adobe Express Logo Maker](https://www.adobe.com/express/create/logo) - Used to generate brand logo for website
+- [Adobe Express Logo Maker](https://www.adobe.com/express/create/logo) - Used to generate brand logo for website
 
 ### Fonts :
-1. [Google Fonts](https://fonts.google.com/) - Used for fonts displayed in website 
+- [Google Fonts](https://fonts.google.com/) - Used for fonts displayed in website 
 
 ### Icons :
+- [Font Awesome](https://fontawesome.com/) - Used for icons displayed in website
 
+### CSS Spinner :
+- [SpinKit](https://tobiasahlin.com/spinkit/) - Adapted CSS spinner for use in website
 
+### Regular Expressions
+- [w3resource](https://www.w3resource.com/javascript/form/email-validation.php) - Used Regex for email validation
 
-### Data :
+- [StackOverflow](https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url) - Used Regex for URL validation
 
+### Dynamic Form Input :
+- [FreeCodeCamp](https://www.freecodecamp.org/news/build-dynamic-forms-in-react/) - For dynamic form input implementation idea
 
 ### Screenshot :
-1. [CreateMockup.com](https://www.createmockup.com/generate/) - Used to generate responsive website mockup for README file
+- [CreateMockup.com](https://www.createmockup.com/generate/) - Used to generate responsive website mockup for README file
