@@ -41,6 +41,11 @@ body {
   background-color: #d4b095;
 }
 
+/* Navbar */
+.navbar {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
 /* Adjust margin-top to account for height of navbar */
 .adjust-margin-top {
   margin-top: 66px;
@@ -197,11 +202,6 @@ body {
   border-color: #7b6c6c;
 }
 
-/* Cards */
-.card {
-  border: none;
-}
-
 /* *** MOBILE SETTINGS (BELOW 768PX) *** */
 /* --- Navbar --- */
 .navbar {
@@ -298,7 +298,9 @@ body {
 /* --- Recipe Card --- */
 .recipe-card {
   width: 18rem;
+  border-color: #bcc4c7;
   border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
   overflow: hidden;
 }
 
@@ -362,6 +364,7 @@ body {
 .search-form {
   background-color: #f0e4d4;
   border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
 }
 
 .btn-bean-info {
@@ -402,6 +405,7 @@ body {
   width: 100%;
   height: 300px;
   border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
   overflow: hidden;
 }
 
@@ -419,6 +423,7 @@ body {
 .recipe-box {
   background-color: #f0e4d4;
   border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
 }
 
 .recipe-detail-list {
@@ -441,6 +446,7 @@ body {
   background-color: #f0e4d4;
   max-height: 50vh;
   border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
   overflow-y: scroll;
 }
 
@@ -475,12 +481,14 @@ body {
 .review-form {
   background-color: #f0e4d4;
   border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
 }
 
 /* --- Create/Edit Recipe Section --- */
 .recipe-form {
   background-color: #f0e4d4;
   border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
 }
 
 .recipe-form-group {
@@ -494,6 +502,7 @@ body {
   background-color: rgba(237, 223, 203, 0.65);
   padding: 1.5rem 3rem;
   border-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
 
   display: flex;
   flex-direction: column;
