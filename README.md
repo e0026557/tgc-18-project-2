@@ -147,7 +147,7 @@ The color scheme chosen revolves around a brown-based primary color as it repres
 ## Testing
 
 The website is tested for responsiveness using Developer Tools on Chrome browser for mobile, tablet and desktop screen widths.
-The test cases can be found [here]().
+The test cases can be found [here](readme/test-cases.pdf).
 
 ---
 
