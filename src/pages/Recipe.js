@@ -257,6 +257,7 @@ export default class Recipe extends React.Component {
 				reviewRating: '',
 				reviewUsername: '',
 				reviewEmail: '',
+				reviewErrors: [],
 				reviewChanged: true,
 				contentLoaded: false // Trigger loading animation
 			});
