@@ -189,10 +189,10 @@ export default class Recipe extends React.Component {
 	renderRatingStars = (num) => {
 		let stars = [];
 		for (let i = 0; i < num; i++) {
-			stars.push(<FontAwesomeIcon icon={faStar} />);
+			stars.push(<FontAwesomeIcon key={i} icon={faStar} />);
 		}
 		for (let i = 0; i < 5-num; i++) {
-			stars.push(<FontAwesomeIcon className='empty-star' icon={faStar} />);
+			stars.push(<FontAwesomeIcon key={4-i} className='empty-star' icon={faStar} />);
 		}
 		return stars;
 	};
@@ -367,7 +367,7 @@ export default class Recipe extends React.Component {
 									{this.state.recipe.coffee_beans.map(
 										(bean) => {
 											return (
-												<li className='d-flex justify-content-start align-items-center gap-2 py-1'>
+												<li key={bean._id} className='d-flex justify-content-start align-items-center gap-2 py-1'>
 													<Button
 														className='btn-bean-info'
 														onClick={() => {
@@ -443,8 +443,8 @@ export default class Recipe extends React.Component {
 								{this.state.recipe.additional_ingredients[0] ? (
 									<ul>
 										{this.state.recipe.additional_ingredients.map(
-											(ingredient) => {
-												return <li>{ingredient}</li>;
+											(ingredient, index) => {
+												return <li key={index}>{ingredient}</li>;
 											}
 										)}
 									</ul>
@@ -459,8 +459,8 @@ export default class Recipe extends React.Component {
 								{this.state.recipe.additional_equipment[0] ? (
 									<ul>
 										{this.state.recipe.additional_equipment.map(
-											(equipment) => {
-												return <li>{equipment}</li>;
+											(equipment, index) => {
+												return <li key={index}>{equipment}</li>;
 											}
 										)}
 									</ul>
@@ -683,7 +683,7 @@ export default class Recipe extends React.Component {
 							<option value='' disabled>
 								--- Select rating ---
 							</option>
-							{[0, 1, 2, 3, 4, 5].map((rating) => {
+							{[1, 2, 3, 4, 5].map((rating) => {
 								return (
 									<option key={rating} value={rating}>
 										{rating}
