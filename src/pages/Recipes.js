@@ -415,7 +415,8 @@ export default class Recipes extends React.Component {
 	searchRecipes = () => {
 		this.setState({
 			submitStatus: true,
-			contentLoaded: false
+			contentLoaded: false,
+			show: false // To close the offcanvas (mobile only)
 		});
 	};
 
