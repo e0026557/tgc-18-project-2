@@ -179,6 +179,9 @@ For the detailed deployment steps, you can refer to the documentation on Heroku 
 ### CSS Spinner :
 - [SpinKit](https://tobiasahlin.com/spinkit/) - Adapted CSS spinner for use in website
 
+### Box Shadows:
+- [CSS Scan](https://getcssscan.com/css-box-shadow-examples) - For box-shadows used to style website
+
 ### Regular Expressions
 - [w3resource](https://www.w3resource.com/javascript/form/email-validation.php) - Used Regex for email validation
 
