@@ -249,6 +249,7 @@ body {
   background-color: rgba(188, 196, 199, 0.65);
   padding: 1rem 1.5rem;
   border-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
 
   display: flex;
   flex-direction: column;
